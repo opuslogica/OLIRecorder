@@ -29,22 +29,22 @@ var recorderObjects = {};
  *
  * @constructor
  * @param src                   The file name or url to play
- * @param successCallback       The callback to be called when the file is done playing or recording.
- *                                  successCallback()
+ * @param fileAnnounceCallback  The callback to be called when a recorded file is available
+ *                                  recoredFileCallback(string-ish filename)
  * @param errorCallback         The callback to be called if there is an error.
  *                                  errorCallback(int errorCode) - OPTIONAL
- * @param statusCallback        The callback to be called when media status has changed.
- *                                  statusCallback(int statusCode) - OPTIONAL
+ * @param stateCallback        The callback to be called when recorder state has changed.
+ *                                  stateCallback(int sessionStateCode) - OPTIONAL
  */
-var OLIRecorder = function(src, successCallback, errorCallback, statusCallback) {
+var OLIRecorder = function(src, fileAnnounceCallback, errorCallback, stateCallback) {
   console.log('OLIRecorder creation');
   argscheck.checkArgs('SFFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
   mediaObjects[this.id] = this;
   this.src = src;
-  this.successCallback = successCallback;
+  this.fileAnnounceCallback = fileAnnounceCallback;
   this.errorCallback = errorCallback;
-  this.statusCallback = statusCallback;
+  this.stateCallback = stateCallback;
   this._duration = -1;
   this._position = -1;
   exec(null, this.errorCallback, "OLIRecorder", "create", [this.id, this.src]);
@@ -53,7 +53,13 @@ var OLIRecorder = function(src, successCallback, errorCallback, statusCallback) 
 // SESSION  messages
 OLIRecorder.SESSION_STATE = 1;
 OLIRecorder.SESSION_ERROR = 2;
-OLIRecorder.SESSION_STOPPED = 3;
+OLIRecorder.SESSION_ANNOUNCE_FILE = 3;
+
+// Session State Codes
+OLIRecorder.SESSION_STATE_WAITING = 10;
+OLIRecorder.SESSION_STATE_PAUSING = 11;
+OLIRecorder.SESSION_STATE_RUNNING = 12;
+OLIRecorder.SESSION_STATE_DEAD    = 19;
 
 // "static" function to return existing objs.
 OLIRecorder.get = function(id) {
@@ -94,6 +100,12 @@ OLIRecorder.prototype.release = function() {
     }, this.errorCallback, "OLIRecorder", "releaseRecorder", [this.id]);
 };
 
+
+//
+// Examples (end to end)
+//
+
+
 /**
  * Get duration of an audio file.
  * The duration is only set for audio that is playing, paused or stopped.
@@ -105,26 +117,26 @@ HLSPlugin.prototype.getDuration = function(success, fail) {
     exec(function(d) {
         me._duration = d;
         success(d);
-    }, fail, "HLSPlugin", "getDurationAudio", [this.id]);
+    }, fail, "OLIRecorder", "getDurationAudio", [this.id]);
 };
 
 
 /**
- * Get position of audio.
+ * Get input gain
  */
-HLSPlugin.prototype.getCurrentPosition = function(success, fail) {
+HLSPlugin.prototype.getInputGain = function(success, fail) {
     var me = this;
     exec(function(p) {
         me._position = p;
         success(p);
-    }, fail, "HLSPlugin", "getCurrentPositionAudio", [this.id]);
+    }, fail, "OLIRecorder", "getInputGain", [this.id]);
 };
 
 /**
- * Adjust the volume.
+ * set input gain
  */
-HLSPlugin.prototype.setVolume = function(volume) {
-    exec(null, null, "HLSPlugin", "setVolume", [this.id, volume]);
+HLSPlugin.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
+    exec(null, null, "OLIRecorder", "setInputGain", [this.id, volume]);
 };
 
 /**
@@ -141,26 +153,26 @@ OLIRecorder.onStatus = function(id, msgType, value) {
 
   if (media) {
     switch(msgType) {
-      case OLIRecorder.SESSION_STATE :
-      recorder.sessionStateCallback && recorder.sessionStateCallback(value);
 
-      if (value == OLIRecorder.SESSION_STOPPED) {
-        recorder.successCallback && recorder.successCallback();
-      }
-      break;
+      case OLIRecorder.SESSION_STATE:
+        recorder.stateCallback && recorder.stateCallback(value);
+        break;
 
-      case OLIRecorder.SESSION_ERROR :
-      recorder.errorCallback && recorder.errorCallback(value);
-      break;
+      case OLIRecorder.SESSION_ERROR:
+        recorder.errorCallback && recorder.errorCallback(value);
+        break;
 
-      default :
-      console.error && console.error("Unhandled OLIRecorder :: " + msgType);
-      break;
+      case OLIRecorder.SESSION_ANNOUNCE_FILE:
+        recorder.fileAnnounceCallback && recorder.fileAnnounceCallback(value);
+        break;
+
+      default:
+        console.error && console.error("Unhandled OLIRecorder :: " + msgType);
+        break;
     }
   } else {
     console.error && console.error("Received OLIRecorder callback for unknown recorderObject :: " + id);
-    }
-
+  }
 };
 
 module.exports = OLIRecorder;

@@ -1,0 +1,883 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3C0169521A576168000D1543 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169511A576168000D1543 /* main.m */; };
+		3C0169551A576168000D1543 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169541A576168000D1543 /* AppDelegate.m */; };
+		3C0169581A576168000D1543 /* SimplePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169571A576168000D1543 /* SimplePlayViewController.m */; };
+		3C01695B1A576168000D1543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0169591A576168000D1543 /* Main.storyboard */; };
+		3C01695D1A576168000D1543 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695C1A576168000D1543 /* Images.xcassets */; };
+		3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695E1A576168000D1543 /* LaunchScreen.xib */; };
+		3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01696B1A576168000D1543 /* SimplePlayTests.m */; };
+		3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
+		3C0169761A57683C000D1543 /* audio.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C0169751A57683C000D1543 /* audio.m4a */; };
+		3C482C2A1A32365C005B55CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C291A32365C005B55CE /* main.m */; };
+		3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2C1A32365C005B55CE /* AppDelegate.m */; };
+		3C482C301A32365C005B55CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2F1A32365C005B55CE /* ViewController.m */; };
+		3C482C331A32365C005B55CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C482C311A32365C005B55CE /* Main.storyboard */; };
+		3C482C351A32365C005B55CE /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C482C341A32365C005B55CE /* Images.xcassets */; };
+		3C482C381A32365C005B55CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C482C361A32365C005B55CE /* LaunchScreen.xib */; };
+		3C482C441A32365C005B55CE /* AudioStreamingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C431A32365C005B55CE /* AudioStreamingTests.m */; };
+		3C482C4E1A32447C005B55CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C482C4D1A32447C005B55CE /* AudioToolbox.framework */; };
+		3C68AEBD1A44E56B00BF81A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
+		3CA051BD1A72FB140044C363 /* OLIRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051BC1A72FB140044C363 /* OLIRecorder.m */; };
+		3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */; };
+		3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C61A72FCDE0044C363 /* CDVCommandQueue.m */; };
+		3CA051EE1A72FCDE0044C363 /* CDVConfigParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C81A72FCDE0044C363 /* CDVConfigParser.m */; };
+		3CA051EF1A72FCDE0044C363 /* CDVInvokedUrlCommand.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051CB1A72FCDE0044C363 /* CDVInvokedUrlCommand.m */; };
+		3CA051F01A72FCDE0044C363 /* CDVJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051CD1A72FCDE0044C363 /* CDVJSON.m */; };
+		3CA051F11A72FCDE0044C363 /* CDVLocalStorage.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051CF1A72FCDE0044C363 /* CDVLocalStorage.m */; };
+		3CA051F21A72FCDE0044C363 /* CDVPlugin.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051D11A72FCDE0044C363 /* CDVPlugin.m */; };
+		3CA051F31A72FCDE0044C363 /* CDVPluginResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051D31A72FCDE0044C363 /* CDVPluginResult.m */; };
+		3CA051F41A72FCDE0044C363 /* CDVTimer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051D71A72FCDE0044C363 /* CDVTimer.m */; };
+		3CA051F51A72FCDE0044C363 /* CDVURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051D91A72FCDE0044C363 /* CDVURLProtocol.m */; };
+		3CA051F61A72FCDE0044C363 /* CDVUserAgentUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051DB1A72FCDE0044C363 /* CDVUserAgentUtil.m */; };
+		3CA051F71A72FCDE0044C363 /* CDVViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051DD1A72FCDE0044C363 /* CDVViewController.m */; };
+		3CA051F81A72FCDE0044C363 /* CDVWebViewDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051DF1A72FCDE0044C363 /* CDVWebViewDelegate.m */; };
+		3CA051F91A72FCDE0044C363 /* CDVWhitelist.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E11A72FCDE0044C363 /* CDVWhitelist.m */; };
+		3CA051FA1A72FCDE0044C363 /* NSArray+Comparisons.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E31A72FCDE0044C363 /* NSArray+Comparisons.m */; };
+		3CA051FB1A72FCDE0044C363 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E51A72FCDE0044C363 /* NSData+Base64.m */; };
+		3CA051FC1A72FCDE0044C363 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E71A72FCDE0044C363 /* NSDictionary+Extensions.m */; };
+		3CA051FD1A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E91A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m */; };
+		3CA051FE1A72FCDE0044C363 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051EB1A72FCDE0044C363 /* UIDevice+Extensions.m */; };
+		3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		3C0169661A576168000D1543 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C482C1C1A32365C005B55CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C01694C1A576167000D1543;
+			remoteInfo = SimplePlay;
+		};
+		3C482C3E1A32365C005B55CE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3C482C1C1A32365C005B55CE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3C482C231A32365C005B55CE;
+			remoteInfo = AudioStreaming;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3C01694D1A576167000D1543 /* SimplePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C0169501A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C0169511A576168000D1543 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C0169531A576168000D1543 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3C0169541A576168000D1543 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3C0169561A576168000D1543 /* SimplePlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimplePlayViewController.h; sourceTree = "<group>"; };
+		3C0169571A576168000D1543 /* SimplePlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayViewController.m; sourceTree = "<group>"; };
+		3C01695A1A576168000D1543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C01695C1A576168000D1543 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3C01695F1A576168000D1543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3C0169651A576168000D1543 /* SimplePlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplePlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C01696A1A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C01696B1A576168000D1543 /* SimplePlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayTests.m; sourceTree = "<group>"; };
+		3C0169751A57683C000D1543 /* audio.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = audio.m4a; sourceTree = "<group>"; };
+		3C482C241A32365C005B55CE /* AudioStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C482C281A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C482C291A32365C005B55CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3C482C2B1A32365C005B55CE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3C482C2C1A32365C005B55CE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3C482C2E1A32365C005B55CE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3C482C2F1A32365C005B55CE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3C482C321A32365C005B55CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3C482C341A32365C005B55CE /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		3C482C371A32365C005B55CE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		3C482C3D1A32365C005B55CE /* AudioStreamingTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AudioStreamingTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3C482C421A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3C482C431A32365C005B55CE /* AudioStreamingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamingTests.m; sourceTree = "<group>"; };
+		3C482C4D1A32447C005B55CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3CA051BB1A72FB140044C363 /* OLIRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OLIRecorder.h; path = ../../src/ios/OLIRecorder.h; sourceTree = "<group>"; };
+		3CA051BC1A72FB140044C363 /* OLIRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OLIRecorder.m; path = ../../src/ios/OLIRecorder.m; sourceTree = "<group>"; };
+		3CA051BF1A72FCDE0044C363 /* CDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDV.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDV.h; sourceTree = "<group>"; };
+		3CA051C01A72FCDE0044C363 /* CDVAvailability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVAvailability.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVAvailability.h; sourceTree = "<group>"; };
+		3CA051C11A72FCDE0044C363 /* CDVAvailabilityDeprecated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVAvailabilityDeprecated.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVAvailabilityDeprecated.h; sourceTree = "<group>"; };
+		3CA051C21A72FCDE0044C363 /* CDVCommandDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCommandDelegate.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVCommandDelegate.h; sourceTree = "<group>"; };
+		3CA051C31A72FCDE0044C363 /* CDVCommandDelegateImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCommandDelegateImpl.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVCommandDelegateImpl.h; sourceTree = "<group>"; };
+		3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCommandDelegateImpl.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVCommandDelegateImpl.m; sourceTree = "<group>"; };
+		3CA051C51A72FCDE0044C363 /* CDVCommandQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVCommandQueue.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVCommandQueue.h; sourceTree = "<group>"; };
+		3CA051C61A72FCDE0044C363 /* CDVCommandQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVCommandQueue.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVCommandQueue.m; sourceTree = "<group>"; };
+		3CA051C71A72FCDE0044C363 /* CDVConfigParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVConfigParser.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVConfigParser.h; sourceTree = "<group>"; };
+		3CA051C81A72FCDE0044C363 /* CDVConfigParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVConfigParser.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVConfigParser.m; sourceTree = "<group>"; };
+		3CA051C91A72FCDE0044C363 /* CDVDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVDebug.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVDebug.h; sourceTree = "<group>"; };
+		3CA051CA1A72FCDE0044C363 /* CDVInvokedUrlCommand.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVInvokedUrlCommand.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVInvokedUrlCommand.h; sourceTree = "<group>"; };
+		3CA051CB1A72FCDE0044C363 /* CDVInvokedUrlCommand.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVInvokedUrlCommand.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVInvokedUrlCommand.m; sourceTree = "<group>"; };
+		3CA051CC1A72FCDE0044C363 /* CDVJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVJSON.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVJSON.h; sourceTree = "<group>"; };
+		3CA051CD1A72FCDE0044C363 /* CDVJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVJSON.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVJSON.m; sourceTree = "<group>"; };
+		3CA051CE1A72FCDE0044C363 /* CDVLocalStorage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVLocalStorage.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVLocalStorage.h; sourceTree = "<group>"; };
+		3CA051CF1A72FCDE0044C363 /* CDVLocalStorage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVLocalStorage.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVLocalStorage.m; sourceTree = "<group>"; };
+		3CA051D01A72FCDE0044C363 /* CDVPlugin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVPlugin.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVPlugin.h; sourceTree = "<group>"; };
+		3CA051D11A72FCDE0044C363 /* CDVPlugin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVPlugin.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVPlugin.m; sourceTree = "<group>"; };
+		3CA051D21A72FCDE0044C363 /* CDVPluginResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVPluginResult.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVPluginResult.h; sourceTree = "<group>"; };
+		3CA051D31A72FCDE0044C363 /* CDVPluginResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVPluginResult.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVPluginResult.m; sourceTree = "<group>"; };
+		3CA051D41A72FCDE0044C363 /* CDVScreenOrientationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVScreenOrientationDelegate.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVScreenOrientationDelegate.h; sourceTree = "<group>"; };
+		3CA051D51A72FCDE0044C363 /* CDVShared.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVShared.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVShared.h; sourceTree = "<group>"; };
+		3CA051D61A72FCDE0044C363 /* CDVTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVTimer.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVTimer.h; sourceTree = "<group>"; };
+		3CA051D71A72FCDE0044C363 /* CDVTimer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVTimer.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVTimer.m; sourceTree = "<group>"; };
+		3CA051D81A72FCDE0044C363 /* CDVURLProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVURLProtocol.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVURLProtocol.h; sourceTree = "<group>"; };
+		3CA051D91A72FCDE0044C363 /* CDVURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVURLProtocol.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVURLProtocol.m; sourceTree = "<group>"; };
+		3CA051DA1A72FCDE0044C363 /* CDVUserAgentUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVUserAgentUtil.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.h; sourceTree = "<group>"; };
+		3CA051DB1A72FCDE0044C363 /* CDVUserAgentUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVUserAgentUtil.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVUserAgentUtil.m; sourceTree = "<group>"; };
+		3CA051DC1A72FCDE0044C363 /* CDVViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVViewController.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVViewController.h; sourceTree = "<group>"; };
+		3CA051DD1A72FCDE0044C363 /* CDVViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVViewController.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVViewController.m; sourceTree = "<group>"; };
+		3CA051DE1A72FCDE0044C363 /* CDVWebViewDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWebViewDelegate.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVWebViewDelegate.h; sourceTree = "<group>"; };
+		3CA051DF1A72FCDE0044C363 /* CDVWebViewDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWebViewDelegate.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVWebViewDelegate.m; sourceTree = "<group>"; };
+		3CA051E01A72FCDE0044C363 /* CDVWhitelist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDVWhitelist.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVWhitelist.h; sourceTree = "<group>"; };
+		3CA051E11A72FCDE0044C363 /* CDVWhitelist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CDVWhitelist.m; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDVWhitelist.m; sourceTree = "<group>"; };
+		3CA051E21A72FCDE0044C363 /* NSArray+Comparisons.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSArray+Comparisons.h"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSArray+Comparisons.h"; sourceTree = "<group>"; };
+		3CA051E31A72FCDE0044C363 /* NSArray+Comparisons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSArray+Comparisons.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSArray+Comparisons.m"; sourceTree = "<group>"; };
+		3CA051E41A72FCDE0044C363 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSData+Base64.h"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSData+Base64.h"; sourceTree = "<group>"; };
+		3CA051E51A72FCDE0044C363 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSData+Base64.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSData+Base64.m"; sourceTree = "<group>"; };
+		3CA051E61A72FCDE0044C363 /* NSDictionary+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Extensions.h"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.h"; sourceTree = "<group>"; };
+		3CA051E71A72FCDE0044C363 /* NSDictionary+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Extensions.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSDictionary+Extensions.m"; sourceTree = "<group>"; };
+		3CA051E81A72FCDE0044C363 /* NSMutableArray+QueueAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+QueueAdditions.h"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSMutableArray+QueueAdditions.h"; sourceTree = "<group>"; };
+		3CA051E91A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+QueueAdditions.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/NSMutableArray+QueueAdditions.m"; sourceTree = "<group>"; };
+		3CA051EA1A72FCDE0044C363 /* UIDevice+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIDevice+Extensions.h"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/UIDevice+Extensions.h"; sourceTree = "<group>"; };
+		3CA051EB1A72FCDE0044C363 /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+Extensions.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/UIDevice+Extensions.m"; sourceTree = "<group>"; };
+		3CA051FF1A72FDAB0044C363 /* OLIRecorder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = OLIRecorder.js; path = ../www/OLIRecorder.js; sourceTree = "<group>"; };
+		3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioStreamingRecorder.h; path = ../../src/ios/AudioStreamingRecorder.h; sourceTree = "<group>"; };
+		3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioStreamingRecorder.m; path = ../../src/ios/AudioStreamingRecorder.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3C01694A1A576167000D1543 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C0169621A576168000D1543 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C211A32365C005B55CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C68AEBD1A44E56B00BF81A3 /* AVFoundation.framework in Frameworks */,
+				3C482C4E1A32447C005B55CE /* AudioToolbox.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C3A1A32365C005B55CE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3C01694E1A576168000D1543 /* SimplePlay */ = {
+			isa = PBXGroup;
+			children = (
+				3C0169531A576168000D1543 /* AppDelegate.h */,
+				3C0169541A576168000D1543 /* AppDelegate.m */,
+				3C0169561A576168000D1543 /* SimplePlayViewController.h */,
+				3C0169571A576168000D1543 /* SimplePlayViewController.m */,
+				3C0169591A576168000D1543 /* Main.storyboard */,
+				3C01695C1A576168000D1543 /* Images.xcassets */,
+				3C01695E1A576168000D1543 /* LaunchScreen.xib */,
+				3C01694F1A576168000D1543 /* Supporting Files */,
+			);
+			path = SimplePlay;
+			sourceTree = "<group>";
+		};
+		3C01694F1A576168000D1543 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C0169751A57683C000D1543 /* audio.m4a */,
+				3C0169501A576168000D1543 /* Info.plist */,
+				3C0169511A576168000D1543 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C0169681A576168000D1543 /* SimplePlayTests */ = {
+			isa = PBXGroup;
+			children = (
+				3C01696B1A576168000D1543 /* SimplePlayTests.m */,
+				3C0169691A576168000D1543 /* Supporting Files */,
+			);
+			path = SimplePlayTests;
+			sourceTree = "<group>";
+		};
+		3C0169691A576168000D1543 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C01696A1A576168000D1543 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C0169771A5E5C89000D1543 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C4D1A32447C005B55CE /* AudioToolbox.framework */,
+				3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3C482C1B1A32365C005B55CE = {
+			isa = PBXGroup;
+			children = (
+				3CA051FF1A72FDAB0044C363 /* OLIRecorder.js */,
+				3CA052011A72FDF20044C363 /* OLIRecorder */,
+				3C482C261A32365C005B55CE /* AudioStreaming */,
+				3C482C401A32365C005B55CE /* AudioStreamingTests */,
+				3C01694E1A576168000D1543 /* SimplePlay */,
+				3C0169681A576168000D1543 /* SimplePlayTests */,
+				3CA051BE1A72FCAE0044C363 /* Cordova */,
+				3C0169771A5E5C89000D1543 /* Frameworks */,
+				3C482C251A32365C005B55CE /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3C482C251A32365C005B55CE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C241A32365C005B55CE /* AudioStreaming.app */,
+				3C482C3D1A32365C005B55CE /* AudioStreamingTests.xctest */,
+				3C01694D1A576167000D1543 /* SimplePlay.app */,
+				3C0169651A576168000D1543 /* SimplePlayTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3C482C261A32365C005B55CE /* AudioStreaming */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C2B1A32365C005B55CE /* AppDelegate.h */,
+				3C482C2C1A32365C005B55CE /* AppDelegate.m */,
+				3C482C2E1A32365C005B55CE /* ViewController.h */,
+				3C482C2F1A32365C005B55CE /* ViewController.m */,
+				3C482C311A32365C005B55CE /* Main.storyboard */,
+				3C482C341A32365C005B55CE /* Images.xcassets */,
+				3C482C361A32365C005B55CE /* LaunchScreen.xib */,
+				3C482C271A32365C005B55CE /* Supporting Files */,
+			);
+			path = AudioStreaming;
+			sourceTree = "<group>";
+		};
+		3C482C271A32365C005B55CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C281A32365C005B55CE /* Info.plist */,
+				3C482C291A32365C005B55CE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C482C401A32365C005B55CE /* AudioStreamingTests */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C431A32365C005B55CE /* AudioStreamingTests.m */,
+				3C482C411A32365C005B55CE /* Supporting Files */,
+			);
+			path = AudioStreamingTests;
+			sourceTree = "<group>";
+		};
+		3C482C411A32365C005B55CE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3C482C421A32365C005B55CE /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3CA051BE1A72FCAE0044C363 /* Cordova */ = {
+			isa = PBXGroup;
+			children = (
+				3CA051BF1A72FCDE0044C363 /* CDV.h */,
+				3CA051C01A72FCDE0044C363 /* CDVAvailability.h */,
+				3CA051C11A72FCDE0044C363 /* CDVAvailabilityDeprecated.h */,
+				3CA051C21A72FCDE0044C363 /* CDVCommandDelegate.h */,
+				3CA051C31A72FCDE0044C363 /* CDVCommandDelegateImpl.h */,
+				3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */,
+				3CA051C51A72FCDE0044C363 /* CDVCommandQueue.h */,
+				3CA051C61A72FCDE0044C363 /* CDVCommandQueue.m */,
+				3CA051C71A72FCDE0044C363 /* CDVConfigParser.h */,
+				3CA051C81A72FCDE0044C363 /* CDVConfigParser.m */,
+				3CA051C91A72FCDE0044C363 /* CDVDebug.h */,
+				3CA051CA1A72FCDE0044C363 /* CDVInvokedUrlCommand.h */,
+				3CA051CB1A72FCDE0044C363 /* CDVInvokedUrlCommand.m */,
+				3CA051CC1A72FCDE0044C363 /* CDVJSON.h */,
+				3CA051CD1A72FCDE0044C363 /* CDVJSON.m */,
+				3CA051CE1A72FCDE0044C363 /* CDVLocalStorage.h */,
+				3CA051CF1A72FCDE0044C363 /* CDVLocalStorage.m */,
+				3CA051D01A72FCDE0044C363 /* CDVPlugin.h */,
+				3CA051D11A72FCDE0044C363 /* CDVPlugin.m */,
+				3CA051D21A72FCDE0044C363 /* CDVPluginResult.h */,
+				3CA051D31A72FCDE0044C363 /* CDVPluginResult.m */,
+				3CA051D41A72FCDE0044C363 /* CDVScreenOrientationDelegate.h */,
+				3CA051D51A72FCDE0044C363 /* CDVShared.h */,
+				3CA051D61A72FCDE0044C363 /* CDVTimer.h */,
+				3CA051D71A72FCDE0044C363 /* CDVTimer.m */,
+				3CA051D81A72FCDE0044C363 /* CDVURLProtocol.h */,
+				3CA051D91A72FCDE0044C363 /* CDVURLProtocol.m */,
+				3CA051DA1A72FCDE0044C363 /* CDVUserAgentUtil.h */,
+				3CA051DB1A72FCDE0044C363 /* CDVUserAgentUtil.m */,
+				3CA051DC1A72FCDE0044C363 /* CDVViewController.h */,
+				3CA051DD1A72FCDE0044C363 /* CDVViewController.m */,
+				3CA051DE1A72FCDE0044C363 /* CDVWebViewDelegate.h */,
+				3CA051DF1A72FCDE0044C363 /* CDVWebViewDelegate.m */,
+				3CA051E01A72FCDE0044C363 /* CDVWhitelist.h */,
+				3CA051E11A72FCDE0044C363 /* CDVWhitelist.m */,
+				3CA051E21A72FCDE0044C363 /* NSArray+Comparisons.h */,
+				3CA051E31A72FCDE0044C363 /* NSArray+Comparisons.m */,
+				3CA051E41A72FCDE0044C363 /* NSData+Base64.h */,
+				3CA051E51A72FCDE0044C363 /* NSData+Base64.m */,
+				3CA051E61A72FCDE0044C363 /* NSDictionary+Extensions.h */,
+				3CA051E71A72FCDE0044C363 /* NSDictionary+Extensions.m */,
+				3CA051E81A72FCDE0044C363 /* NSMutableArray+QueueAdditions.h */,
+				3CA051E91A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m */,
+				3CA051EA1A72FCDE0044C363 /* UIDevice+Extensions.h */,
+				3CA051EB1A72FCDE0044C363 /* UIDevice+Extensions.m */,
+			);
+			name = Cordova;
+			sourceTree = "<group>";
+		};
+		3CA052011A72FDF20044C363 /* OLIRecorder */ = {
+			isa = PBXGroup;
+			children = (
+				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
+				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
+				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
+				3CA051BC1A72FB140044C363 /* OLIRecorder.m */,
+			);
+			name = OLIRecorder;
+			path = AudioStreaming;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3C01694C1A576167000D1543 /* SimplePlay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C0169711A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlay" */;
+			buildPhases = (
+				3C0169491A576167000D1543 /* Sources */,
+				3C01694A1A576167000D1543 /* Frameworks */,
+				3C01694B1A576167000D1543 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SimplePlay;
+			productName = SimplePlay;
+			productReference = 3C01694D1A576167000D1543 /* SimplePlay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3C0169641A576168000D1543 /* SimplePlayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C0169721A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlayTests" */;
+			buildPhases = (
+				3C0169611A576168000D1543 /* Sources */,
+				3C0169621A576168000D1543 /* Frameworks */,
+				3C0169631A576168000D1543 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C0169671A576168000D1543 /* PBXTargetDependency */,
+			);
+			name = SimplePlayTests;
+			productName = SimplePlayTests;
+			productReference = 3C0169651A576168000D1543 /* SimplePlayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		3C482C231A32365C005B55CE /* AudioStreaming */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C482C471A32365C005B55CE /* Build configuration list for PBXNativeTarget "AudioStreaming" */;
+			buildPhases = (
+				3C482C201A32365C005B55CE /* Sources */,
+				3C482C211A32365C005B55CE /* Frameworks */,
+				3C482C221A32365C005B55CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AudioStreaming;
+			productName = AudioStreaming;
+			productReference = 3C482C241A32365C005B55CE /* AudioStreaming.app */;
+			productType = "com.apple.product-type.application";
+		};
+		3C482C3C1A32365C005B55CE /* AudioStreamingTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3C482C4A1A32365C005B55CE /* Build configuration list for PBXNativeTarget "AudioStreamingTests" */;
+			buildPhases = (
+				3C482C391A32365C005B55CE /* Sources */,
+				3C482C3A1A32365C005B55CE /* Frameworks */,
+				3C482C3B1A32365C005B55CE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3C482C3F1A32365C005B55CE /* PBXTargetDependency */,
+			);
+			name = AudioStreamingTests;
+			productName = AudioStreamingTests;
+			productReference = 3C482C3D1A32365C005B55CE /* AudioStreamingTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3C482C1C1A32365C005B55CE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Opus Logica Inc.";
+				TargetAttributes = {
+					3C01694C1A576167000D1543 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					3C0169641A576168000D1543 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 3C01694C1A576167000D1543;
+					};
+					3C482C231A32365C005B55CE = {
+						CreatedOnToolsVersion = 6.1.1;
+						DevelopmentTeam = Q24R6U6QED;
+					};
+					3C482C3C1A32365C005B55CE = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 3C482C231A32365C005B55CE;
+					};
+				};
+			};
+			buildConfigurationList = 3C482C1F1A32365C005B55CE /* Build configuration list for PBXProject "AudioStreaming" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3C482C1B1A32365C005B55CE;
+			productRefGroup = 3C482C251A32365C005B55CE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3C482C231A32365C005B55CE /* AudioStreaming */,
+				3C482C3C1A32365C005B55CE /* AudioStreamingTests */,
+				3C01694C1A576167000D1543 /* SimplePlay */,
+				3C0169641A576168000D1543 /* SimplePlayTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3C01694B1A576167000D1543 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C01695B1A576168000D1543 /* Main.storyboard in Resources */,
+				3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */,
+				3C01695D1A576168000D1543 /* Images.xcassets in Resources */,
+				3C0169761A57683C000D1543 /* audio.m4a in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C0169631A576168000D1543 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C221A32365C005B55CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C482C331A32365C005B55CE /* Main.storyboard in Resources */,
+				3C482C381A32365C005B55CE /* LaunchScreen.xib in Resources */,
+				3C482C351A32365C005B55CE /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C3B1A32365C005B55CE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3C0169491A576167000D1543 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C0169581A576168000D1543 /* SimplePlayViewController.m in Sources */,
+				3C0169551A576168000D1543 /* AppDelegate.m in Sources */,
+				3C0169521A576168000D1543 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C0169611A576168000D1543 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C201A32365C005B55CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3CA051F71A72FCDE0044C363 /* CDVViewController.m in Sources */,
+				3CA051BD1A72FB140044C363 /* OLIRecorder.m in Sources */,
+				3CA051F01A72FCDE0044C363 /* CDVJSON.m in Sources */,
+				3C482C301A32365C005B55CE /* ViewController.m in Sources */,
+				3CA051EF1A72FCDE0044C363 /* CDVInvokedUrlCommand.m in Sources */,
+				3CA051FA1A72FCDE0044C363 /* NSArray+Comparisons.m in Sources */,
+				3CA051F11A72FCDE0044C363 /* CDVLocalStorage.m in Sources */,
+				3CA051F41A72FCDE0044C363 /* CDVTimer.m in Sources */,
+				3CA051FC1A72FCDE0044C363 /* NSDictionary+Extensions.m in Sources */,
+				3CA051FE1A72FCDE0044C363 /* UIDevice+Extensions.m in Sources */,
+				3CA051F61A72FCDE0044C363 /* CDVUserAgentUtil.m in Sources */,
+				3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */,
+				3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */,
+				3CA051EE1A72FCDE0044C363 /* CDVConfigParser.m in Sources */,
+				3CA051F91A72FCDE0044C363 /* CDVWhitelist.m in Sources */,
+				3CA051F31A72FCDE0044C363 /* CDVPluginResult.m in Sources */,
+				3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */,
+				3CA051F51A72FCDE0044C363 /* CDVURLProtocol.m in Sources */,
+				3CA051F81A72FCDE0044C363 /* CDVWebViewDelegate.m in Sources */,
+				3CA051FB1A72FCDE0044C363 /* NSData+Base64.m in Sources */,
+				3C482C2A1A32365C005B55CE /* main.m in Sources */,
+				3CA051F21A72FCDE0044C363 /* CDVPlugin.m in Sources */,
+				3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */,
+				3CA051FD1A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		3C482C391A32365C005B55CE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C482C441A32365C005B55CE /* AudioStreamingTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3C0169671A576168000D1543 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C01694C1A576167000D1543 /* SimplePlay */;
+			targetProxy = 3C0169661A576168000D1543 /* PBXContainerItemProxy */;
+		};
+		3C482C3F1A32365C005B55CE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3C482C231A32365C005B55CE /* AudioStreaming */;
+			targetProxy = 3C482C3E1A32365C005B55CE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3C0169591A576168000D1543 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C01695A1A576168000D1543 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3C01695E1A576168000D1543 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C01695F1A576168000D1543 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+		3C482C311A32365C005B55CE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C482C321A32365C005B55CE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3C482C361A32365C005B55CE /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3C482C371A32365C005B55CE /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3C01696D1A576168000D1543 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SimplePlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3C01696E1A576168000D1543 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = SimplePlay/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		3C01696F1A576168000D1543 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SimplePlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplePlay.app/SimplePlay";
+			};
+			name = Debug;
+		};
+		3C0169701A576168000D1543 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = SimplePlayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplePlay.app/SimplePlay";
+			};
+			name = Release;
+		};
+		3C482C451A32365C005B55CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3C482C461A32365C005B55CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3C482C481A32365C005B55CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ed Gamble (8YS5F6PB43)";
+				INFOPLIST_FILE = AudioStreaming/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "../../PhoncertGO//platforms/ios/CordovaLib/Classes";
+			};
+			name = Debug;
+		};
+		3C482C491A32365C005B55CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Ed Gamble (8YS5F6PB43)";
+				INFOPLIST_FILE = AudioStreaming/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				USER_HEADER_SEARCH_PATHS = "../../PhoncertGO//platforms/ios/CordovaLib/Classes";
+			};
+			name = Release;
+		};
+		3C482C4B1A32365C005B55CE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AudioStreamingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioStreaming.app/AudioStreaming";
+			};
+			name = Debug;
+		};
+		3C482C4C1A32365C005B55CE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = AudioStreamingTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AudioStreaming.app/AudioStreaming";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3C0169711A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C01696D1A576168000D1543 /* Debug */,
+				3C01696E1A576168000D1543 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C0169721A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C01696F1A576168000D1543 /* Debug */,
+				3C0169701A576168000D1543 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C482C1F1A32365C005B55CE /* Build configuration list for PBXProject "AudioStreaming" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C482C451A32365C005B55CE /* Debug */,
+				3C482C461A32365C005B55CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C482C471A32365C005B55CE /* Build configuration list for PBXNativeTarget "AudioStreaming" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C482C481A32365C005B55CE /* Debug */,
+				3C482C491A32365C005B55CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3C482C4A1A32365C005B55CE /* Build configuration list for PBXNativeTarget "AudioStreamingTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3C482C4B1A32365C005B55CE /* Debug */,
+				3C482C4C1A32365C005B55CE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3C482C1C1A32365C005B55CE /* Project object */;
+}

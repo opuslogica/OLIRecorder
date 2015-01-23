@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="ufC-wZ-h7g">
+            <objects>
+                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
+                        <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKu-ov-DEk">
+                                <rect key="frame" x="157" y="72" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fZx-Gr-dle"/>
+                                    <constraint firstAttribute="width" constant="60" id="xLN-CU-0MF"/>
+                                </constraints>
+                                <state key="normal" title="Record">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleRecord:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4zR-13-Pfd"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2I-Qz-f6k">
+                                <rect key="frame" x="138" y="148" width="98" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="98" id="P4U-qB-ub3"/>
+                                    <constraint firstAttribute="height" constant="30" id="vbi-wa-VHg"/>
+                                </constraints>
+                                <state key="normal" title="Reset Session">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetSession:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="ZwZ-EV-rhm"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monitor Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gfk-GP-Ova">
+                                <rect key="frame" x="92" y="351" width="190" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="EYu-XO-moO"/>
+                                    <constraint firstAttribute="width" constant="190" id="zwk-er-ij2"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Q3w-u8-KzT">
+                                <rect key="frame" x="14" y="288" width="347" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="oRi-0o-AYR"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="recordVolumeChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="JwK-ep-KC1"/>
+                                </connections>
+                            </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="fxS-6C-jR6">
+                                <rect key="frame" x="14" y="380" width="347" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="lLW-BE-Weu"/>
+                                    <constraint firstAttribute="height" constant="30" id="uP8-ah-5lo"/>
+                                </constraints>
+                                <connections>
+                                    <action selector="monitorVolumeChanged:" destination="vXZ-lx-hvc" eventType="valueChanged" id="9XD-dH-oq5"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="&lt;not recording&gt;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="99j-w4-3X8">
+                                <rect key="frame" x="16" y="204" width="343" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="DTY-Ll-GoL"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oi0-ve-TPx">
+                                <rect key="frame" x="107" y="449" width="160" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="ALb-ce-EWE"/>
+                                    <constraint firstAttribute="width" constant="160" id="jzY-BF-Qmw"/>
+                                </constraints>
+                                <state key="normal" title="Enable Monitor">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleMonitor:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="cZu-Ii-ev7"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Record Volume" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mn5-eb-Fct">
+                                <rect key="frame" x="105" y="259" width="165" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="FyJ-2S-sBk"/>
+                                    <constraint firstAttribute="width" constant="165" id="I9s-Pd-K4l"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="fxS-6C-jR6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="2Dl-Mt-IWp"/>
+                            <constraint firstItem="Oi0-ve-TPx" firstAttribute="top" secondItem="fxS-6C-jR6" secondAttribute="bottom" constant="39" id="5B5-te-HOU"/>
+                            <constraint firstItem="Q3w-u8-KzT" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="8sg-Vh-6JQ"/>
+                            <constraint firstAttribute="centerX" secondItem="Oi0-ve-TPx" secondAttribute="centerX" constant="0.5" id="9uH-gh-dO4"/>
+                            <constraint firstItem="fxS-6C-jR6" firstAttribute="top" secondItem="gfk-GP-Ova" secondAttribute="bottom" constant="8" id="AHg-xj-tmo"/>
+                            <constraint firstItem="99j-w4-3X8" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="26" id="LA2-2g-MV0"/>
+                            <constraint firstItem="mn5-eb-Fct" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="81" id="WJM-gf-xym"/>
+                            <constraint firstItem="fxS-6C-jR6" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bFm-Lm-7sI"/>
+                            <constraint firstItem="Q3w-u8-KzT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="c0h-ow-x9b"/>
+                            <constraint firstItem="99j-w4-3X8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cPM-RD-Y7u"/>
+                            <constraint firstItem="l2I-Qz-f6k" firstAttribute="centerX" secondItem="uKu-ov-DEk" secondAttribute="centerX" id="fID-YA-6cI"/>
+                            <constraint firstItem="l2I-Qz-f6k" firstAttribute="top" secondItem="uKu-ov-DEk" secondAttribute="bottom" constant="46" id="lQt-e3-KK3"/>
+                            <constraint firstItem="Q3w-u8-KzT" firstAttribute="top" secondItem="mn5-eb-Fct" secondAttribute="bottom" constant="8" id="n9k-L3-zHQ"/>
+                            <constraint firstAttribute="centerX" secondItem="mn5-eb-Fct" secondAttribute="centerX" id="p06-TK-Kuk"/>
+                            <constraint firstAttribute="centerX" secondItem="uKu-ov-DEk" secondAttribute="centerX" constant="0.5" id="qVf-nR-7H2"/>
+                            <constraint firstItem="99j-w4-3X8" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="sce-qI-2Py"/>
+                            <constraint firstAttribute="centerX" secondItem="gfk-GP-Ova" secondAttribute="centerX" id="wsT-B4-uEi"/>
+                            <constraint firstItem="gfk-GP-Ova" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="331" id="xkb-hu-XFh"/>
+                            <constraint firstItem="uKu-ov-DEk" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="52" id="zTs-7a-7N1"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="infoLabel" destination="99j-w4-3X8" id="CK9-4C-2XR"/>
+                        <outlet property="monitorVolumeSlider" destination="fxS-6C-jR6" id="Aze-5B-V8F"/>
+                        <outlet property="recordVolumnSlider" destination="Q3w-u8-KzT" id="lD9-Jt-fkA"/>
+                        <outlet property="resetSessionButton" destination="l2I-Qz-f6k" id="6fd-fR-S3W"/>
+                        <outlet property="toggleMonitorButton" destination="Oi0-ve-TPx" id="91W-iQ-AXB"/>
+                        <outlet property="toggleRecordButton" destination="uKu-ov-DEk" id="kgB-Ip-eqj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+    </scenes>
+</document>
