@@ -50,8 +50,10 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
       // Do this on the 'main queue' - ensures that the UI is updated.
       dispatch_async (dispatch_get_global_queue
                       (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        // handle file
-                        
+                        [self.commandDelegate
+                         sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK
+                                                             messageAsString: file.absoluteString]
+                         callbackId:@"OLIRecorder.SESSION_ANNOUNCE_FILE"]; // perhaps?
                       });
     }];
     // } /* @synchronized */
