@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:rim="http://www.blackberry.com/ns/widgets"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.opuslogica.plugins.HLSPlugin"
+    version="1.1.0">
+  <name>hls-player</name>
+  <description>HLS Player Plugin for Ionic and Cordova</description>
+  <license>Apache 2.0</license>
+  <keywords>HLS</keywords>
+
+  <js-module src="www/HLSPlugin.js" name="HLSPlugin">
+    <clobbers target="window.HLSPlugin" />
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="HLSPlugin" >
+        <param name="ios-package" value="HLSPlugin"/>
+      </feature>
+    </config-file>
+    <config-file target="*-Info.plist" parent="UIBackgroundModes">
+      <array>
+        <string>audio</string>
+      </array>
+    </config-file>
+
+    <header-file src="src/ios/HLSPlugin.h"/>
+    <source-file src="src/ios/HLSPlugin.m"/>
+        
+    <framework src="MediaPlayer.framework"/>
+    <framework src="AudioToolbox.framework"/>
+    <framework src="CFNetwork.framework"/>
+    <framework src="UIKit.framework"/>
+  </platform>
+</plugin>
