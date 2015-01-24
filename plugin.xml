@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
     xmlns:rim="http://www.blackberry.com/ns/widgets"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    id="org.opuslogica.plugins.HLSPlugin"
-    version="1.1.0">
-  <name>hls-player</name>
-  <description>HLS Player Plugin for Ionic and Cordova</description>
+    id="org.opuslogica.plugins.OLIRecorder"
+    version="1.0.0">
+  <name>oli-recorder</name>
+  <description>OLI Recorder Backend for Ionic and Cordova</description>
   <license>Apache 2.0</license>
-  <keywords>HLS</keywords>
+  <keywords>Recorder</keywords>
 
-  <js-module src="www/HLSPlugin.js" name="HLSPlugin">
-    <clobbers target="window.HLSPlugin" />
+  <js-module src="www/OLIRecorder.js" name="OLIRecorder">
+    <clobbers target="window.OLIRecorder" />
   </js-module>
 
   <!-- ios -->
   <platform name="ios">
     <config-file target="config.xml" parent="/*">
-      <feature name="HLSPlugin" >
-        <param name="ios-package" value="HLSPlugin"/>
+      <feature name="OLIRecorder" >
+        <param name="ios-package" value="OLIRecorder"/>
       </feature>
     </config-file>
     <config-file target="*-Info.plist" parent="UIBackgroundModes">
@@ -27,9 +26,9 @@
       </array>
     </config-file>
 
-    <header-file src="src/ios/HLSPlugin.h"/>
-    <source-file src="src/ios/HLSPlugin.m"/>
-        
+    <header-file src="src/ios/OLIRecorder.h"/>
+    <source-file src="src/ios/OLIRecorder.m"/>
+
     <framework src="MediaPlayer.framework"/>
     <framework src="AudioToolbox.framework"/>
     <framework src="CFNetwork.framework"/>
