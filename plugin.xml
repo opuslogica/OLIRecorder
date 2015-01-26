@@ -28,6 +28,8 @@
 
     <header-file src="src/ios/OLIRecorder.h"/>
     <source-file src="src/ios/OLIRecorder.m"/>
+    <header-file src="src/ios/AudioStreamingRecorder.h"/>
+    <source-file src="src/ios/AudioStreamingRecorder.m"/>
     <framework src="UIKit.framework"/>
   </platform>
 </plugin>
