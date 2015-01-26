@@ -71,7 +71,7 @@ OLIRecorder.get = function(id) {
  */
 OLIRecorder.prototype.start = function(options) {
   console.log("OLIRecorder: JS: start: ", options);
-  exec(null, null, "OLIRecorder", "startSession", [this.id, this.src, options]);
+  exec(null, null, "OLIRecorder", "startSession", [this.id, options]);
 };
 
 /**
@@ -105,26 +105,10 @@ OLIRecorder.prototype.release = function() {
 // Examples (end to end)
 //
 
-
-/**
- * Get duration of an audio file.
- * The duration is only set for audio that is playing, paused or stopped.
- *
- * @return      duration or -1 if not known.
- */
-HLSPlugin.prototype.getDuration = function(success, fail) {
-    var me = this;
-    exec(function(d) {
-        me._duration = d;
-        success(d);
-    }, fail, "OLIRecorder", "getDurationAudio", [this.id]);
-};
-
-
 /**
  * Get input gain
  */
-HLSPlugin.prototype.getInputGain = function(success, fail) {
+OLIRecorder.prototype.getInputGain = function(success, fail) {
     var me = this;
     exec(function(p) {
         me._position = p;
@@ -135,7 +119,7 @@ HLSPlugin.prototype.getInputGain = function(success, fail) {
 /**
  * set input gain
  */
-HLSPlugin.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
+OLIRecorder.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
     exec(null, null, "OLIRecorder", "setInputGain", [this.id, volume]);
 };
 
