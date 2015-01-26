@@ -28,26 +28,23 @@ var recorderObjects = {};
  * This class provides access to the device media, interfaces to both sound and video
  *
  * @constructor
- * @param src                   The file name or url to play
  * @param fileAnnounceCallback  The callback to be called when a recorded file is available
- *                                  recoredFileCallback(string-ish filename)
+ *                                  recordedFileCallback(string-ish filename)
  * @param errorCallback         The callback to be called if there is an error.
  *                                  errorCallback(int errorCode) - OPTIONAL
  * @param stateCallback        The callback to be called when recorder state has changed.
  *                                  stateCallback(int sessionStateCode) - OPTIONAL
  */
-var OLIRecorder = function(src, fileAnnounceCallback, errorCallback, stateCallback) {
+var OLIRecorder = function(fileAnnounceCallback, errorCallback, stateCallback) {
   console.log('OLIRecorder creation');
   argscheck.checkArgs('SFFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
   mediaObjects[this.id] = this;
-  this.src = src;
   this.fileAnnounceCallback = fileAnnounceCallback;
   this.errorCallback = errorCallback;
   this.stateCallback = stateCallback;
-  this._duration = -1;
   this._position = -1;
-  exec(null, this.errorCallback, "OLIRecorder", "create", [this.id, this.src]);
+  exec(null, this.errorCallback, "OLIRecorder", "create", [this.id]);
 };
 
 // SESSION  messages

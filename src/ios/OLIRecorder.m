@@ -20,10 +20,8 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
 - (void) create: (CDVInvokedUrlCommand*) command {
 
   self.mediaId      = [command.arguments objectAtIndex:0];
-  self.resourcePath = [command.arguments objectAtIndex:1];
 
-  NSLog (@"OLIRecorder created path-> %@    id-> %@",
-         self.resourcePath, self.mediaId);
+  NSLog (@"OLIRecorder created:  id-> %@", self.mediaId);
 
   theAudioRecorder =
     [[AudioStreamingRecorder alloc]

@@ -13,7 +13,6 @@
 
 // CDVPlugin Framework (apparently)
 @property(nonatomic, retain) NSString* mediaId;
-@property(nonatomic, retain) NSString* resourcePath;
 
 // OLIRecorder Specific
 @property(strong, nonatomic, readonly) AudioStreamingRecorder *audioRecorder;
