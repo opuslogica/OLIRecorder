@@ -40,7 +40,7 @@ var OLIRecorder = function(src, fileAnnounceCallback, errorCallback, stateCallba
   console.log('OLIRecorder creation');
   argscheck.checkArgs('SFFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
-  mediaObjects[this.id] = this;
+  recorderObjects[this.id] = this;
   this.src = src;
   this.fileAnnounceCallback = fileAnnounceCallback;
   this.errorCallback = errorCallback;
