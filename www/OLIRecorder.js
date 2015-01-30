@@ -39,7 +39,7 @@ var OLIRecorder = function(fileAnnounceCallback, errorCallback, stateCallback) {
   console.log('OLIRecorder creation');
   argscheck.checkArgs('SFFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
-  mediaObjects[this.id] = this;
+  recorderObjects[this.id] = this;
   this.fileAnnounceCallback = fileAnnounceCallback;
   this.errorCallback = errorCallback;
   this.stateCallback = stateCallback;
@@ -132,7 +132,7 @@ OLIRecorder.onStatus = function(id, msgType, value) {
 
   var recorder = recorderObjects[id];
 
-  if (media) {
+  if (recorder) {
     switch(msgType) {
 
       case OLIRecorder.SESSION_STATE:
