@@ -25,7 +25,7 @@ var argscheck = require('cordova/argscheck'),
 var recorderObjects = {};
 
 /**
- * This class provides access to the device media, interfaces to both sound and video
+ * This class provides access to the device recording interfaces for recording sound
  *
  * @constructor
  * @param fileAnnounceCallback  The callback to be called when a recorded file is available
@@ -35,16 +35,16 @@ var recorderObjects = {};
  * @param stateCallback        The callback to be called when recorder state has changed.
  *                                  stateCallback(int sessionStateCode) - OPTIONAL
  */
-var OLIRecorder = function(fileAnnounceCallback, errorCallback, stateCallback) {
+var OLIRecorder = function(file_ready_callback, error_callback, state_callback) {
   console.log('OLIRecorder creation');
-  argscheck.checkArgs('SFFF', 'OLIRecorder', arguments);
+  argscheck.checkArgs('FFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
+  this.file_ready_callback = file_ready_callback;
+  this.error_callback = error_callback;
+  this.state_callback = state_callback;
   recorderObjects[this.id] = this;
-  this.fileAnnounceCallback = fileAnnounceCallback;
-  this.errorCallback = errorCallback;
-  this.stateCallback = stateCallback;
   this._position = -1;
-  exec(null, this.errorCallback, "OLIRecorder", "create", [this.id]);
+  exec(null, this.error_callback, "OLIRecorder", "create", [this.id]);
 };
 
 // SESSION  messages
@@ -97,7 +97,6 @@ OLIRecorder.prototype.release = function() {
     }, this.errorCallback, "OLIRecorder", "releaseRecorder", [this.id]);
 };
 
-
 //
 // Examples (end to end)
 //
@@ -124,7 +123,7 @@ OLIRecorder.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
  * Audio has status update.
  * PRIVATE
  *
- * @param id            The media object id (string)
+ * @param id            The recorder object id (string)
  * @param msgType       The 'type' of update this is
  * @param value         Use of value is determined by the msgType
  */
@@ -136,15 +135,15 @@ OLIRecorder.onStatus = function(id, msgType, value) {
     switch(msgType) {
 
       case OLIRecorder.SESSION_STATE:
-        recorder.stateCallback && recorder.stateCallback(value);
+        recorder.state_callback && recorder.state_callback(value);
         break;
 
       case OLIRecorder.SESSION_ERROR:
-        recorder.errorCallback && recorder.errorCallback(value);
+        recorder.error_callback && recorder.error_callback(value);
         break;
 
       case OLIRecorder.SESSION_ANNOUNCE_FILE:
-        recorder.fileAnnounceCallback && recorder.fileAnnounceCallback(value);
+        recorder.file_ready_callback && recorder.file_ready_callback(value);
         break;
 
       default:
