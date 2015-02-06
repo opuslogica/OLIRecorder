@@ -51,7 +51,7 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
                         [self.commandDelegate
                          evalJs: [NSString stringWithFormat:
                                   @"OLIRecorder.processFile('%@', '%@');",
-                                  self.mediaId, file]
+                                  self.mediaId, file.absoluteString]
                          scheduledOnRunLoop: YES];
                         });
     }];
