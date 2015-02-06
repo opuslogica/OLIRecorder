@@ -120,6 +120,64 @@ OLIRecorder.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
 };
 
 /**
+ * expunge (delete) already processed file
+ */
+OLIRecorder.prototype.expungeLeftOverAudioFile = function(fileURL) {
+  exec (null, null,
+        "OLIRecorder", "expungeLeftOverAudioFile",
+        [this.id, fileURL]);
+};
+
+/**
+ * expunge (delete) any and all already processed files
+ */
+OLIRecorder.prototype.expungeLeftOverAudioFiles = function() {
+  exec (null, null,
+        "OLIRecorder", "expungeLeftOverAudioFiles",
+        [this.id]);
+};
+
+/**
+ * Apply handleFile to any and all already processed files
+ */
+OLIRecorder.prototype.processLeftOverAudioFiles = function(handleFile) {
+  exec (function (files) { files.forEach(handleFile) },
+        null,
+        "OLIRecorder", "arrayOfLeftOverAudioFiles",
+        [this.id]);
+};
+
+/**
+ * Callbacks.  Invoked view evalJS.  There is no CDVInvokedUrlCommand
+ 
+/**
+ * process file
+ */
+OLIRecorder.processFile = function(id, url) {
+  console.log ("OLIRecorder: JS: processFile: ", url)
+
+  var recorder = recorderObjects[id];
+
+  if (recorder && recorder.file_ready_callback)
+    recorder.file_ready_callback(url)
+  else
+    console.log (@"OLIRecorder: JS: processFile: <missed recorder and/or callback>")
+}
+
+/**
+ * Process route changes
+ */
+OLIRecorder.processRoute = function(id, placeholder) {
+  console.log ("OLIRecorder: JS: processRoute: ", placeholder)
+  
+  var recorder = recorderObjects[id];
+  
+  if (!recorder)
+    console.log (@"OLIRecorder: JS: processRoute: <missed recorder>")
+};
+
+
+/**
  * Audio has status update.
  * PRIVATE
  *

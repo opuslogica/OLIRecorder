@@ -80,9 +80,19 @@ typedef void (^RecordedFileCallback) (unsigned int session,
 // the above declarations for AUDIO_DISPATCH_QUEUE_*.
 @property (nonatomic, readwrite) dispatch_queue_t callbackQueue;
 
+// Learn about changes
+typedef void (^RouteChangeCallback) (NSString *placeholder);
+
+@property (nonatomic, copy) RouteChangeCallback routeCallback;
+
 //
 // Class Methods
 //
+
+//
+// Expunge (aka 'rm') the file - it is 'left over' because it is assumed that
+// the file has already been handled/downlinked.
++ (void) expungeLeftOverAudioFile: (NSString *) fileURLAsString;
 
 //
 // Expunge any and all left over audio files.  Any audio files remaining in

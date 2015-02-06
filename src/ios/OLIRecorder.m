@@ -49,11 +49,23 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
       dispatch_async (dispatch_get_global_queue
                       (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         [self.commandDelegate
-                         sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK
-                                                             messageAsString: file.absoluteString]
-                         callbackId:@"OLIRecorder.SESSION_ANNOUNCE_FILE"]; // perhaps?
-                      });
+                         evalJs: [NSString stringWithFormat:
+                                  @"OLIRecorder.processFile(%@);",
+                                  file]
+                         scheduledOnRunLoop: YES];
+                        });
     }];
+    
+    // Assign a 'route change' callback; typically invoked when an audio device
+    // is added to the AVAudioEngine
+    theAudioRecorder.routeCallback = ^(NSString *placeholder) {
+      [self.commandDelegate
+       evalJs: [NSString stringWithFormat:
+                @"OLIRecorder.processRoute(%@);",
+                placeholder]
+       scheduledOnRunLoop:YES];
+    };
+    
     // } /* @synchronized */
   }
 
@@ -127,6 +139,38 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
   if (nil != theAudioRecorder) {
     theAudioRecorder.inputGain = MAX (0.0, (MIN (gain.floatValue, 1.0)));
   }
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]
+   callbackId: command.callbackId];
+}
+
+//
+// 'Left Over Files'
+//
+- (void) expungeLeftOverAudioFiles: (CDVInvokedUrlCommand*) command {
+  NSLog(@"OLIRecorder: expungeLeftOverAudioFiles");
+  [AudioStreamingRecorder expungeLeftOverAudioFiles];
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]
+   callbackId: command.callbackId];
+}
+
+- (void) arrayOfLeftOverAudioFiles: (CDVInvokedUrlCommand*) command {
+  NSLog(@"OLIRecorder: arrayOfLeftOverAudioFiles");
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK
+                      messageAsArray: [AudioStreamingRecorder arrayOfLeftOverAudioFiles]]
+   callbackId: command.callbackId];
+}
+
+- (void) expungeLeftOverAudioFile: (CDVInvokedUrlCommand*) command {
+  NSString *fileURL = [command.arguments objectAtIndex: 1];
+  
+  NSLog(@"OLIRecorder: expungeLeftOverAudioFile: %@", fileURL);
+  [AudioStreamingRecorder expungeLeftOverAudioFile: fileURL];
   
   [self.commandDelegate
    sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]

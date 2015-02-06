@@ -144,6 +144,11 @@ static unsigned int instance = 0;
                                                  inDomains: NSUserDomainMask] lastObject];
 }
 
++ (void) expungeLeftOverAudioFile: (NSString *) fileURLAsString {
+  [[NSFileManager defaultManager] removeItemAtPath: fileURLAsString
+                                             error: NULL];
+}
+
 //
 //
 //
@@ -564,7 +569,7 @@ static unsigned int instance = 0;
       if (self.isRecording)
         [self pause];
 
-      // Mark as isInterrupted on if isRecording (not a real interrupt otherwise)
+      // Mark as isInterrupted if isRecording (not a real interrupt otherwise)
       self.isInterrupted = self.isRecording;
       break;
       
@@ -608,6 +613,10 @@ static unsigned int instance = 0;
   }
   
   NSLog(@"     Description: %@\n\n", self.session.currentRoute);
+
+  if (self.routeCallback)
+    self.routeCallback ([NSString stringWithFormat:@"Placeholder: %@",
+                         self.session.currentRoute]);
 }
 
 @end
