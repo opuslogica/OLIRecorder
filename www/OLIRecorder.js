@@ -161,7 +161,7 @@ OLIRecorder.processFile = function(id, url) {
   if (recorder && recorder.file_ready_callback)
     recorder.file_ready_callback(url)
   else
-    console.log (@"OLIRecorder: JS: processFile: <missed recorder and/or callback>")
+    console.log ("OLIRecorder: JS: processFile: <missed recorder and/or callback>");
 }
 
 /**
@@ -173,7 +173,7 @@ OLIRecorder.processRoute = function(id, placeholder) {
   var recorder = recorderObjects[id];
   
   if (!recorder)
-    console.log (@"OLIRecorder: JS: processRoute: <missed recorder>")
+    console.log ("OLIRecorder: JS: processRoute: <missed recorder>");
 };
 
 
