@@ -614,9 +614,23 @@ static unsigned int instance = 0;
   
   NSLog(@"     Description: %@\n\n", self.session.currentRoute);
 
-  if (self.routeCallback)
-    self.routeCallback ([NSString stringWithFormat:@"Placeholder: %@",
-                         self.session.currentRoute]);
+  if (self.routeCallback) {
+    NSMutableArray *iNames = [NSMutableArray array];
+    NSMutableArray *oNames = [NSMutableArray array];
+    
+    [self.session.currentRoute.inputs enumerateObjectsUsingBlock:
+     ^(AVAudioSessionPortDescription *obj, NSUInteger idx, BOOL *stop) {
+       [iNames addObject: obj.portName];
+     }];
+    
+    [self.session.currentRoute.outputs enumerateObjectsUsingBlock:
+     ^(AVAudioSessionPortDescription *obj, NSUInteger idx, BOOL *stop) {
+       [oNames addObject: obj.portName];
+     }];
+
+    self.routeCallback ([NSString stringWithFormat:@"Route:\n  Inputs: %@\n  Outputs: %@",
+                         iNames, oNames]);
+  }
 }
 
 @end
