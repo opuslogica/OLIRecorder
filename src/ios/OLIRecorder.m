@@ -50,7 +50,7 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
                       (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         [self.commandDelegate
                          evalJs: [NSString stringWithFormat:
-                                  @"OLIRecorder.processFile(%@, %@);",
+                                  @"OLIRecorder.processFile('%@', '%@');",
                                   self.mediaId, file]
                          scheduledOnRunLoop: YES];
                         });
@@ -61,7 +61,7 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
     theAudioRecorder.routeCallback = ^(NSString *placeholder) {
       [self.commandDelegate
        evalJs: [NSString stringWithFormat:
-                @"OLIRecorder.processRoute(%@, %@);",
+                @"OLIRecorder.processRoute('%@', '%@');",
                 self.mediaId, placeholder]
        scheduledOnRunLoop:YES];
     };
