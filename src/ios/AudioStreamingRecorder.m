@@ -628,8 +628,9 @@ static unsigned int instance = 0;
        [oNames addObject: obj.portName];
      }];
 
-    self.routeCallback ([NSString stringWithFormat:@"Route:\n  Inputs: %@\n  Outputs: %@",
-                         iNames, oNames]);
+    self.routeCallback ([NSString stringWithFormat:@"Route Inputs %lu Outputs %lu",
+                         (unsigned long)iNames.count,
+                         (unsigned long)oNames.count]);
   }
 }
 
