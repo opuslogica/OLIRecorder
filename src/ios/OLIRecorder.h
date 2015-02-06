@@ -4,7 +4,11 @@
    and others, of Opus Logica, Inc. */
 
 #import <UIKit/UIKit.h>
-#import "CDVPlugin.h" // <Cordova/CDVPlugin.h>
+#if defined (ED_STANDALONE)
+#import "CDVPlugin.h"
+#else
+#import <Cordova/CDVPlugin.h>
+#endif
 #import "AudioStreamingRecorder.h"
 
 #define OLIRECORDER_DEFAULT_RECORDING_INTERVAL  10.0 /* seconds */
