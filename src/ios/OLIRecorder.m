@@ -48,22 +48,26 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
       // Do this on the 'main queue' - ensures that the UI is updated.
       dispatch_async (dispatch_get_global_queue
                       (DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+#if 0
                         [self.commandDelegate
                          evalJs: [NSString stringWithFormat:
                                   @"OLIRecorder.processFile('%@', '%@');",
                                   self.mediaId, file]
                          scheduledOnRunLoop: YES];
+#endif
                         });
     }];
     
     // Assign a 'route change' callback; typically invoked when an audio device
     // is added to the AVAudioEngine
     theAudioRecorder.routeCallback = ^(NSString *placeholder) {
+#if 0
       [self.commandDelegate
        evalJs: [NSString stringWithFormat:
                 @"OLIRecorder.processRoute('%@', '%@');",
                 self.mediaId, placeholder]
        scheduledOnRunLoop:YES];
+#endif
     };
     
     // } /* @synchronized */
