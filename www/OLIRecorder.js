@@ -147,6 +147,10 @@ OLIRecorder.prototype.processLeftOverAudioFiles = function(handleFile) {
         [this.id]);
 };
 
+OLIRecorder.prototype.getMeterLevels = function(handleLevels) {
+  exec(function(levels) { handleLevels(levels); }, null, "OLIRecorder", "getMeterLevels", [this.id]);
+};
+
 /**
  * Callbacks.  Invoked view evalJS.  There is no CDVInvokedUrlCommand
  
