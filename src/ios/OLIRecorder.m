@@ -146,6 +146,24 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
 }
 
 //
+// Meter Levels
+//
+- (void) getMeterLevels: (CDVInvokedUrlCommand*) command {
+  NSLog(@"OLIRecorder: getMeterLevels");
+  
+  AudioQueueLevelMeterState meterLeft  = theAudioRecorder.recordedLevelLeft;
+  AudioQueueLevelMeterState meterRight = theAudioRecorder.recordedLevelRight;
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK
+                                       messageAsArray: @[@(meterLeft.mPeakPower),
+                                                         @(meterLeft.mAveragePower),
+                                                         @(meterRight.mPeakPower),
+                                                         @(meterRight.mAveragePower)]]
+   callbackId: command.callbackId];
+}
+
+//
 // 'Left Over Files'
 //
 - (void) expungeLeftOverAudioFiles: (CDVInvokedUrlCommand*) command {
