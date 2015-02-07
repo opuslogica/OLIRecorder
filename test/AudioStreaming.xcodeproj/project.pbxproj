@@ -24,6 +24,7 @@
 		3C482C381A32365C005B55CE /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C482C361A32365C005B55CE /* LaunchScreen.xib */; };
 		3C482C441A32365C005B55CE /* AudioStreamingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C431A32365C005B55CE /* AudioStreamingTests.m */; };
 		3C482C4E1A32447C005B55CE /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C482C4D1A32447C005B55CE /* AudioToolbox.framework */; };
+		3C609F631A8675E900F986BC /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C609F621A8675E900F986BC /* Accelerate.framework */; };
 		3C68AEBD1A44E56B00BF81A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
 		3CA051BD1A72FB140044C363 /* OLIRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051BC1A72FB140044C363 /* OLIRecorder.m */; };
 		3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */; };
@@ -94,6 +95,7 @@
 		3C482C421A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C482C431A32365C005B55CE /* AudioStreamingTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AudioStreamingTests.m; sourceTree = "<group>"; };
 		3C482C4D1A32447C005B55CE /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		3C609F621A8675E900F986BC /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3CA051BB1A72FB140044C363 /* OLIRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OLIRecorder.h; path = ../../src/ios/OLIRecorder.h; sourceTree = "<group>"; };
 		3CA051BC1A72FB140044C363 /* OLIRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OLIRecorder.m; path = ../../src/ios/OLIRecorder.m; sourceTree = "<group>"; };
@@ -167,6 +169,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C609F631A8675E900F986BC /* Accelerate.framework in Frameworks */,
 				3C68AEBD1A44E56B00BF81A3 /* AVFoundation.framework in Frameworks */,
 				3C482C4E1A32447C005B55CE /* AudioToolbox.framework in Frameworks */,
 			);
@@ -227,6 +230,7 @@
 		3C0169771A5E5C89000D1543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3C609F621A8675E900F986BC /* Accelerate.framework */,
 				3C482C4D1A32447C005B55CE /* AudioToolbox.framework */,
 				3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */,
 			);

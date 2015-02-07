@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Opus Logica Inc. All rights reserved.
 //
 #import "AudioStreamingRecorder.h"
+#import <Accelerate/Accelerate.h>
 
 //
 // THESE ARE ALL THE WRONG THING TO DO
@@ -120,6 +121,7 @@
 
 @end
 
+
 //
 // Count for instances.  Used with fileIdentifier to ensure that a filename
 // won't ever be repeated.
@@ -133,7 +135,7 @@ static unsigned int instance = 0;
 @dynamic isRecording;
 @dynamic inputGain;
 @dynamic outputGain;
-@dynamic inputLevel;
+@dynamic recordedLevelLeft;
 //@dynamic enableOutput;
 
 //
@@ -413,6 +415,9 @@ static unsigned int instance = 0;
            [date timeIntervalSinceDate: self.fileExpiration] > 0) {
          [self announceFile];
        }
+       
+       [self updateMeterOfRecordedLevel: buffer
+                                 format: [self.engine.inputNode inputFormatForBus: 0]];
      }];
     
     self.isPermitted = granted;
@@ -452,7 +457,7 @@ static unsigned int instance = 0;
 
 }
 
-- (AudioQueueLevelMeterState) inputLevel {
+- (AudioQueueLevelMeterState) recordedLevelLeft {
   AudioQueueLevelMeterState state = { 0.0, 0.0 };
   return state;
 }
@@ -634,6 +639,113 @@ static unsigned int instance = 0;
   }
 }
 
+- (void) updateMeterOfRecordedLevel: (AVAudioPCMBuffer *) buffer
+                             format: (AVAudioFormat *) format {
+  AVAudioFrameCount   frameCount   = buffer.frameLength;
+  AVAudioChannelCount channelCount = format.channelCount;
+  
+  AudioQueueLevelMeterState meter;
+  
+  float * const *channelData = buffer.floatChannelData;
+  
+  for (int channel = 0; channel < channelCount; channel++) {
+    // Freaking point-to-point-of-pointers-to-N-values documentation.
+    //   struct {
+    //     float channelOne[number_of_values];
+    //     float channelTwo[number_of_values]
+    //  } channelData?
+    //
+    // The following: Maybe?  Probably wrong
+    float *data = *channelData + channel * frameCount;
+    
+    vDSP_rmsqv (data, (vDSP_Stride) 1, &(meter.mAveragePower), (vDSP_Length) frameCount);
+    vDSP_maxv  (data, (vDSP_Stride) 1, &(meter.mPeakPower),    (vDSP_Length) frameCount);
+
+    // The level meters should be in dBs and thus need to use log10f() ?
+    
+    switch (channel) {
+      case 0: self.recordedLevelLeft  = meter; break;
+      case 1: self.recordedLevelRight = meter; break;
+      default: break;
+    }
+  }
+}
+
+#if 0
+private func calculateMeterOutputFromAudioPCMBuffer(audioPCMBuffer : AVAudioPCMBuffer, channelCount : AVAudioChannelCount, levelMeterDelegate : ((LTChannelLevels, LTChannelLevels) -> Void)) {
+  
+  
+  
+  let sampleCount = Int(audioPCMBuffer.frameLength)
+  
+  let sampleLength = sampleCount // ceil
+  
+  let floatChannelData = audioPCMBuffer.floatChannelData.memory;
+  
+  
+  
+  var rms : Float = 0
+  
+  var maxSample : Float = 0
+  
+  
+  
+  var channelLevelPeak = LTChannelLevels(leftChannel: 0, rightChannel: 0)
+  
+  var channelLevelAverage = LTChannelLevels(leftChannel: 0, rightChannel: 0)
+  
+  
+  
+  
+  
+  vDSP_rmsqv(floatChannelData, vDSP_Stride(1), &rms, vDSP_Length(sampleLength))
+  
+  var dbAverage : Float = 20.0 * log10f( rms )
+  
+  channelLevelPeak.leftChannel = dbAverage
+  
+  
+  
+  // If stereo, calculate the second half of the array
+  
+  if channelCount > 1 {
+    
+    vDSP_rmsqv(floatChannelData + sampleLength, vDSP_Stride(1), &rms, vDSP_Length(sampleLength))
+    
+    var dbAverage : Float = 20.0 * log10f( rms )
+    
+    channelLevelPeak.rightChannel = dbAverage
+    
+  }
+  
+  
+  
+  vDSP_maxv(floatChannelData, vDSP_Stride(1), &maxSample, vDSP_Length(sampleLength))
+  
+  var dbPeak : Float = 20.0 * log10f( maxSample )
+  
+  channelLevelAverage.leftChannel = dbPeak
+  
+  
+  
+  // If stereo, calculate the second half of the array
+  
+  if channelCount > 1 {
+    
+    vDSP_maxv(floatChannelData + sampleLength, vDSP_Stride(1), &maxSample, vDSP_Length(sampleLength))
+    
+    var dbPeak : Float = 20.0 * log10f( maxSample )
+    
+    channelLevelAverage.rightChannel = dbAverage
+    
+  }
+  
+  
+  
+  levelMeterDelegate(channelLevelAverage, channelLevelPeak)
+  
+}
+#endif
 @end
 
 

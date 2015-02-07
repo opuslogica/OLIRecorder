@@ -40,7 +40,8 @@
 // been configured, then -1.0 is returned!
 @property (nonatomic, readwrite) float inputGain;
 
-@property (nonatomic, readonly) AudioQueueLevelMeterState inputLevel;
+@property (nonatomic) AudioQueueLevelMeterState recordedLevelLeft;
+@property (nonatomic) AudioQueueLevelMeterState recordedLevelRight;
 
 // Gain for the speaker.  See above.
 // Not implemented... requires mixerNode...
