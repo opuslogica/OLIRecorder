@@ -135,8 +135,8 @@ static unsigned int instance = 0;
 @dynamic isRecording;
 @dynamic inputGain;
 @dynamic outputGain;
-@dynamic recordedLevelLeft;
-//@dynamic enableOutput;
+// @dynamic recordedLevelLeft;
+// @dynamic enableOutput;
 
 //
 // Officially sanctioned place for App files - audio files in our case.
@@ -462,9 +462,9 @@ static unsigned int instance = 0;
   return state;
 }
 
-- (void) setRecordedLevelLeft:(AudioQueueLevelMeterState) state {
+// - (void) setRecordedLevelLeft:(AudioQueueLevelMeterState) state {
   // self.theRecordedLevelLeft = state;
-}
+// }
 
 ///
 /// Audio Output Gain
