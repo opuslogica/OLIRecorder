@@ -31,5 +31,6 @@
     <header-file src="src/ios/AudioStreamingRecorder.h"/>
     <source-file src="src/ios/AudioStreamingRecorder.m"/>
     <framework src="UIKit.framework"/>
+    <framework src="AVFoundation.framework"/>
   </platform>
 </plugin>

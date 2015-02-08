@@ -28,7 +28,7 @@ var recorderObjects = {};
  * This class provides access to the device recording interfaces for recording sound
  *
  * @constructor
- * @param fileAnnounceCallback  The callback to be called when a recorded file is available
+ * @param file_ready_callback  The callback to be called when a recorded file is available
  *                                  recordedFileCallback(string-ish filename)
  * @param errorCallback         The callback to be called if there is an error.
  *                                  errorCallback(int errorCode) - OPTIONAL
