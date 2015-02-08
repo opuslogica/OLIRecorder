@@ -32,5 +32,6 @@
     <source-file src="src/ios/AudioStreamingRecorder.m"/>
     <framework src="UIKit.framework"/>
     <framework src="AVFoundation.framework"/>
+    <framework src="Accelerate.framework"/>
   </platform>
 </plugin>

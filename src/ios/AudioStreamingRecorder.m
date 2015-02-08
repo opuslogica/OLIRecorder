@@ -462,6 +462,10 @@ static unsigned int instance = 0;
   return state;
 }
 
+- (void) setRecordedLevelLeft:(AudioQueueLevelMeterState) state {
+  // self.theRecordedLevelLeft = state;
+}
+
 ///
 /// Audio Output Gain
 ///
