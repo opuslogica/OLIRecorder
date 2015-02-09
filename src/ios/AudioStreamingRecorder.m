@@ -277,8 +277,7 @@ static unsigned int instance = 0;
   [self fileUpdateBlockCount: NO];
 
   // Move to the next file but with an updated 'block' count.
-  //  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: @"m4a"]
-  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: @"aac"]
+  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: @"m4a"]
                                          settings: self.fileSettings
                                             error: &error];
   AbortOnNull(((__bridge void *)self.file), @"AVAudioFile initForWriting");
@@ -366,8 +365,7 @@ static unsigned int instance = 0;
     // Configure the AVAudioEngine
     //
     self.engine = [[AVAudioEngine alloc] init];
-    //    self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
-    self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFileAAC_ADTSType),
+    self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
                            AVSampleRateKey               : @(44100.0),
                            
                            // Stuff we don't need (or seem to need) and which
