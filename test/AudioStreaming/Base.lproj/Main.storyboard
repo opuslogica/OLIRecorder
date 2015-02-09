@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -104,6 +104,19 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Blo-iB-TYM">
+                                <rect key="frame" x="167" y="513" width="40" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="LHc-EW-4Kv"/>
+                                    <constraint firstAttribute="width" constant="40" id="sb2-6b-KG0"/>
+                                </constraints>
+                                <state key="normal" title="Meter">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="getMeters:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="q7f-FP-C1w"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -114,6 +127,7 @@
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="top" secondItem="gfk-GP-Ova" secondAttribute="bottom" constant="8" id="AHg-xj-tmo"/>
                             <constraint firstItem="99j-w4-3X8" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="26" id="LA2-2g-MV0"/>
                             <constraint firstItem="mn5-eb-Fct" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="81" id="WJM-gf-xym"/>
+                            <constraint firstItem="Blo-iB-TYM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="151" id="aWG-at-wgL"/>
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bFm-Lm-7sI"/>
                             <constraint firstItem="Q3w-u8-KzT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="c0h-ow-x9b"/>
                             <constraint firstItem="99j-w4-3X8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="cPM-RD-Y7u"/>
@@ -123,6 +137,7 @@
                             <constraint firstAttribute="centerX" secondItem="mn5-eb-Fct" secondAttribute="centerX" id="p06-TK-Kuk"/>
                             <constraint firstAttribute="centerX" secondItem="uKu-ov-DEk" secondAttribute="centerX" constant="0.5" id="qVf-nR-7H2"/>
                             <constraint firstItem="99j-w4-3X8" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="sce-qI-2Py"/>
+                            <constraint firstItem="Blo-iB-TYM" firstAttribute="top" secondItem="Oi0-ve-TPx" secondAttribute="bottom" constant="34" id="wUi-zm-6Y2"/>
                             <constraint firstAttribute="centerX" secondItem="gfk-GP-Ova" secondAttribute="centerX" id="wsT-B4-uEi"/>
                             <constraint firstItem="gfk-GP-Ova" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="331" id="xkb-hu-XFh"/>
                             <constraint firstItem="uKu-ov-DEk" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="52" id="zTs-7a-7N1"/>

@@ -92,5 +92,14 @@
   self.recorder.outputGain = sender.value;
 }
 
+- (IBAction)getMeters:(id)sender {
+  AudioQueueLevelMeterState meterLeft  = self.recorder.recordedLevelLeft;
+  AudioQueueLevelMeterState meterRight = self.recorder.recordedLevelRight;
+  
+  NSLog(@"Meter: Lp: %f, Rp: %f",
+        meterLeft.mPeakPower,
+        meterRight.mPeakPower);
+
+}
 
 @end
