@@ -366,14 +366,17 @@ static unsigned int instance = 0;
     self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
                            AVSampleRateKey               : @(44100.0),
                            
-                           // Stuff we don't need (or seem to need) and which
-                           // might actually be detrimental
-                           
-                           // AVNumberOfChannelsKey         : @(1),
-                           // AVEncoderBitRatePerChannelKey : @(16),
-                           // AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
+                           AVNumberOfChannelsKey         : @(2),
+                           AVEncoderBitRatePerChannelKey : @(16),
+                           //AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
                            };
     
+    // Define the format for the two busses: input -> mixer, mixer -> output.
+    // The numbe of channels below must match, is seems, with the above
+    // fileSettings
+    AVAudioFormat *format =
+      [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
+                                                     channels: 2];
 
     // Apparently the mainMixerNode is connected to the outputNode by default
     // but only if the inputNode is connected to the mainMixerNode.
@@ -384,11 +387,11 @@ static unsigned int instance = 0;
     
     [self.engine connect: self.engine.inputNode
                       to: self.engine.mainMixerNode
-                  format: [self.engine.inputNode inputFormatForBus: 0]];
+                  format: format];
     
     [self.engine connect: self.engine.mainMixerNode
                       to: self.engine.outputNode
-                  format: [self.engine.inputNode inputFormatForBus: 0]];
+                  format: format];
 
     // This is the default.  Ranges from {-1.0, +1.0}
     self.engine.inputNode.pan = 0.0;
@@ -401,9 +404,10 @@ static unsigned int instance = 0;
      // This number is ignored... and an Apple bug?
      bufferSize: 4096 * 16
 
-     // perhaps this format can be the file's format; then the inputNode
-     // might change/adapt?
-     format: [self.engine.inputNode inputFormatForBus: 0]
+     // Use of 'nil' is quasi-required - based on the documentation - because
+     // the mainMixerNode is attached to the outputNode and thus the format
+     // of the mainMixerNode is already determined.
+     format: nil
      
      // This 'handler' needs to allocate and initialze an AVAudioFile and to
      // write buffer data to that file.  If this handler is too slow, we
