@@ -374,11 +374,28 @@ static unsigned int instance = 0;
                            // AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
                            };
     
+
+    // Apparently the mainMixerNode is connected to the outputNode by default
+    // but only if the inputNode is connected to the mainMixerNode.
+    
+    // We are going to connect inputNode -> mainMixerNode -> outputNode.  And
+    // we'll do it explicitly.  Then we will enable/disable monitoring just by
+    // changing the volume.
+    
+    [self.engine connect: self.engine.inputNode
+                      to: self.engine.mainMixerNode
+                  format: [self.engine.inputNode inputFormatForBus: 0]];
+    
+    [self.engine connect: self.engine.mainMixerNode
+                      to: self.engine.outputNode
+                  format: [self.engine.inputNode inputFormatForBus: 0]];
+
     // This is the default.  Ranges from {-1.0, +1.0}
     self.engine.inputNode.pan = 0.0;
+    self.engine.inputNode.volume = 0.5;
     
     // Today, we are getting ~16384 frames per block callback. (4 * 4096)
-    [self.engine.inputNode
+    [self.engine.mainMixerNode
      installTapOnBus: 0
      
      // This number is ignored... and an Apple bug?
@@ -423,20 +440,6 @@ static unsigned int instance = 0;
     
     self.isPermitted = granted;
  
-    // Apparently the mainMixerNode is connected to the outputNode by default
-    // but only if the inputNode is connected to the mainMixerNode.
-  
-    // We are going to connect inputNode -> mainMixerNode -> outputNode.  And
-    // we'll do it explicitly.  Then we will enable/disable monitoring just by
-    // changing the volume.
-  
-    [self.engine connect: self.engine.inputNode
-                      to: self.engine.mainMixerNode
-                  format: [self.engine.inputNode inputFormatForBus: 0]];
-  
-    [self.engine connect: self.engine.mainMixerNode
-                      to: self.engine.outputNode
-                  format: [self.engine.inputNode inputFormatForBus: 0]];
     self.enableOutput = NO;
   }];
 }
@@ -449,13 +452,13 @@ static unsigned int instance = 0;
 
 // It seems we can't actually change the input gain.  Don't freaking ask.
 - (float) inputGain {
-  return 1.0; // (nil == self.engine ? -1.0 : self.engine.inputNode.volume);
+  return (nil == self.engine ? 0.0 : self.engine.inputNode.volume);
 }
 
 - (void) setInputGain:(float) inputGain {
-  if (nil != self.engine)
-    NSLog (@"InputGain is not settable"); //     self.engine.inputNode.volume = inputGain;
-
+  if (nil != self.engine) {
+    self.engine.inputNode.volume = inputGain;
+  }
 }
 
 ///
@@ -466,12 +469,12 @@ static unsigned int instance = 0;
 // Is seem the outputGain is the inputNode's volume.  Don't freaking ask.  I
 // Thought the mainMixerNode had an volume to adjust...
 - (float) outputGain {
-  return (nil == self.engine ? -1.0 : self.engine.inputNode.volume);
+  return (nil == self.engine ? 0.0 : self.engine.mainMixerNode.volume);
 }
 
 - (void) setOutputGain:(float) outputGain {
   if (nil != self.engine)
-    self.engine.inputNode.volume = (self.enableOutput ? outputGain : 0.0);
+    self.engine.mainMixerNode.volume = (self.enableOutput ? outputGain : 0.0);
 }
 
 //
@@ -488,11 +491,7 @@ static unsigned int instance = 0;
 
   _enableOutput = enableOutput;
   if (!enableOutput)
-    self.engine.inputNode.volume = 0.0;
-
-  NSLog (@"inputNode.volume to %f", self.engine.inputNode.volume);
-
-
+    self.engine.mainMixerNode.volume = 0.0;
 }
 
 ///
@@ -529,7 +528,7 @@ static unsigned int instance = 0;
     NSError *error;
     [self.engine startAndReturnError: &error];
     AbortOnError(error, @"record");
-    NSLog (@"inputNode.volume to %f", self.engine.inputNode.volume);  }
+  }
 }
 
 - (void) reset {

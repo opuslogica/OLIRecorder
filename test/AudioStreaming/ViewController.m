@@ -82,6 +82,7 @@
   self.recorder.outputGain   = self.monitorVolumeSlider.value;
 
   self.monitorVolumeSlider.enabled = self.recorder.enableOutput;
+  [self monitorVolumeChanged: self.monitorVolumeSlider];
   [self.toggleMonitorButton setTitle: (self.recorder.enableOutput
                                        ? @"Disable Monitor"
                                        : @"Enable Monitor")
