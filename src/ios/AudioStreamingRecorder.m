@@ -7,7 +7,7 @@
 //
 #import "AudioStreamingRecorder.h"
 #import <Accelerate/Accelerate.h>
-
+#define num_channels 1
 //
 // THESE ARE ALL THE WRONG THING TO DO
 //
@@ -365,7 +365,8 @@ static unsigned int instance = 0;
     self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
                            AVSampleRateKey               : @(44100.0),
                            
-                           AVNumberOfChannelsKey         : @(2),
+			   // AVNumberOfChannelsKey         : @(2),
+			   AVNumberOfChannelsKey         : @(num_channels),
                            AVEncoderBitRatePerChannelKey : @(16),
                            //AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
                            };
@@ -375,7 +376,7 @@ static unsigned int instance = 0;
     // fileSettings
     AVAudioFormat *format =
       [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
-                                                     channels: 2];
+                                                     channels: num_channels];
 
     // Apparently the mainMixerNode is connected to the outputNode by default
     // but only if the inputNode is connected to the mainMixerNode.
