@@ -8,10 +8,10 @@
 #import <AVFoundation/AVFoundation.h>
 
 // The number of channels written to file
-#define AUDIO_FILE_CHANNELS 1
+#define AUDIO_FILE_CHANNELS 2
 
 // The number of channels for audio nodes, in the audio engine.
-#define AUDIO_NODE_CHANNELS 1
+#define AUDIO_NODE_CHANNELS 2
 
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)

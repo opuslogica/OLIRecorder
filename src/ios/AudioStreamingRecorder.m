@@ -416,7 +416,7 @@ static unsigned int instance = 0;
                   format: nodeFormat];
 
     // This is the default.  Ranges from {-1.0, +1.0}
-    self.engine.inputNode.pan = 0.0;
+    self.environmentNode.pan = 0.0;
     
     // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
@@ -463,7 +463,7 @@ static unsigned int instance = 0;
        }
        
        [self updateMeterOfRecordedLevel: buffer
-                                 format: [self.engine.inputNode inputFormatForBus: 0]];
+                                 format: nodeFormat];
      }];
     
     self.isPermitted = granted;
@@ -495,12 +495,12 @@ static unsigned int instance = 0;
 #pragma mark - Audio Input Pan
 
 - (float) inputPan {
-  return (nil == self.engine ? 0.0 : self.engine.inputNode.pan);
+  return (nil == self.engine ? 0.0 : self.environmentNode.pan);
 }
 
 - (void) setInputPan:(float)inputPan {
   if (nil != self.engine)
-    self.engine.inputNode.pan = MAX (-1.0, MIN (+1.0, inputPan));
+    self.environmentNode.pan = MAX (-1.0, MIN (+1.0, inputPan));
 }
 
 ///
@@ -698,13 +698,15 @@ static unsigned int instance = 0;
     vDSP_rmsqv (data, (vDSP_Stride) 1, &(meter.mAveragePower), (vDSP_Length) frameCount);
     vDSP_maxv  (data, (vDSP_Stride) 1, &(meter.mPeakPower),    (vDSP_Length) frameCount);
 
-    // The level meters should be in dBs and thus need to use log10f() ?
+    // Apparent range is {0.0, 1.0}
     
     switch (channel) {
       case 0: self.recordedLevelLeft  = meter; break;
       case 1: self.recordedLevelRight = meter; break;
       default: break;
     }
+    
+    // NSLog (@"Meter (%d): p:%f, a:%f", channel, meter.mPeakPower, meter.mAveragePower);
   }
 }
 
