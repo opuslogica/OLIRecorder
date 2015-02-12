@@ -7,6 +7,11 @@
 //
 #import <AVFoundation/AVFoundation.h>
 
+// Use m4a, adts or aac
+#if ! defined (AUDIO_FILE_EXTENSION)
+#define AUDIO_FILE_EXTENSION  @"adts"
+#endif
+
 //
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
 

@@ -275,7 +275,7 @@ static unsigned int instance = 0;
   [self fileUpdateBlockCount: NO];
 
   // Move to the next file but with an updated 'block' count.
-  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: @"m4a"]
+  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: AUDIO_FILE_EXTENSION]
                                          settings: self.fileSettings
                                             error: &error];
   AbortOnNull(((__bridge void *)self.file), @"AVAudioFile initForWriting");
