@@ -395,7 +395,7 @@ static unsigned int instance = 0;
 
     // This is the default.  Ranges from {-1.0, +1.0}
     self.engine.inputNode.pan = 0.0;
-    self.engine.inputNode.volume = 0.5;
+    self.engine.inputNode.volume = 0.8;
     
     // Today, we are getting ~16384 frames per block callback. (4 * 4096)
     [self.engine.mainMixerNode
