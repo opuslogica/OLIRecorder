@@ -282,7 +282,6 @@ static unsigned int instance = 0;
   
   // This new file will expire in self.recordingInterval seconds from now.
   self.fileExpiration = [[NSDate date] dateByAddingTimeInterval: 0.95 * self.recordingInterval];
-  
 }
 
 - (void) configureFileIfNeeded { if (nil == self.file) [self configureFile]; }
@@ -413,7 +412,7 @@ static unsigned int instance = 0;
      // write buffer data to that file.  If this handler is too slow, we
      // perhaps might not actually know but should increase the 'bufferSize'
      // to allow for a greater time between invocation of this handler.  The
-     // later only solves a 'too slow' problem if it is the allocation and
+     // latter only solves a 'too slow' problem if it is the allocation and
      // initialization of the AVAudioFile that is slow.
      block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
        NSError *error = nil;
@@ -470,8 +469,8 @@ static unsigned int instance = 0;
 ///
 #pragma mark - Audio Output Gain
 
-// Is seem the outputGain is the inputNode's volume.  Don't freaking ask.  I
-// Thought the mainMixerNode had an volume to adjust...
+// It seems the outputGain is the inputNode's volume.  Don't freaking ask.  I
+// thought the mainMixerNode had a volume to adjust...
 - (float) outputGain {
   return (nil == self.engine ? 0.0 : self.engine.mainMixerNode.volume);
 }
@@ -485,7 +484,7 @@ static unsigned int instance = 0;
 // setEnableOutput
 //
 // When enabled will connect the mainMixerNode to the outputNode; when disabled
-// with diconnect these two.
+// will diconnect these two.
 //
 - (void) setEnableOutput:(Boolean)enableOutput {
   if (nil == self.engine) {
@@ -673,76 +672,41 @@ static unsigned int instance = 0;
 #if 0
 private func calculateMeterOutputFromAudioPCMBuffer(audioPCMBuffer : AVAudioPCMBuffer, channelCount : AVAudioChannelCount, levelMeterDelegate : ((LTChannelLevels, LTChannelLevels) -> Void)) {
   
-  
-  
   let sampleCount = Int(audioPCMBuffer.frameLength)
-  
   let sampleLength = sampleCount // ceil
-  
   let floatChannelData = audioPCMBuffer.floatChannelData.memory;
-  
-  
-  
+
   var rms : Float = 0
-  
   var maxSample : Float = 0
-  
-  
-  
+
   var channelLevelPeak = LTChannelLevels(leftChannel: 0, rightChannel: 0)
-  
   var channelLevelAverage = LTChannelLevels(leftChannel: 0, rightChannel: 0)
   
-  
-  
-  
-  
   vDSP_rmsqv(floatChannelData, vDSP_Stride(1), &rms, vDSP_Length(sampleLength))
-  
   var dbAverage : Float = 20.0 * log10f( rms )
-  
   channelLevelPeak.leftChannel = dbAverage
   
-  
-  
   // If stereo, calculate the second half of the array
-  
   if channelCount > 1 {
-    
     vDSP_rmsqv(floatChannelData + sampleLength, vDSP_Stride(1), &rms, vDSP_Length(sampleLength))
-    
     var dbAverage : Float = 20.0 * log10f( rms )
     
     channelLevelPeak.rightChannel = dbAverage
-    
   }
   
-  
-  
   vDSP_maxv(floatChannelData, vDSP_Stride(1), &maxSample, vDSP_Length(sampleLength))
-  
   var dbPeak : Float = 20.0 * log10f( maxSample )
-  
   channelLevelAverage.leftChannel = dbPeak
   
-  
-  
   // If stereo, calculate the second half of the array
-  
   if channelCount > 1 {
-    
     vDSP_maxv(floatChannelData + sampleLength, vDSP_Stride(1), &maxSample, vDSP_Length(sampleLength))
-    
     var dbPeak : Float = 20.0 * log10f( maxSample )
     
     channelLevelAverage.rightChannel = dbAverage
-    
   }
   
-  
-  
   levelMeterDelegate(channelLevelAverage, channelLevelPeak)
-  
 }
 #endif
 @end
