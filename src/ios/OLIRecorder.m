@@ -146,6 +146,50 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
 }
 
 //
+// Output Gain
+//
+- (void) enableOutput: (CDVInvokedUrlCommand*) command {
+  NSString* recId  = [command.arguments objectAtIndex:0];
+  NSNumber* enable = [command.arguments objectAtIndex:1];
+  
+  NSLog(@"OLIRecorder: enableOutput: %@, recID: %@", enable, recId);
+  
+  if (nil != theAudioRecorder) {
+    theAudioRecorder.enableOutput = enable.boolValue;
+  }
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]
+   callbackId: command.callbackId];
+}
+
+//
+- (void) getOutputGain: (CDVInvokedUrlCommand*) command {
+  NSLog(@"OLIRecorder: getOutputGain");
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK
+                                       messageAsDouble: theAudioRecorder.outputGain]
+   callbackId: command.callbackId];
+}
+
+//
+- (void) setOutputGain: (CDVInvokedUrlCommand*) command {
+  NSString* recId = [command.arguments objectAtIndex:0];
+  NSNumber* gain  = [command.arguments objectAtIndex:1];
+  
+  NSLog(@"OLIRecorder: setOutputGain: %@, recID: %@", gain, recId);
+  
+  if (nil != theAudioRecorder) {
+    theAudioRecorder.outputGain = MAX (0.0, (MIN (gain.floatValue, 1.0)));
+  }
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]
+   callbackId: command.callbackId];
+}
+
+//
 // Meter Levels
 //
 - (void) getMeterLevels: (CDVInvokedUrlCommand*) command {

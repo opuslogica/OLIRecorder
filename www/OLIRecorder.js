@@ -120,6 +120,32 @@ OLIRecorder.prototype.setInputGain = function(volume) { // float: [0.0, 1.0]
 };
 
 /**
+ * enable output
+ */
+OLIRecorder.prototype.enableOutput = function(enable) { // bool: 0, 1
+  exec(null, null, "OLIRecorder", "enableOutput", [this.id, enable]);
+};
+
+/**
+ * Get output gain
+ */
+OLIRecorder.prototype.getOutputGain = function(success, fail) {
+  var me = this;
+  exec(function(p) {
+       me._position = p;
+       success(p);
+       }, fail, "OLIRecorder", "getOutputGain", [this.id]);
+};
+
+/**
+ * set output gain
+ */
+OLIRecorder.prototype.setOutputGain = function(volume) { // float: [0.0, 1.0]
+  exec(null, null, "OLIRecorder", "setOutputGain", [this.id, volume]);
+};
+
+
+/**
  * expunge (delete) already processed file
  */
 OLIRecorder.prototype.expungeLeftOverAudioFile = function(fileURL) {
