@@ -71,6 +71,9 @@
 - (IBAction)recordVolumeChanged:(UISlider *)sender {
   self.recorder.inputGain = sender.value;
 }
+- (IBAction)inputPanChanged:(UISlider *)sender {
+  self.recorder.inputPan = sender.value;
+}
 
 //
 //

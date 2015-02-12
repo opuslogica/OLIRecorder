@@ -7,6 +7,12 @@
 //
 #import <AVFoundation/AVFoundation.h>
 
+// The number of channels written to file
+#define AUDIO_FILE_CHANNELS 1
+
+// The number of channels for audio nodes, in the audio engine.
+#define AUDIO_NODE_CHANNELS 1
+
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)
 #define AUDIO_FILE_EXTENSION  @"adts"
@@ -44,6 +50,8 @@
 // Gain for the microphone.  Set/Get the gain in {0.0, 1.0}.  If 'self' has not
 // been configured, then -1.0 is returned!
 @property (nonatomic, readwrite) float inputGain;
+
+@property (nonatomic, readwrite) float inputPan;
 
 @property (nonatomic) AudioQueueLevelMeterState recordedLevelLeft;
 @property (nonatomic) AudioQueueLevelMeterState recordedLevelRight;

@@ -7,7 +7,7 @@
 //
 #import "AudioStreamingRecorder.h"
 #import <Accelerate/Accelerate.h>
-#define num_channels 1
+
 //
 // THESE ARE ALL THE WRONG THING TO DO
 //
@@ -96,6 +96,8 @@
 
 @property (nonatomic, readwrite) NSTimeInterval recordingInterval;
 
+@property (nonatomic, readwrite) AVAudioEnvironmentNode *environmentNode;
+
 // The current file into which audio is being accumulated.
 @property (nonatomic) AVAudioFile *file;
 
@@ -135,6 +137,7 @@ static unsigned int instance = 0;
 @dynamic isRecording;
 @dynamic inputGain;
 @dynamic outputGain;
+@dynamic inputPan;
 
 //
 // Officially sanctioned place for App files - audio files in our case.
@@ -364,37 +367,58 @@ static unsigned int instance = 0;
     self.engine = [[AVAudioEngine alloc] init];
     self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
                            AVSampleRateKey               : @(44100.0),
-                           
-			   // AVNumberOfChannelsKey         : @(2),
-			   AVNumberOfChannelsKey         : @(num_channels),
+                           AVNumberOfChannelsKey         : @(AUDIO_FILE_CHANNELS),
                            AVEncoderBitRatePerChannelKey : @(16),
                            //AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
                            };
     
     // Define the format for the two busses: input -> mixer, mixer -> output.
-    // The numbe of channels below must match, is seems, with the above
+    // The number of channels below must match, is seems, with the above
     // fileSettings
-    AVAudioFormat *format =
+    AVAudioFormat *stereoFormat =
       [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
-                                                     channels: num_channels];
+                                                     channels: 2];
 
+    AVAudioFormat *monoFormat =
+    [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
+                                                   channels: 1];
+    
+    AVAudioFormat *nodeFormat = (1 == AUDIO_NODE_CHANNELS
+                                 ? monoFormat
+                                 : stereoFormat);
+    
+    // To mix stereo we need an EnvironmentNode (environment because it models
+    // the position of a listener.
+    self.environmentNode = [[AVAudioEnvironmentNode alloc] init];
+
+    [self.engine attachNode: self.environmentNode];
+    
     // Apparently the mainMixerNode is connected to the outputNode by default
     // but only if the inputNode is connected to the mainMixerNode.
     
-    // We are going to connect inputNode -> mainMixerNode -> outputNode.  And
-    // we'll do it explicitly.  Then we will enable/disable monitoring just by
-    // changing the volume.
-    
+    // We are going to connect inputNode -> envNode -> mainMixerNode ->
+    // outputNode.  We'll do it explicitly.  Then we will enable/disable
+    // monitoring just by changing the volume of the main mixer node.  We should
+    // get stereo panning of the inputNode too.
+
     [self.engine connect: self.engine.inputNode
-                      to: self.engine.mainMixerNode
-                  format: format];
+                      to: self.environmentNode
+                  format: monoFormat];
     
+    // The mainMixer node is tapped to record audio to file.
+    [self.engine connect: self.environmentNode
+                      to: self.engine.mainMixerNode
+                  format: nodeFormat];
+    
+    // The output node is used for monitoring the recorded audio.
     [self.engine connect: self.engine.mainMixerNode
                       to: self.engine.outputNode
-                  format: format];
+                  format: nodeFormat];
 
     // This is the default.  Ranges from {-1.0, +1.0}
     self.engine.inputNode.pan = 0.0;
+    
+    // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
     
     // Today, we are getting ~16384 frames per block callback. (4 * 4096)
@@ -466,6 +490,20 @@ static unsigned int instance = 0;
 }
 
 ///
+/// Audio Input Pan
+///
+#pragma mark - Audio Input Pan
+
+- (float) inputPan {
+  return (nil == self.engine ? 0.0 : self.engine.inputNode.pan);
+}
+
+- (void) setInputPan:(float)inputPan {
+  if (nil != self.engine)
+    self.engine.inputNode.pan = MAX (-1.0, MIN (+1.0, inputPan));
+}
+
+///
 /// Audio Output Gain
 ///
 #pragma mark - Audio Output Gain
@@ -485,7 +523,7 @@ static unsigned int instance = 0;
 // setEnableOutput
 //
 // When enabled will connect the mainMixerNode to the outputNode; when disabled
-// will diconnect these two.
+// will disconnect these two.
 //
 - (void) setEnableOutput:(Boolean)enableOutput {
   if (nil == self.engine) {
