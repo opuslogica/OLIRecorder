@@ -15,7 +15,7 @@
 
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)
-#define AUDIO_FILE_EXTENSION  @"adts"
+#define AUDIO_FILE_EXTENSION  @"m4a"
 #endif
 
 //
