@@ -102,18 +102,23 @@ abort ();                       \
     self.player = [[AVAudioPlayerNode alloc] init];
     
     [self.engine attachNode: self.player];
-    
-    NSURL *location = [[NSBundle mainBundle] URLForResource: @"audio" withExtension: @"m4a"];
-    NSLog(@"Location: %@", location);
-    
-    self.file = [[AVAudioFile alloc] initForReading: [[NSBundle mainBundle] URLForResource: @"audio" withExtension: @"m4a"]
-                                              error: &error];
-    AbortOnError(error, @"missed file");
-    NSLog(@"File: %@\n fileFormat: %@\n procFormat: %@\n length: %lld\n position: %lld",
-          self.file, self.file.fileFormat, self.file.processingFormat,
-          self.file.length,
-          self.file.framePosition);
-    
+
+    for (int dex = 0; dex <= 3; dex++) {
+      NSURL *url = [[NSBundle mainBundle] URLForResource:
+                    [NSString stringWithFormat: @"audio-%02d", dex]
+                                           withExtension: @"m4a"];
+      if (!url) {
+        NSLog (@"missed %d", dex);
+        return;
+      }
+      
+      [self.player scheduleFile: [[AVAudioFile alloc] initForReading: url error: &error]
+                         atTime: nil
+              completionHandler: ^{
+                NSLog (@"File Done: %@", url.absoluteString);
+              }];
+    }
+
     [self.engine connect: self.player
                       to: self.engine.mainMixerNode
                   format: self.file.processingFormat];
@@ -144,11 +149,7 @@ abort ();                       \
     return;
   }
 
-  NSLog (@"PLAY!");
-  [self.player scheduleFile: self.file atTime: nil completionHandler:^{
-    NSLog (@"File Done");
-  }];
-
+  NSLog(@"Play!");
   [self.player play];
 }
 
