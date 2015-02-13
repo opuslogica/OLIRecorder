@@ -291,6 +291,7 @@ static unsigned int instance = 0;
 
 - (void) announceFile {
   if (nil != self.file) {
+
     // Immediately invoke the callback.  We'll dispatch to some other
     // thread - the file isn't going any where and, in fact, is the
     // responsibility of the callback to discard it.
@@ -390,6 +391,12 @@ static unsigned int instance = 0;
     // To mix stereo we need an EnvironmentNode (environment because it models
     // the position of a listener.
     self.environmentNode = [[AVAudioEnvironmentNode alloc] init];
+    
+    // Is this the default?
+    self.environmentNode.volume = 1.0;
+    
+    // This is the default.  Ranges from {-1.0, +1.0}
+    self.environmentNode.pan    = 0.0;
 
     [self.engine attachNode: self.environmentNode];
     
@@ -414,9 +421,6 @@ static unsigned int instance = 0;
     [self.engine connect: self.engine.mainMixerNode
                       to: self.engine.outputNode
                   format: nodeFormat];
-
-    // This is the default.  Ranges from {-1.0, +1.0}
-    self.environmentNode.pan = 0.0;
     
     // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
@@ -511,12 +515,14 @@ static unsigned int instance = 0;
 // It seems the outputGain is the inputNode's volume.  Don't freaking ask.  I
 // thought the mainMixerNode had a volume to adjust...
 - (float) outputGain {
-  return (nil == self.engine ? 0.0 : self.engine.mainMixerNode.volume);
+  return (nil == self.engine ? -1.0 : self.engine.mainMixerNode.volume);
 }
 
 - (void) setOutputGain:(float) outputGain {
   if (nil != self.engine)
     self.engine.mainMixerNode.volume = (self.enableOutput ? outputGain : 0.0);
+  
+  // NSLog (@"OutputGain (%d), %f => %f", self.enableOutput, outputGain, self.engine.mainMixerNode.volume);
 }
 
 //
