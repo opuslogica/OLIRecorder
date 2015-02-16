@@ -105,5 +105,8 @@
         meterRight.mPeakPower);
 
 }
+- (IBAction)getAllStats:(id)sender {
+  [self.recorder reportStatsOfLeftOverAudioFiles];
+}
 
 @end

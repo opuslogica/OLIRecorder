@@ -141,6 +141,8 @@ typedef void (^RouteChangeCallback) (NSString *placeholder);
                          block: (unsigned int  *) block
                      extension: (NSString **) extension;
 
+- (void) reportStatsOfLeftOverAudioFiles;
+
 @end
 
 //

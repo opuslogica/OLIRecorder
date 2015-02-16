@@ -174,6 +174,11 @@ static unsigned int instance = 0;
   return files;
 }
 
+- (void) reportStatsOfLeftOverAudioFiles {
+    for (NSURL *filename in [AudioStreamingRecorder arrayOfLeftOverAudioFiles])
+      [self reportFileStats: filename.path message: @"All Stats"];
+}
+
 //
 // Encode various parameters into a filename
 //
@@ -207,6 +212,14 @@ static unsigned int instance = 0;
   return 5 == matched;
 }
 
+- (void) reportFileStats: (NSString *) path
+                 message: (NSString *) msg {
+  NSError *error = nil;
+  NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath: path error: &error];
+  AbortOnError(error, msg);
+  
+  NSLog (@"%@: File Size: %8llu @ %@", msg, attributes.fileSize, path.lastPathComponent);
+}
 
 //
 //
