@@ -304,6 +304,12 @@ static unsigned int instance = 0;
       unsigned int lastBlockCount   = self.fileBlockCount;
       unsigned int lastSessionCount = self.fileSessionCount;
 
+      NSError *error = nil;
+      NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath: lastFile.url.absoluteString error: &error];
+      AbortOnError(error, @"Pre-Callback: File Size");
+
+      NSLog (@"Pre-Callback: File Size: %llu", attributes.fileSize);
+      
       dispatch_async (self.callbackQueue, ^{
         callback (lastSessionCount, lastBlockCount, lastFile.url);
       });
