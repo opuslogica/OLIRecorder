@@ -334,8 +334,6 @@ static unsigned int instance = 0;
       
         dispatch_async (self.callbackQueue, ^{
           callback (0, 0, lastURL);
-        [self reportFileStats: lastURL.path message: @"Pre-Callback"];
-        NSLog (@"Pre-Callback: Next file: %@", lastURL.path.lastPathComponent);
         });
       }
     }
