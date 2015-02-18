@@ -30,7 +30,7 @@
 
 #define AbortOnNull( val, desc )      \
   do {                                \
-    void *__val = (val);              \
+    void *__val = (__bridge void *) (val); \
     if (NULL == __val) {              \
       NSLog (@"NULL value: %@", desc);\
       abort ();                       \
@@ -121,6 +121,7 @@
 // Audio-Specific Settings.
 @property (nonatomic) NSDictionary *fileSettings;
 
+@property (nonatomic) NSMutableArray *fileDelayQueue;
 @end
 
 
@@ -243,8 +244,9 @@ static unsigned int instance = 0;
     self.file    = nil;
     
     self.fileIdentifier = [NSDate date];
-    self.fileLocation  = [AudioStreamingRecorder documentsDirectory];
-    
+    self.fileLocation   = [AudioStreamingRecorder documentsDirectory];
+    self.fileDelayQueue = [NSMutableArray arrayWithCapacity: AUDIO_FILE_DELAY_QUEUE_SIZE];
+
     [self fileUpdateSessionCount: YES];
     [self fileUpdateBlockCount: YES];
     
@@ -294,7 +296,7 @@ static unsigned int instance = 0;
   self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: AUDIO_FILE_EXTENSION]
                                          settings: self.fileSettings
                                             error: &error];
-  AbortOnNull(((__bridge void *)self.file), @"AVAudioFile initForWriting");
+  AbortOnNull(self.file, @"AVAudioFile initForWriting");
   
   // This new file will expire in self.recordingInterval seconds from now.
   self.fileExpiration = [[NSDate date] dateByAddingTimeInterval: 0.95 * self.recordingInterval];
@@ -305,35 +307,38 @@ static unsigned int instance = 0;
 - (void) announceFile {
   if (nil != self.file) {
 
-    // Immediately invoke the callback.  We'll dispatch to some other
-    // thread - the file isn't going any where and, in fact, is the
-    // responsibility of the callback to discard it.
-    if (self.callback) {
-      
-      // These MUST be cached... otherwise they will be lost by the time
-      // the asynchronous callback is invoked.
-      RecordedFileCallback callback = self.callback;
-      AVAudioFile *lastFile = self.file;
-      unsigned int lastBlockCount   = self.fileBlockCount;
-      unsigned int lastSessionCount = self.fileSessionCount;
-
-      NSError *error = nil;
-      NSDictionary *attributes = [[NSFileManager defaultManager] attributesOfItemAtPath: lastFile.url.absoluteString error: &error];
-      AbortOnError(error, @"Pre-Callback: File Size");
-
-      NSLog (@"Pre-Callback: File Size: %llu", attributes.fileSize);
-      
-      dispatch_async (self.callbackQueue, ^{
-        callback (lastSessionCount, lastBlockCount, lastFile.url);
-      });
-    }
     NSLog (@"Wrote Audio File: (%10lld): %@",
            self.file.length,
            self.file.url.lastPathComponent);
     
-    // Clear out the file; setup for our 'lazy' alloc and init.
+    [self.fileDelayQueue addObject: self.file.url];
+    
+    // To be compatible with exisiting 'configureFile'...
     self.file = nil;
     self.fileExpiration = nil;
+    [self configureFile];
+
+
+    if (AUDIO_FILE_DELAY_QUEUE_SIZE == self.fileDelayQueue.count) {
+      RecordedFileCallback callback = self.callback;
+      
+      // Preserve the current 'file' parameters.  They will be modified
+      // by the upcomine 'configureFile'
+      NSURL *lastURL = (NSURL *) [self.fileDelayQueue objectAtIndex: 0];
+      [self.fileDelayQueue removeObjectAtIndex: 0];
+    
+      // Invoke the callback.  We'll dispatch to some other thread - the file
+      // isn't going anywhere and, in fact, it is the responsibility of the
+      // callback to discard it.
+      if (callback) {
+      
+        dispatch_async (self.callbackQueue, ^{
+          callback (0, 0, lastURL);
+        [self reportFileStats: lastURL.path message: @"Pre-Callback"];
+        NSLog (@"Pre-Callback: Next file: %@", lastURL.path.lastPathComponent);
+        });
+      }
+    }
   }
 }
 
@@ -470,7 +475,8 @@ static unsigned int instance = 0;
        
        // Allocate a file if we don't have one.  We do this lazily which helps
        // to ensure that we have a file when we actually need one
-       [self configureFileIfNeeded];
+       AbortOnNull(self.file, @"No file");
+       //[self configureFileIfNeeded];
        
        // The AVAudioPCMBuffer is 'specially designed' to easily write to a file
        // and, as part of the write, be converted to the file's format.  The
@@ -593,6 +599,7 @@ static unsigned int instance = 0;
 
   if (!self.isRecording) {
     NSError *error;
+    [self configureFileIfNeeded];
     [self.engine startAndReturnError: &error];
     AbortOnError(error, @"record");
   }
@@ -600,6 +607,9 @@ static unsigned int instance = 0;
 
 - (void) reset {
   WarnIfNotConfigured(@"Reset", YES);
+  
+  // Update our session count.
+  [self fileUpdateSessionCount: NO];
 
   // If recording, our 'pause' will invoke announceFile.
   [self pause];
@@ -607,9 +617,6 @@ static unsigned int instance = 0;
   // Stop and Reset the AVAudio Engine
   [self.engine stop];
   [self.engine reset];
-  
-  // Update our session count.
-  [self fileUpdateSessionCount: NO];
 }
 
 ///

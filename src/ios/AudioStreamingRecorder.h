@@ -29,6 +29,8 @@
 #define AUDIO_DISPATCH_QUEUE_FLAGS 0
 #endif
 
+#define AUDIO_FILE_DELAY_QUEUE_SIZE 2
+
 //
 //
 //
