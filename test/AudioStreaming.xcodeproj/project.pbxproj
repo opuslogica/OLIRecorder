@@ -15,6 +15,10 @@
 		3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695E1A576168000D1543 /* LaunchScreen.xib */; };
 		3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01696B1A576168000D1543 /* SimplePlayTests.m */; };
 		3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
+		3C1BA7DC1A95864E004F42A3 /* audio-00.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7D81A95864E004F42A3 /* audio-00.m4a */; };
+		3C1BA7DD1A95864E004F42A3 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7D91A95864E004F42A3 /* audio-01.m4a */; };
+		3C1BA7DE1A95864E004F42A3 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */; };
+		3C1BA7DF1A95864E004F42A3 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */; };
 		3C482C2A1A32365C005B55CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C291A32365C005B55CE /* main.m */; };
 		3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2C1A32365C005B55CE /* AppDelegate.m */; };
 		3C482C301A32365C005B55CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2F1A32365C005B55CE /* ViewController.m */; };
@@ -45,10 +49,6 @@
 		3CA051FC1A72FCDE0044C363 /* NSDictionary+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E71A72FCDE0044C363 /* NSDictionary+Extensions.m */; };
 		3CA051FD1A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051E91A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m */; };
 		3CA051FE1A72FCDE0044C363 /* UIDevice+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051EB1A72FCDE0044C363 /* UIDevice+Extensions.m */; };
-		3CA0FA641A8E8EAC00DD25C0 /* audio-00.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0FA591A8E8EAC00DD25C0 /* audio-00.m4a */; };
-		3CA0FA651A8E8EAC00DD25C0 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0FA5A1A8E8EAC00DD25C0 /* audio-01.m4a */; };
-		3CA0FA661A8E8EAC00DD25C0 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0FA5B1A8E8EAC00DD25C0 /* audio-02.m4a */; };
-		3CA0FA671A8E8EAC00DD25C0 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CA0FA5C1A8E8EAC00DD25C0 /* audio-03.m4a */; };
 		3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */; };
 /* End PBXBuildFile section */
 
@@ -83,6 +83,10 @@
 		3C0169651A576168000D1543 /* SimplePlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplePlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C01696A1A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C01696B1A576168000D1543 /* SimplePlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayTests.m; sourceTree = "<group>"; };
+		3C1BA7D81A95864E004F42A3 /* audio-00.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-00.m4a"; sourceTree = "<group>"; };
+		3C1BA7D91A95864E004F42A3 /* audio-01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-01.m4a"; sourceTree = "<group>"; };
+		3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-02.m4a"; sourceTree = "<group>"; };
+		3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-03.m4a"; sourceTree = "<group>"; };
 		3C482C241A32365C005B55CE /* AudioStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C482C281A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C482C291A32365C005B55CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -148,10 +152,6 @@
 		3CA051EB1A72FCDE0044C363 /* UIDevice+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIDevice+Extensions.m"; path = "../../PhoncertGO/platforms/ios/CordovaLib/Classes/UIDevice+Extensions.m"; sourceTree = "<group>"; };
 		3CA051FF1A72FDAB0044C363 /* OLIRecorder.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = OLIRecorder.js; path = ../www/OLIRecorder.js; sourceTree = "<group>"; };
 		3CA0FA2A1A8D8A6D00DD25C0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		3CA0FA591A8E8EAC00DD25C0 /* audio-00.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-00.m4a"; sourceTree = "<group>"; };
-		3CA0FA5A1A8E8EAC00DD25C0 /* audio-01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-01.m4a"; sourceTree = "<group>"; };
-		3CA0FA5B1A8E8EAC00DD25C0 /* audio-02.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-02.m4a"; sourceTree = "<group>"; };
-		3CA0FA5C1A8E8EAC00DD25C0 /* audio-03.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-03.m4a"; sourceTree = "<group>"; };
 		3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AudioStreamingRecorder.h; path = ../../src/ios/AudioStreamingRecorder.h; sourceTree = "<group>"; };
 		3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AudioStreamingRecorder.m; path = ../../src/ios/AudioStreamingRecorder.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,10 +210,10 @@
 		3C01694F1A576168000D1543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3CA0FA591A8E8EAC00DD25C0 /* audio-00.m4a */,
-				3CA0FA5A1A8E8EAC00DD25C0 /* audio-01.m4a */,
-				3CA0FA5B1A8E8EAC00DD25C0 /* audio-02.m4a */,
-				3CA0FA5C1A8E8EAC00DD25C0 /* audio-03.m4a */,
+				3C1BA7D81A95864E004F42A3 /* audio-00.m4a */,
+				3C1BA7D91A95864E004F42A3 /* audio-01.m4a */,
+				3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */,
+				3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */,
 				3C0169501A576168000D1543 /* Info.plist */,
 				3C0169511A576168000D1543 /* main.m */,
 			);
@@ -504,13 +504,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3CA0FA661A8E8EAC00DD25C0 /* audio-02.m4a in Resources */,
 				3C01695B1A576168000D1543 /* Main.storyboard in Resources */,
-				3CA0FA651A8E8EAC00DD25C0 /* audio-01.m4a in Resources */,
+				3C1BA7DD1A95864E004F42A3 /* audio-01.m4a in Resources */,
+				3C1BA7DF1A95864E004F42A3 /* audio-03.m4a in Resources */,
 				3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */,
-				3CA0FA641A8E8EAC00DD25C0 /* audio-00.m4a in Resources */,
+				3C1BA7DE1A95864E004F42A3 /* audio-02.m4a in Resources */,
 				3C01695D1A576168000D1543 /* Images.xcassets in Resources */,
-				3CA0FA671A8E8EAC00DD25C0 /* audio-03.m4a in Resources */,
+				3C1BA7DC1A95864E004F42A3 /* audio-00.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

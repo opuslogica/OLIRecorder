@@ -8,5 +8,3 @@ plugins/
 *~
 *.#*
 .DS_Store
-test/PhromPhoncert/
-test/PhromPhoncertTests/
