@@ -137,7 +137,10 @@ abort ();                       \
 }
 
 - (IBAction)handleSetup:(id)sender {
-  if (!self.engine.running) [self setup];
+  if (self.engine.running)
+    [self.engine stop];
+
+  [self setup];
   self.playButton.enabled = YES;
   self.volumeSlider.value = 1.0;
 }

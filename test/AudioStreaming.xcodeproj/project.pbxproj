@@ -15,13 +15,9 @@
 		3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695E1A576168000D1543 /* LaunchScreen.xib */; };
 		3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01696B1A576168000D1543 /* SimplePlayTests.m */; };
 		3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
-		3C1BA7DC1A95864E004F42A3 /* audio-00.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7D81A95864E004F42A3 /* audio-00.m4a */; };
-		3C1BA7DD1A95864E004F42A3 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7D91A95864E004F42A3 /* audio-01.m4a */; };
-		3C1BA7DE1A95864E004F42A3 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */; };
-		3C1BA7DF1A95864E004F42A3 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */; };
 		3C1BA8261A9591D3004F42A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8251A9591D3004F42A3 /* main.m */; };
 		3C1BA8291A9591D3004F42A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8281A9591D3004F42A3 /* AppDelegate.m */; };
-		3C1BA82C1A9591D3004F42A3 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA82B1A9591D3004F42A3 /* ViewController.m */; };
+		3C1BA82C1A9591D3004F42A3 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA82B1A9591D3004F42A3 /* ViewController.mm */; };
 		3C1BA82F1A9591D3004F42A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA82D1A9591D3004F42A3 /* Main.storyboard */; };
 		3C1BA8311A9591D3004F42A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8301A9591D3004F42A3 /* Images.xcassets */; };
 		3C1BA8341A9591D3004F42A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8321A9591D3004F42A3 /* LaunchScreen.xib */; };
@@ -32,6 +28,10 @@
 		3C1BA8571A9591EE004F42A3 /* CADebugPrintf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA84D1A9591EE004F42A3 /* CADebugPrintf.cpp */; };
 		3C1BA8581A9591EE004F42A3 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8501A9591EE004F42A3 /* CAStreamBasicDescription.cpp */; };
 		3C1BA8591A9591EE004F42A3 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8521A9591EE004F42A3 /* CAXException.cpp */; };
+		3C1BA8661A97DE5E004F42A3 /* audio-00.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */; };
+		3C1BA8671A97DE5E004F42A3 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */; };
+		3C1BA8681A97DE5E004F42A3 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */; };
+		3C1BA8691A97DE5E004F42A3 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */; };
 		3C482C2A1A32365C005B55CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C291A32365C005B55CE /* main.m */; };
 		3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2C1A32365C005B55CE /* AppDelegate.m */; };
 		3C482C301A32365C005B55CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2F1A32365C005B55CE /* ViewController.m */; };
@@ -103,17 +103,13 @@
 		3C0169651A576168000D1543 /* SimplePlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplePlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C01696A1A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C01696B1A576168000D1543 /* SimplePlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayTests.m; sourceTree = "<group>"; };
-		3C1BA7D81A95864E004F42A3 /* audio-00.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-00.m4a"; sourceTree = "<group>"; };
-		3C1BA7D91A95864E004F42A3 /* audio-01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-01.m4a"; sourceTree = "<group>"; };
-		3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-02.m4a"; sourceTree = "<group>"; };
-		3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-03.m4a"; sourceTree = "<group>"; };
 		3C1BA8211A9591D3004F42A3 /* PhromPhoncert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhromPhoncert.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C1BA8241A9591D3004F42A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1BA8251A9591D3004F42A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3C1BA8271A9591D3004F42A3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3C1BA8281A9591D3004F42A3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		3C1BA82A1A9591D3004F42A3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3C1BA82B1A9591D3004F42A3 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3C1BA82B1A9591D3004F42A3 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
 		3C1BA82E1A9591D3004F42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3C1BA8301A9591D3004F42A3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		3C1BA8331A9591D3004F42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -133,6 +129,10 @@
 		3C1BA8511A9591EE004F42A3 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
 		3C1BA8521A9591EE004F42A3 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
 		3C1BA8531A9591EE004F42A3 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
+		3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-00.m4a"; sourceTree = "<group>"; };
+		3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-01.m4a"; sourceTree = "<group>"; };
+		3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-02.m4a"; sourceTree = "<group>"; };
+		3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-03.m4a"; sourceTree = "<group>"; };
 		3C482C241A32365C005B55CE /* AudioStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C482C281A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C482C291A32365C005B55CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -270,10 +270,10 @@
 		3C01694F1A576168000D1543 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				3C1BA7D81A95864E004F42A3 /* audio-00.m4a */,
-				3C1BA7D91A95864E004F42A3 /* audio-01.m4a */,
-				3C1BA7DA1A95864E004F42A3 /* audio-02.m4a */,
-				3C1BA7DB1A95864E004F42A3 /* audio-03.m4a */,
+				3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */,
+				3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */,
+				3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */,
+				3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */,
 				3C0169501A576168000D1543 /* Info.plist */,
 				3C0169511A576168000D1543 /* main.m */,
 			);
@@ -327,7 +327,7 @@
 				3C1BA8271A9591D3004F42A3 /* AppDelegate.h */,
 				3C1BA8281A9591D3004F42A3 /* AppDelegate.m */,
 				3C1BA82A1A9591D3004F42A3 /* ViewController.h */,
-				3C1BA82B1A9591D3004F42A3 /* ViewController.m */,
+				3C1BA82B1A9591D3004F42A3 /* ViewController.mm */,
 				3C1BA82D1A9591D3004F42A3 /* Main.storyboard */,
 				3C1BA8301A9591D3004F42A3 /* Images.xcassets */,
 				3C1BA8321A9591D3004F42A3 /* LaunchScreen.xib */,
@@ -667,12 +667,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C01695B1A576168000D1543 /* Main.storyboard in Resources */,
-				3C1BA7DD1A95864E004F42A3 /* audio-01.m4a in Resources */,
-				3C1BA7DF1A95864E004F42A3 /* audio-03.m4a in Resources */,
+				3C1BA8671A97DE5E004F42A3 /* audio-01.m4a in Resources */,
+				3C1BA8691A97DE5E004F42A3 /* audio-03.m4a in Resources */,
 				3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */,
-				3C1BA7DE1A95864E004F42A3 /* audio-02.m4a in Resources */,
+				3C1BA8681A97DE5E004F42A3 /* audio-02.m4a in Resources */,
 				3C01695D1A576168000D1543 /* Images.xcassets in Resources */,
-				3C1BA7DC1A95864E004F42A3 /* audio-00.m4a in Resources */,
+				3C1BA8661A97DE5E004F42A3 /* audio-00.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -743,7 +743,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C1BA8591A9591EE004F42A3 /* CAXException.cpp in Sources */,
-				3C1BA82C1A9591D3004F42A3 /* ViewController.m in Sources */,
+				3C1BA82C1A9591D3004F42A3 /* ViewController.mm in Sources */,
 				3C1BA8291A9591D3004F42A3 /* AppDelegate.m in Sources */,
 				3C1BA8551A9591EE004F42A3 /* AQRecorder.mm in Sources */,
 				3C1BA8581A9591EE004F42A3 /* CAStreamBasicDescription.cpp in Sources */,
@@ -1173,6 +1173,7 @@
 				3C1BA8421A9591D3004F42A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C1BA8461A9591D3004F42A3 /* Build configuration list for PBXNativeTarget "PhromPhoncertTests" */ = {
 			isa = XCConfigurationList;
@@ -1181,6 +1182,7 @@
 				3C1BA8441A9591D3004F42A3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3C482C1F1A32365C005B55CE /* Build configuration list for PBXProject "AudioStreaming" */ = {
 			isa = XCConfigurationList;
