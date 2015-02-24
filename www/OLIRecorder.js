@@ -36,7 +36,7 @@ var recorderObjects = {};
  *                                  stateCallback(int sessionStateCode) - OPTIONAL
  */
 var OLIRecorder = function(file_ready_callback, error_callback, state_callback) {
-  console.log('OLIRecorder creation');
+  // console.log('OLIRecorder creation');
   argscheck.checkArgs('FFF', 'OLIRecorder', arguments);
   this.id = utils.createUUID();
   this.file_ready_callback = file_ready_callback;
@@ -67,7 +67,7 @@ OLIRecorder.get = function(id) {
  * Start recording a session.
  */
 OLIRecorder.prototype.start = function(options) {
-  console.log("OLIRecorder: JS: start: ", options);
+  // console.log("OLIRecorder: JS: start: ", options);
   exec(null, null, "OLIRecorder", "startSession", [this.id, options]);
 };
 
@@ -184,21 +184,22 @@ OLIRecorder.prototype.getMeterLevels = function(handleLevels) {
  * process file
  */
 OLIRecorder.processFile = function(id, url) {
-  console.log ("OLIRecorder: JS: processFile: ", url)
+  // console.log ("OLIRecorder: JS: processFile: ", url)
 
   var recorder = recorderObjects[id];
 
-  if (recorder && recorder.file_ready_callback)
+  if (recorder && recorder.file_ready_callback) {
     recorder.file_ready_callback(url)
-  else
+  } else {
     console.log ("OLIRecorder: JS: processFile: <missed recorder and/or callback>");
+  }
 }
 
 /**
  * Process route changes
  */
 OLIRecorder.processRoute = function(id, placeholder) {
-  console.log ("OLIRecorder: JS: processRoute: ", placeholder)
+  // console.log ("OLIRecorder: JS: processRoute: ", placeholder)
   
   var recorder = recorderObjects[id];
   
