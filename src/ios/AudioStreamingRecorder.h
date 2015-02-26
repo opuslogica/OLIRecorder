@@ -103,6 +103,12 @@ typedef void (^RouteChangeCallback) (NSString *placeholder);
 
 @property (nonatomic, copy) RouteChangeCallback routeCallback;
 
+// Learn about meter levels
+typedef void (^MeterCallback) (AudioQueueLevelMeterState leftMeter,
+                               AudioQueueLevelMeterState rightMeter);
+
+@property (nonatomic, copy) MeterCallback meterCallback;
+
 //
 // Class Methods
 //

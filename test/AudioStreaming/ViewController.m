@@ -18,6 +18,10 @@
 @property (strong, nonatomic) IBOutlet UISlider *monitorVolumeSlider;
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UIButton *toggleMonitorButton;
+@property (strong, nonatomic) IBOutlet UIProgressView *levelLeft;
+@property (strong, nonatomic) IBOutlet UIProgressView *levelRight;
+@property (strong, nonatomic) IBOutlet UITextField *levelLeftText;
+@property (strong, nonatomic) IBOutlet UITextField *levelRightText;
 
 @property (nonatomic, retain) AudioStreamingRecorder *recorder;
 @end
@@ -38,6 +42,20 @@
   
   [self.toggleRecordButton setEnabled: YES];
   // [self toggleMonitor: self.toggleMonitorButton];
+  
+  self.recorder.meterCallback = ^(AudioQueueLevelMeterState leftMeter,
+                                  AudioQueueLevelMeterState rightMeter) {
+    dispatch_async(dispatch_get_main_queue(), ^{
+      self.levelLeft.progress  = 50 * leftMeter.mAveragePower;
+      self.levelRight.progress = 50 * rightMeter.mAveragePower;
+      
+      self.levelLeftText.text = [NSString stringWithFormat: @"%f",
+                                 50 * leftMeter.mAveragePower];
+      self.levelRightText.text = [NSString stringWithFormat: @"%f",
+                                 50 * rightMeter.mAveragePower];
+      //NSLog (@"Left: %.2g", leftMeter.mAveragePower);
+    });
+  };
 }
 
 - (void) updateRecordButton: (Boolean) recording {

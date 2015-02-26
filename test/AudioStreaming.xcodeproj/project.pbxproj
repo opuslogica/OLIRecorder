@@ -32,6 +32,8 @@
 		3C1BA8671A97DE5E004F42A3 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */; };
 		3C1BA8681A97DE5E004F42A3 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */; };
 		3C1BA8691A97DE5E004F42A3 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */; };
+		3C1BA86A1A980FBA004F42A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
+		3C1BA86B1A980FC4004F42A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C482C4D1A32447C005B55CE /* AudioToolbox.framework */; };
 		3C482C2A1A32365C005B55CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C291A32365C005B55CE /* main.m */; };
 		3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2C1A32365C005B55CE /* AppDelegate.m */; };
 		3C482C301A32365C005B55CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2F1A32365C005B55CE /* ViewController.m */; };
@@ -117,9 +119,9 @@
 		3C1BA83E1A9591D3004F42A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C1BA83F1A9591D3004F42A3 /* PhromPhoncertTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhromPhoncertTests.m; sourceTree = "<group>"; };
 		3C1BA8471A9591EE004F42A3 /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
-		3C1BA8481A9591EE004F42A3 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; };
+		3C1BA8481A9591EE004F42A3 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; tabWidth = 4; };
 		3C1BA8491A9591EE004F42A3 /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
-		3C1BA84A1A9591EE004F42A3 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; };
+		3C1BA84A1A9591EE004F42A3 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; tabWidth = 4; };
 		3C1BA84B1A9591EE004F42A3 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
 		3C1BA84C1A9591EE004F42A3 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
 		3C1BA84D1A9591EE004F42A3 /* CADebugPrintf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugPrintf.cpp; sourceTree = "<group>"; };
@@ -222,6 +224,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1BA86B1A980FC4004F42A3 /* AudioToolbox.framework in Frameworks */,
+				3C1BA86A1A980FBA004F42A3 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

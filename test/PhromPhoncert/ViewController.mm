@@ -9,8 +9,9 @@
 #import "ViewController.h"
 
 @interface ViewController ()
-
 @end
+
+static AQRecorder recorder = AQRecorder();
 
 @implementation ViewController
 
@@ -22,6 +23,10 @@
 - (void)didReceiveMemoryWarning {
   [super didReceiveMemoryWarning];
   // Dispose of any resources that can be recreated.
+}
+
+
+- (IBAction)toggleRecord:(id)sender {
 }
 
 @end

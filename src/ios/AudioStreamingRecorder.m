@@ -253,6 +253,8 @@ static unsigned int instance = 0;
     self.callbackQueue =
       dispatch_get_global_queue (AUDIO_DISPATCH_QUEUE_PRIORITY_DEFAULT,
                                  AUDIO_DISPATCH_QUEUE_FLAGS);
+    
+    self.meterCallback = nil;
 
   }
   return self;
@@ -466,6 +468,8 @@ static unsigned int instance = 0;
      // latter only solves a 'too slow' problem if it is the allocation and
      // initialization of the AVAudioFile that is slow.
      block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
+       buffer.frameLength = 4096;
+       
        NSError *error = nil;
        
        // The date, right now.  Has 'interval' (10 seconds) elapsed?
@@ -738,6 +742,9 @@ static unsigned int instance = 0;
     
     // NSLog (@"Meter (%d): p:%f, a:%f", channel, meter.mPeakPower, meter.mAveragePower);
   }
+  
+  if (nil != self.meterCallback)
+    self.meterCallback (self.recordedLevelLeft, self.recordedLevelRight);
 }
 
 #if 0
