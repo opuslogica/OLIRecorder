@@ -78,6 +78,7 @@
 		3CCBF8BF1AA0EA2100B3A071 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF8BA1AA0EA2100B3A071 /* audio-02.m4a */; };
 		3CCBF8C01AA0EA2100B3A071 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF8BB1AA0EA2100B3A071 /* audio-03.m4a */; };
 		3CCBF8C11AA0EA2100B3A071 /* audio.m3u8 in Resources */ = {isa = PBXBuildFile; fileRef = 3CCBF8BC1AA0EA2100B3A071 /* audio.m3u8 */; };
+		3CCBF8C21AA0FB6100B3A071 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
 		3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */; };
 /* End PBXBuildFile section */
 
@@ -299,6 +300,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3CCBF8C21AA0FB6100B3A071 /* AVFoundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

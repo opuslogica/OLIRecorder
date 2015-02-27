@@ -146,10 +146,10 @@
                                     <action selector="getAllStats:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6e0-cC-Ndi"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cLv-OH-9rT">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cLv-OH-9rT">
                                 <rect key="frame" x="16" y="98" width="343" height="3"/>
                             </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z5-SvD">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z5-SvD">
                                 <rect key="frame" x="16" y="117" width="343" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="6Wt-yZ-CvF"/>
@@ -191,6 +191,7 @@
                         <constraints>
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="2Dl-Mt-IWp"/>
                             <constraint firstItem="Oi0-ve-TPx" firstAttribute="top" secondItem="fxS-6C-jR6" secondAttribute="bottom" constant="39" id="5B5-te-HOU"/>
+                            <constraint firstItem="uKu-ov-DEk" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="19" id="65j-Oh-mvq"/>
                             <constraint firstItem="gGU-wH-YjJ" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="6yE-dw-2NG"/>
                             <constraint firstItem="cLv-OH-9rT" firstAttribute="top" secondItem="AVZ-Kf-udJ" secondAttribute="bottom" constant="29" id="8jv-PX-soq"/>
                             <constraint firstItem="Q3w-u8-KzT" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="8sg-Vh-6JQ"/>
@@ -200,6 +201,7 @@
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="top" secondItem="gfk-GP-Ova" secondAttribute="bottom" constant="8" id="AHg-xj-tmo"/>
                             <constraint firstItem="Vjp-NF-oxL" firstAttribute="top" secondItem="gGU-wH-YjJ" secondAttribute="bottom" constant="8" id="ElK-pQ-31N"/>
                             <constraint firstItem="48j-QV-yVR" firstAttribute="top" secondItem="fxS-6C-jR6" secondAttribute="bottom" constant="132" id="GUY-tD-MVI"/>
+                            <constraint firstItem="cLv-OH-9rT" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="78" id="IHX-Ba-Ez3"/>
                             <constraint firstItem="Vjp-NF-oxL" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="Igw-b5-eie"/>
                             <constraint firstItem="KZd-58-lCT" firstAttribute="top" secondItem="fxS-6C-jR6" secondAttribute="bottom" constant="132" id="KrE-3V-t0V"/>
                             <constraint firstItem="99j-w4-3X8" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="26" id="LA2-2g-MV0"/>

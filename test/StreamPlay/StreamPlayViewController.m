@@ -11,9 +11,10 @@
 #import <AVFoundation/AVFoundation.h>
 
 @interface StreamPlayViewController ()
-@property (strong, nonatomic) IBOutlet UIButton *togglePlayButton;
-@property (nonatomic, retain) MPMoviePlayerController *player;
-//@property (nonatomic, retain) AVAudioPlayer *player;
+@property (nonatomic, readwrite) AVAudioSession *session;
+@property (strong, nonatomic) IBOutlet UIButton *playButton;
+@property (strong, nonatomic) IBOutlet UIButton *stopButton;
+@property (nonatomic, retain) AVAudioPlayer *player;
 @end
 
 @implementation StreamPlayViewController
@@ -34,60 +35,101 @@
   // Dispose of any resources that can be recreated.
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+  [super viewWillAppear: animated];
+  [self configureSessionIfAppropriate];
+}
 
 //
 // Play
 //
 - (NSURL *) createPlaybackUrl {
-  return [NSURL URLWithString: @"audio-03.m4a"
-                relativeToURL: [StreamPlayViewController documentsDirectory]];
+    return  [[NSBundle mainBundle] URLForResource: @"audio-00"
+                                    withExtension: @"m4a"];
 }
 
 - (BOOL) isPlaying {
-  if (nil == self.player) return NO;
-  
-  switch (self.player.playbackState) {
-    case MPMoviePlaybackStatePlaying:
-    case MPMoviePlaybackStatePaused:
-      return YES;
-      
-    default:
-      return NO;
-  }
+  return nil != self.player && self.player.isPlaying;
 }
 
 -(IBAction)togglePlay:(UIButton *) sender {
-  switch (self.player.playbackState) {
-    case MPMoviePlaybackStateStopped:
-      self.player = [[MPMoviePlayerController alloc] initWithContentURL:
-                     [self createPlaybackUrl]];
-      
-      self.player.shouldAutoplay = YES;
-      [self.player play];
-      break;
-      
-    case MPMoviePlaybackStatePlaying:
-      [self.player pause];
-      break;
-      
-    case MPMoviePlaybackStatePaused:
-      [self.player play];
-      break;
-      
-    default:
-      break;
-  }
+  NSAssert (nil != self.player, @"missed player");
+
+  if (self.player.isPlaying)
+    [self.player pause];
+  else
+    [self.player play];
   
-  [self.togglePlayButton setTitle: ([self isPlaying] ? @"Pause" : @"Play")
+  [self.playButton setTitle: (self.player.isPlaying ? @"Pause" : @"Play")
                          forState: UIControlStateNormal];
 }
 
-- (void) stopPlay {
-  if (nil != self.player) {
-    [self.player stop];
-    self.player = nil;
-    [self.togglePlayButton setTitle: @"Play" forState: UIControlStateNormal];
-  }
+-(IBAction)stopPlay:(UIButton *) sender {
+  [self.player stop];
+  [self.playButton setTitle: @"Play" forState: UIControlStateNormal];
 }
 
+- (IBAction)volumeAdjust:(UISlider *)sender {
+  self.player.volume = sender.value;
+}
+
+- (void) configurePlayer {
+  NSError *error = nil;
+  self.player = [[AVAudioPlayer alloc] initWithContentsOfURL: [self createPlaybackUrl] error:&error];
+  NSLog(@"Player Configured: %@", self.player);
+  if (nil != error)
+    NSLog (@"PLayer Configured: (Error):\n    %@", error);
+}
+
+- (void) configureSession {
+  
+  //
+  // (Re)Configure the AVAudioSession
+  //
+  self.session = [AVAudioSession sharedInstance];
+  
+#if 0
+  [self.session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
+  AbortOnError(error, @"missed audio category");
+  
+  [self.session setPreferredIOBufferDuration: AUDIO_BUFFER_DURATION error: &error];
+  AbortOnError(error, @"missed IOBufferDuration");
+  
+  [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
+  AbortOnError(error, @"missed SampleRate");
+  
+  // add interruption handler
+  [[NSNotificationCenter defaultCenter] addObserver: self
+                                           selector: @selector (handleInterruption:)
+                                               name: AVAudioSessionInterruptionNotification
+                                             object: self.session];
+  
+  // We don't do anything special in the route change notification
+  [[NSNotificationCenter defaultCenter] addObserver: self
+                                           selector: @selector (handleRouteChange:)
+                                               name: AVAudioSessionRouteChangeNotification
+                                             object: self.session];
+#endif
+  
+  // Here the callback is called immediately after the first request.  If the
+  // first request, then their will be an 'alert' and a callback - that might
+  // be too late.
+  [self.session requestRecordPermission:^(BOOL granted) {
+    NSLog (@"RecordPermission: %@", (granted ? @"Granted" : @"Denied"));
+    
+    // Skip out if permission has not been granted.
+    if (!granted) return;
+    
+    
+    
+    [self configurePlayer];
+    self.playButton.enabled = YES;
+    self.stopButton.enabled = YES;
+  }];
+}
+
+- (void) configureSessionIfAppropriate {
+  if (nil == self.session)
+    [self configureSession];
+}
 @end
