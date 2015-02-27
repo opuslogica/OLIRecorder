@@ -2,13 +2,12 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7519.1" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7513.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Phrom Phoncert View Controller-->
+        <!--Stream Play View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="PhromPhoncertViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="StreamPlayViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -17,24 +16,24 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Xh-wJ-a9L">
-                                <rect key="frame" x="164" y="77" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-Ag-pld">
+                                <rect key="frame" x="172" y="53" width="30" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="pHe-zH-CXH"/>
+                                    <constraint firstAttribute="width" constant="30" id="cJ9-hg-f9B"/>
+                                    <constraint firstAttribute="height" constant="30" id="zXQ-YO-hHp"/>
                                 </constraints>
-                                <state key="normal" title="Button">
+                                <state key="normal" title="Play">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="toggleRecord:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="9cp-tZ-ha7"/>
+                                    <action selector="togglePlay:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="M7R-K7-LJo"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="8Xh-wJ-a9L" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="148" id="K4a-Hy-Hwp"/>
-                            <constraint firstItem="8Xh-wJ-a9L" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="57" id="Zgw-k1-f2N"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="8Xh-wJ-a9L" secondAttribute="trailing" constant="149" id="dkG-Ge-Riu"/>
+                            <constraint firstItem="1oU-Ag-pld" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="33" id="Jxh-P5-jWo"/>
+                            <constraint firstAttribute="centerX" secondItem="1oU-Ag-pld" secondAttribute="centerX" constant="0.5" id="aqY-yd-sDY"/>
                         </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>

@@ -12,6 +12,6 @@
 #define kAudioBufferSizeInSeconds 10.0
 #define kAudioBufferCount 2
 
-@interface ViewController : UIViewController
+@interface AudioStreamingViewController : UIViewController
 @end
 

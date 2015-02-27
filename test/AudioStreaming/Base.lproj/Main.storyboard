@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Audio Streaming View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="ViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" customClass="AudioStreamingViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -17,19 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKu-ov-DEk">
-                                <rect key="frame" x="157" y="39" width="60" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="fZx-Gr-dle"/>
-                                    <constraint firstAttribute="width" constant="60" id="xLN-CU-0MF"/>
-                                </constraints>
-                                <state key="normal" title="Record">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="toggleRecord:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4zR-13-Pfd"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l2I-Qz-f6k">
                                 <rect key="frame" x="138" y="148" width="98" height="30"/>
                                 <constraints>
@@ -50,7 +37,7 @@
                                     <constraint firstAttribute="width" constant="190" id="zwk-er-ij2"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Q3w-u8-KzT">
@@ -78,7 +65,7 @@
                                     <constraint firstAttribute="height" constant="21" id="DTY-Ll-GoL"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Oi0-ve-TPx">
@@ -101,7 +88,7 @@
                                     <constraint firstAttribute="width" constant="165" id="I9s-Pd-K4l"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Blo-iB-TYM">
@@ -133,7 +120,7 @@
                                     <constraint firstAttribute="width" constant="30" id="htI-Qo-wYh"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="48j-QV-yVR">
@@ -143,11 +130,11 @@
                                     <constraint firstAttribute="height" constant="21" id="SKr-A8-d3N"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AVZ-Kf-udJ">
-                                <rect key="frame" x="16" y="39" width="36" height="30"/>
+                                <rect key="frame" x="169" y="609" width="36" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="cKW-4o-6Sf"/>
                                     <constraint firstAttribute="height" constant="30" id="mZn-NQ-mkR"/>
@@ -159,10 +146,10 @@
                                     <action selector="getAllStats:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="6e0-cC-Ndi"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cLv-OH-9rT">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="cLv-OH-9rT">
                                 <rect key="frame" x="16" y="98" width="343" height="3"/>
                             </progressView>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z5-SvD">
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="UMw-Z5-SvD">
                                 <rect key="frame" x="16" y="117" width="343" height="3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="6Wt-yZ-CvF"/>
@@ -186,6 +173,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uKu-ov-DEk">
+                                <rect key="frame" x="157" y="39" width="60" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="fZx-Gr-dle"/>
+                                    <constraint firstAttribute="width" constant="60" id="xLN-CU-0MF"/>
+                                </constraints>
+                                <state key="normal" title="Record">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toggleRecord:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="4zR-13-Pfd"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -194,6 +194,7 @@
                             <constraint firstItem="gGU-wH-YjJ" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="6yE-dw-2NG"/>
                             <constraint firstItem="cLv-OH-9rT" firstAttribute="top" secondItem="AVZ-Kf-udJ" secondAttribute="bottom" constant="29" id="8jv-PX-soq"/>
                             <constraint firstItem="Q3w-u8-KzT" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="8sg-Vh-6JQ"/>
+                            <constraint firstItem="uKu-ov-DEk" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="141" id="98U-ZM-wqm"/>
                             <constraint firstItem="AVZ-Kf-udJ" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="19" id="9bp-Em-nSS"/>
                             <constraint firstAttribute="centerX" secondItem="Oi0-ve-TPx" secondAttribute="centerX" constant="0.5" id="9uH-gh-dO4"/>
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="top" secondItem="gfk-GP-Ova" secondAttribute="bottom" constant="8" id="AHg-xj-tmo"/>
@@ -203,8 +204,11 @@
                             <constraint firstItem="KZd-58-lCT" firstAttribute="top" secondItem="fxS-6C-jR6" secondAttribute="bottom" constant="132" id="KrE-3V-t0V"/>
                             <constraint firstItem="99j-w4-3X8" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="26" id="LA2-2g-MV0"/>
                             <constraint firstItem="Dnt-Wh-hwP" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Mya-3X-eLn"/>
+                            <constraint firstItem="AVZ-Kf-udJ" firstAttribute="top" secondItem="gGU-wH-YjJ" secondAttribute="bottom" constant="8" id="Nv9-SN-0bw"/>
+                            <constraint firstAttribute="centerX" secondItem="uKu-ov-DEk" secondAttribute="centerX" constant="0.5" id="Tu0-bm-s04"/>
                             <constraint firstItem="mn5-eb-Fct" firstAttribute="top" secondItem="l2I-Qz-f6k" secondAttribute="bottom" constant="81" id="WJM-gf-xym"/>
                             <constraint firstItem="gGU-wH-YjJ" firstAttribute="top" secondItem="48j-QV-yVR" secondAttribute="bottom" constant="8" id="Wh5-AN-0Uc"/>
+                            <constraint firstAttribute="centerX" secondItem="AVZ-Kf-udJ" secondAttribute="centerX" constant="0.5" id="aV6-01-Yo5"/>
                             <constraint firstItem="Blo-iB-TYM" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="151" id="aWG-at-wgL"/>
                             <constraint firstItem="fxS-6C-jR6" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="bFm-Lm-7sI"/>
                             <constraint firstItem="gGU-wH-YjJ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="bOU-fT-Rxi"/>
@@ -230,6 +234,15 @@
                             <constraint firstItem="gfk-GP-Ova" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="331" id="xkb-hu-XFh"/>
                             <constraint firstItem="uKu-ov-DEk" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="19" id="zTs-7a-7N1"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="8jv-PX-soq"/>
+                                <exclude reference="98U-ZM-wqm"/>
+                                <exclude reference="qVf-nR-7H2"/>
+                                <exclude reference="9bp-Em-nSS"/>
+                                <exclude reference="qqn-ga-pdB"/>
+                            </mask>
+                        </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>

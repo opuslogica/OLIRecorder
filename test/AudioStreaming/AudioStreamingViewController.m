@@ -5,13 +5,13 @@
 //  Created by Ed Gamble on 12/5/14.
 //  Copyright (c) 2014 Opus Logica Inc. All rights reserved.
 //
-#import "ViewController.h"
+#import "AudioStreamingViewController.h"
 
 //
 // AVCaptureAudioDataOutput
 //
 //
-@interface ViewController ()
+@interface AudioStreamingViewController ()
 @property (nonatomic, readwrite) IBOutlet UIButton *resetSessionButton;
 @property (nonatomic, readwrite) IBOutlet UIButton *toggleRecordButton;
 @property (strong, nonatomic) IBOutlet UISlider *recordVolumnSlider;
@@ -24,9 +24,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *levelRightText;
 
 @property (nonatomic, retain) AudioStreamingRecorder *recorder;
+
 @end
 
-@implementation ViewController
+@implementation AudioStreamingViewController
+
 - (void)viewDidLoad {
   [super viewDidLoad];
   self.recorder = [[AudioStreamingRecorder alloc] initWithRecordingInterval: kAudioBufferSizeInSeconds];
@@ -72,12 +74,13 @@
   self.infoLabel.text = @"<not recording>";
 }
 
+
 //
-//
+// Record
 //
 - (IBAction) toggleRecord: (UIButton *) sender {
   self.recorder.inputGain = self.recordVolumnSlider.value;
-
+  
   if (self.recorder.isRecording)
     [self.recorder pause];
   else
@@ -89,6 +92,7 @@
 - (IBAction)recordVolumeChanged:(UISlider *)sender {
   self.recorder.inputGain = sender.value;
 }
+
 - (IBAction)inputPanChanged:(UISlider *)sender {
   self.recorder.inputPan = sender.value;
 }

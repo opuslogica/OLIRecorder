@@ -6,14 +6,14 @@
 //  Copyright (c) 2015 Opus Logica Inc. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "PhromPhoncertViewController.h"
 
-@interface ViewController ()
+@interface PhromPhoncertViewController ()
 @end
 
 static AQRecorder recorder = AQRecorder();
 
-@implementation ViewController
+@implementation PhromPhoncertViewController
 
 - (void)viewDidLoad {
   [super viewDidLoad];
