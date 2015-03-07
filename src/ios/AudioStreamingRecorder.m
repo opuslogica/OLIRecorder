@@ -37,6 +37,15 @@
     }                                 \
   } while (0)
 
+#define AbortOnNullVoid( val, desc )      \
+do {                                \
+void *__val = (void *) (val); \
+if (NULL == __val) {              \
+NSLog (@"NULL (void) value: %@", desc);\
+abort ();                       \
+}                                 \
+} while (0)
+
 
 //
 // THERE ARE NOT THE WRONG THING
@@ -99,7 +108,7 @@
 @property (nonatomic, readwrite) AVAudioEnvironmentNode *environmentNode;
 
 // The current file into which audio is being accumulated.
-@property (nonatomic) AVAudioFile *file;
+@property (nonatomic) ExtAudioFileRef file;
 
 // The time at which the current file's audio recording expires.  Once expired
 // the file is closed and passed to the RecordedFileCallback.
@@ -107,6 +116,8 @@
 
 // URL/Folder where the audio filees are stored
 @property (nonatomic) NSURL  *fileLocation;
+
+@property (nonatomic) NSURL  *fileURL;
 
 // Unique-ish identifer for a file.  We never want to worry about pre-existing
 // files in our fileLocation so we encode the 'init time' into the file name.
@@ -245,6 +256,7 @@ static unsigned int instance = 0;
     
     self.fileIdentifier = [NSDate date];
     self.fileLocation   = [AudioStreamingRecorder documentsDirectory];
+    self.fileURL        = nil;
     self.fileDelayQueue = [NSMutableArray arrayWithCapacity: AUDIO_FILE_DELAY_QUEUE_SIZE];
 
     [self fileUpdateSessionCount: YES];
@@ -271,14 +283,14 @@ static unsigned int instance = 0;
   else self.fileBlockCount++;
 }
 
-- (NSURL *) fileURLForAudioData: (NSString *) extension {
-  return [NSURL URLWithString:
-          [AudioStreamingRecorder createAudioFilename: 0
-                                              seconds: lround (self.fileIdentifier.timeIntervalSinceReferenceDate)
-                                              session: self.fileSessionCount
-                                                block: self.fileBlockCount
-                                            extension: extension]
-                relativeToURL: _fileLocation];
+- (void) fileUpdateFileURL: (NSString *) extension {
+  self.fileURL = [NSURL URLWithString:
+                  [AudioStreamingRecorder createAudioFilename: 0
+                                                      seconds: lround (self.fileIdentifier.timeIntervalSinceReferenceDate)
+                                                      session: self.fileSessionCount
+                                                        block: self.fileBlockCount
+                                                    extension: extension]
+                        relativeToURL: _fileLocation];
 }
 
 ///
@@ -287,19 +299,31 @@ static unsigned int instance = 0;
 #pragma mark - Audio File Configuration and Announcement
 
 - (void) configureFile {
-  NSError *error = nil;
+  OSStatus err;
   
-  NSAssert (nil == self.file, @"Called configureFile w/o a file?!");
+  NSAssert (nil == self.file, @"Called configureFile w a file?!");
 
-  // Update the block count for the NEXT invocation.
+  // Update the block count.
   [self fileUpdateBlockCount: NO];
-
-  // Move to the next file but with an updated 'block' count.
-  self.file = [[AVAudioFile alloc] initForWriting: [self fileURLForAudioData: AUDIO_FILE_EXTENSION]
-                                         settings: self.fileSettings
-                                            error: &error];
-  AbortOnNull(self.file, @"AVAudioFile initForWriting");
   
+  // Update the URL for the audio data
+  [self fileUpdateFileURL: AUDIO_FILE_EXTENSION];
+
+  
+  // AVAudioFormat *format = [self.engine.mainMixerNode outputFormatForBus: 0];
+  AVAudioFormat *format = [[AVAudioFormat alloc] initWithSettings: self.fileSettings];
+  
+  
+  // 	XThrowIfError(AudioFileCreateWithURL(url, kAudioFileAAC_ADTSType, &aqr->mRecordFormat, kAudioFileFlags_EraseFile, &aqr->mRecordFile1), "AudioFileCreateWithURL failed");
+
+  err = ExtAudioFileCreateWithURL ((__bridge CFURLRef)(self.fileURL),
+                                   AUDIO_FILE_TYPE,
+                                   format.streamDescription,
+                                   NULL,
+                                   kAudioFileFlags_EraseFile,
+                                   &_file);
+  AbortOnStatus(err, @"ExtAudioFileCreateWithURL");
+
   // This new file will expire in self.recordingInterval seconds from now.
   self.fileExpiration = [[NSDate date] dateByAddingTimeInterval: 0.95 * self.recordingInterval];
 }
@@ -309,18 +333,28 @@ static unsigned int instance = 0;
 - (void) announceFile {
   if (nil != self.file) {
 
-    NSLog (@"Wrote Audio File: (%10lld): %@",
-           self.file.length,
-           self.file.url.lastPathComponent);
-    
-    [self.fileDelayQueue addObject: self.file.url];
+    // AudioConverterRef ... writeCookie
+
+    // Close out the AudioFile; presumably closing fileURL
+    ExtAudioFileDispose(self.file);
+
+    // Announce
+    NSLog (@"Wrote Audio File: (%10ui): %@",
+           0xDEADBEEF,
+           self.fileURL.lastPathComponent);
+
+    // Queue the URL - avoid this if 'dispose' works.
+    [self.fileDelayQueue addObject: self.fileURL];
     
     // To be compatible with exisiting 'configureFile'...
-    self.file = nil;
+    self.file    = nil;
+    self.fileURL = nil;
     self.fileExpiration = nil;
+    
+    // Get the next file, fileURL, etc
     [self configureFile];
 
-
+    // If the fileDelayQueue is full, pop and announce.
     if (AUDIO_FILE_DELAY_QUEUE_SIZE == self.fileDelayQueue.count) {
       RecordedFileCallback callback = self.callback;
       
@@ -365,6 +399,36 @@ static unsigned int instance = 0;
   [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
   AbortOnError(error, @"missed SampleRate");
   
+#if 0
+  - (void) updateAudioFormat (UInt32 inFormatID) {
+    
+
+  void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
+  {
+    memset(&mRecordFormat, 0, sizeof(mRecordFormat));
+    
+    UInt32 size = sizeof(mRecordFormat.mSampleRate);
+    XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareSampleRate,
+                                          &size,
+                                          &mRecordFormat.mSampleRate), "couldn't get hardware sample rate");
+    
+    size = sizeof(mRecordFormat.mChannelsPerFrame);
+    XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareInputNumberChannels,
+                                          &size,
+                                          &mRecordFormat.mChannelsPerFrame), "couldn't get input channel count");
+    
+    mRecordFormat.mFormatID = inFormatID;
+    if (inFormatID == kAudioFormatLinearPCM)
+    {
+      // if we want pcm, default to signed 16-bit little-endian
+      mRecordFormat.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+      mRecordFormat.mBitsPerChannel = 16;
+      mRecordFormat.mBytesPerPacket = mRecordFormat.mBytesPerFrame = (mRecordFormat.mBitsPerChannel / 8) * mRecordFormat.mChannelsPerFrame;
+      mRecordFormat.mFramesPerPacket = 1;
+    }
+  }
+#endif
+
   // add interruption handler
   [[NSNotificationCenter defaultCenter] addObserver: self
                                            selector: @selector (handleInterruption:)
@@ -390,6 +454,9 @@ static unsigned int instance = 0;
     // Configure the AVAudioEngine
     //
     self.engine = [[AVAudioEngine alloc] init];
+    
+    // NOTE: settings can come from [node outputFormatForBus: 0].  Of course,
+    // it surely is the case that the bus format is not the file format?
     self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
                            AVSampleRateKey               : @(44100.0),
                            AVNumberOfChannelsKey         : @(AUDIO_FILE_CHANNELS),
@@ -441,11 +508,19 @@ static unsigned int instance = 0;
                       to: self.engine.mainMixerNode
                   format: nodeFormat];
     
+    AVAudioNode *impedenceNode = [[AVAudioMixerNode alloc] init];
+    [self.engine attachNode: impedenceNode];
+    
     // The output node is used for monitoring the recorded audio.
     [self.engine connect: self.engine.mainMixerNode
+                      to: impedenceNode
+                  format: nodeFormat];
+
+    [self.engine connect: impedenceNode
                       to: self.engine.outputNode
                   format: nodeFormat];
     
+
     // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
     
@@ -459,7 +534,7 @@ static unsigned int instance = 0;
      // Use of 'nil' is quasi-required - based on the documentation - because
      // the mainMixerNode is attached to the outputNode and thus the format
      // of the mainMixerNode is already determined.
-     format: nil
+     format: [[AVAudioFormat alloc] initWithSettings: self.fileSettings]
      
      // This 'handler' needs to allocate and initialze an AVAudioFile and to
      // write buffer data to that file.  If this handler is too slow, we
@@ -468,7 +543,6 @@ static unsigned int instance = 0;
      // latter only solves a 'too slow' problem if it is the allocation and
      // initialization of the AVAudioFile that is slow.
      block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
-       buffer.frameLength = 4096;
        
        NSError *error = nil;
        
@@ -477,14 +551,14 @@ static unsigned int instance = 0;
        
        // Allocate a file if we don't have one.  We do this lazily which helps
        // to ensure that we have a file when we actually need one
-       AbortOnNull(self.file, @"No file");
+       AbortOnNullVoid(self.file, @"No file");
        //[self configureFileIfNeeded];
        
        // The AVAudioPCMBuffer is 'specially designed' to easily write to a file
        // and, as part of the write, be converted to the file's format.  The
        // writeFromBuffer will open if needed and appends by default.
-       [self.file writeFromBuffer: buffer error: &error];
-       AbortOnError(error, @"File writeFromBuffer");
+       ExtAudioFileWrite(self.file, buffer.frameLength, buffer.audioBufferList);
+       AbortOnError(error, @"File ExtAudioFileWrite");
        
        // Check if 'now' is beyond the pre-computed fileExpiration.  If so, or
        // if we don't have a fileExperation, announce the file.
@@ -495,6 +569,10 @@ static unsigned int instance = 0;
        
        [self updateMeterOfRecordedLevel: buffer
                                  format: nodeFormat];
+
+       // Do last, so as not to upset current handling.
+       buffer.frameLength = 4096;
+
      }];
     
     self.isPermitted = granted;

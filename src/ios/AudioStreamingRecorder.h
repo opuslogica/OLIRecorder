@@ -15,10 +15,20 @@
 
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)
-#define AUDIO_FILE_EXTENSION  @"m4a"
+// #define AUDIO_FILE_EXTENSION  @"m4a"
 // #define AUDIO_FILE_EXTENSION  @"adts"
 // #define AUDIO_FILE_EXTENSION  @"aac"
+#define AUDIO_FILE_EXTENSION  @"mp3"
 #endif
+
+// For lower-level file protocols, the file type is NOT derived from the file
+// extension.  So we are forced to set it and hope, desperately, that we got
+// lucky and choose something consistent with the extension.  Or maybe we should
+// just challenge audio file processor by putting a '.scm' or '.sh' or '.o'
+// extesion?
+//
+// See AudioFileTypeID - but the following looks pretty darn good...
+#define AUDIO_FILE_TYPE kAudioFileMP3Type // kAudioFileAAC_ADTSType
 
 //
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
