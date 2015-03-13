@@ -14,7 +14,7 @@
 #define AbortOnError( error, desc ) \
   do {                              \
     if (nil != error) {             \
-      NSLog (@"Error: %@", desc);    \
+      NSLog (@"Error: %@", desc);   \
       abort ();                     \
     }                               \
   } while (0)
@@ -37,13 +37,13 @@
     }                                 \
   } while (0)
 
-#define AbortOnNullVoid( val, desc )      \
-do {                                \
-void *__val = (void *) (val); \
-if (NULL == __val) {              \
+#define AbortOnNullVoid( val, desc )  \
+do {                                  \
+void *__val = (void *) (val);         \
+if (NULL == __val) {                  \
 NSLog (@"NULL (void) value: %@", desc);\
-abort ();                       \
-}                                 \
+abort ();                             \
+}                                     \
 } while (0)
 
 
@@ -97,6 +97,7 @@ abort ();                       \
 @interface AudioStreamingRecorder ()
 @property (nonatomic, readwrite) AVAudioSession *session;
 @property (nonatomic, readwrite) AVAudioEngine  *engine;
+@property (nonatomic, readwrite) AVAudioFormat  *format;
 
 @property (nonatomic, copy) RecordedFileCallback callback;
 
@@ -293,6 +294,72 @@ static unsigned int instance = 0;
                         relativeToURL: _fileLocation];
 }
 
+/*
+void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
+{
+  // grab the cookie from the converter and write it to the file
+  UInt32 cookieSize = 0;
+  OSStatus err = AudioConverterGetPropertyInfo(converter, kAudioConverterCompressionMagicCookie, &cookieSize, NULL);
+		// if there is an error here, then the format doesn't have a cookie, so on we go
+  if (!err && cookieSize) {
+    char* cookie = new char [cookieSize];
+    
+    err = AudioConverterGetProperty(converter, kAudioConverterCompressionMagicCookie, &cookieSize, cookie);
+    XThrowIfError (err, "Get Cookie From AudioConverter");
+    
+    AudioFileSetProperty (outfile, kAudioFilePropertyMagicCookieData, cookieSize, cookie);
+    // even though some formats have cookies, some files don't take them, so we ignore the error
+    delete [] cookie;
+  }
+}
+*/
+
+//
+// In some cases it appears that a 'Magic Cookie' is needed at the end of the
+// file.  We'll write one here.
+//
+- (void) writeMagicCookie {
+  OSStatus err;
+  UInt32 size;
+  AudioConverterRef converter;
+  
+  // Get the converter for this file.  The converter is taking the LPCM input
+  // and producing AAC (or whatever, as configured) output.  We'll get the
+  // magic cookie from the converter.
+  
+  size = sizeof (converter);
+  err = ExtAudioFileGetProperty (self.file, kExtAudioFileProperty_AudioConverter, &size, &converter);
+  AbortOnStatus (err, @"ExtAudioFileGetProperty outFile, kExtAudioFileProperty_AudioConverter");
+
+  // Grab the cookie size.  Note: if we had a maximum size for the cookie we
+  // could grab the cookie right here.  As it is, we get the size and allocate
+  // some memory for the cookie.
+  err = AudioConverterGetProperty (converter, kAudioConverterCompressionMagicCookie, &size, NULL);
+  AbortOnStatus (err, @"AudioConverterGetProperty converter, kAudioConverterCompressionMagicCookie");
+  
+  // Allocate memory for the cookie, if there is one
+  if (0 != size) {
+    char cookie [size]; //
+
+    // Once again, with cookie memory this time
+    err = AudioConverterGetProperty (converter, kAudioConverterCompressionMagicCookie, &size, cookie);
+    AbortOnStatus (err, @"AudioConverterGetProperty converter, kAudioConverterCompressionMagicCookie");
+
+    // Write it.  Oooops, no interface for ExtAudioFile.... but we can get
+    // at a lower level interface.
+
+    AudioFileID fileID;
+    UInt32 size = sizeof(fileID);
+
+    err = ExtAudioFileGetProperty(self.file, kExtAudioFileProperty_AudioFile, &size, &fileID);
+    AbortOnStatus (err, @"ExtAudioFileGetProperty outFile, kExtAudioFileProperty_AudioFile");
+    
+    // Now, write the cookie
+    err = AudioFileSetProperty(fileID, kAudioFilePropertyMagicCookieData, size, cookie);
+    AbortOnStatus(err, @"AudioFileSetProperty fileID kAudioFilePropertyMagicCookieData");
+  }
+}
+
 ///
 /// Audio File Configuration and Announcement
 ///
@@ -309,20 +376,75 @@ static unsigned int instance = 0;
   // Update the URL for the audio data
   [self fileUpdateFileURL: AUDIO_FILE_EXTENSION];
 
-  
+#if 0
   // AVAudioFormat *format = [self.engine.mainMixerNode outputFormatForBus: 0];
-  AVAudioFormat *format = [[AVAudioFormat alloc] initWithSettings: self.fileSettings];
+  AVAudioFormat *fileFormat = [[AVAudioFormat alloc] initWithSettings: self.fileSettings];
+#endif
   
-  
-  // 	XThrowIfError(AudioFileCreateWithURL(url, kAudioFileAAC_ADTSType, &aqr->mRecordFormat, kAudioFileFlags_EraseFile, &aqr->mRecordFile1), "AudioFileCreateWithURL failed");
+  // The 'original' AQRecorder.mm code set only three fields when
+  // creating the AVAudioQueue.  But then, when creating the file, the queue's
+  // format was read back in, using GetProperty, and that 'read format' was
+  // used to create the file.  We don't have a queue to read and our
+  // AVAudioEngine uses LPCM, like by strong default.
+  //
+  // But, the read back doesn't appear to change the Stream Description so it
+  // won't matter.
 
+  AudioStreamBasicDescription description = { 0 };
+  description.mSampleRate = AUDIO_HW_SAMPLE_RATE;
+  description.mFormatID   = AUDIO_FILE_FORMAT;
+  description.mChannelsPerFrame = AUDIO_FILE_CHANNELS;
+  description.mBitsPerChannel   = 16;
+  description.mFormatFlags = (kAudioFormatFlagIsNonInterleaved |
+                              kAudioFormatFlagIsPacked |
+                              kAudioFormatFlagIsFloat);
+  
+  //description.mFramesPerPacket = 1024;
+  
+  // Let everything else 'ride'... could set mFormatFlags at least.
+  
+  // In one, Out another?
+  AVAudioFormat *fileFormat =
+    [[AVAudioFormat alloc] initWithStreamDescription: &description];
+
+  // Actually create the ExtAudioFile
   err = ExtAudioFileCreateWithURL ((__bridge CFURLRef)(self.fileURL),
                                    AUDIO_FILE_TYPE,
-                                   format.streamDescription,
+                                   fileFormat.streamDescription,
                                    NULL,
                                    kAudioFileFlags_EraseFile,
                                    &_file);
   AbortOnStatus(err, @"ExtAudioFileCreateWithURL");
+
+  // At this point, if we needed to, we can prove that self.file is valid.
+  // We'll aimlessly read back-in the format; during debugging it can be
+  // used to confirm the setup.
+  {
+    AudioStreamBasicDescription format;
+    UInt32 size = sizeof(format);
+    err = ExtAudioFileGetProperty(self.file, kExtAudioFileProperty_FileDataFormat, &size, &format);
+    AbortOnStatus (err, @"ExtAudioFileGetProperty outFile, kExtAudioFileProperty_FileDataFormat");
+  }
+  
+  // Tell the ExtAudioFile what the client format is.  The audio file writes
+  // occur as a tap on the mainMixerNode - so we'll grab that format.  We expect
+  // that format to be stereo, non-interleaved; we further expect that the
+  // ExtAudioFile converter will 'do the right thing' for the file result.
+  //
+  // And yet... there is direct evidence and stackoverflow confirmation that
+  // the tap's AVAudioPCMBuffer must have one buffer, even with two channels,
+  // and be interleaved.  The ExtAudioFileWrite barfs otherwise.
+  //
+  // Our confidence in the above is captured in the value of
+  //   AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT
+#if AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT
+  AVAudioFormat *clientFormat = [self.engine.mainMixerNode outputFormatForBus: 0];
+  
+  err = ExtAudioFileSetProperty(self.file, kExtAudioFileProperty_ClientDataFormat,
+                                sizeof (clientFormat.streamDescription),
+                                clientFormat.streamDescription);
+  AbortOnStatus(err, @"ExtAudioFileSetProperty self.file kExtAudioFileProperty_ClientDataFormat");
+#endif
 
   // This new file will expire in self.recordingInterval seconds from now.
   self.fileExpiration = [[NSDate date] dateByAddingTimeInterval: 0.95 * self.recordingInterval];
@@ -333,10 +455,12 @@ static unsigned int instance = 0;
 - (void) announceFile {
   if (nil != self.file) {
 
+    OSStatus err = noErr;
     // AudioConverterRef ... writeCookie
 
     // Close out the AudioFile; presumably closing fileURL
-    ExtAudioFileDispose(self.file);
+    err = ExtAudioFileDispose(self.file);
+    AbortOnStatus(err, @"Missed Dispose"); 
 
     // Announce
     NSLog (@"Wrote Audio File: (%10ui): %@",
@@ -455,10 +579,12 @@ static unsigned int instance = 0;
     //
     self.engine = [[AVAudioEngine alloc] init];
     
-    // NOTE: settings can come from [node outputFormatForBus: 0].  Of course,
-    // it surely is the case that the bus format is not the file format?
-    self.fileSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
-                           AVSampleRateKey               : @(44100.0),
+    // These file settings, particularly because of MPEG4AAC (in
+    // AUDIO_FILE_FORMAT), will be distinct from the format in the
+    // AVAudioEngine; the engine format is LPCM.
+
+    self.fileSettings = @{ AVFormatIDKey                 : @(AUDIO_FILE_FORMAT),
+                           AVSampleRateKey               : @(AUDIO_HW_SAMPLE_RATE),
                            AVNumberOfChannelsKey         : @(AUDIO_FILE_CHANNELS),
                            AVEncoderBitRatePerChannelKey : @(16),
                            //AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
@@ -466,18 +592,41 @@ static unsigned int instance = 0;
     
     // Define the format for the two busses: input -> mixer, mixer -> output.
     // The number of channels below must match, is seems, with the above
-    // fileSettings
-    AVAudioFormat *stereoFormat =
-      [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
-                                                     channels: 2];
+    // fileSettings.
 
+    // MonoFormat
     AVAudioFormat *monoFormat =
-    [[AVAudioFormat alloc] initStandardFormatWithSampleRate: 44100.0
-                                                   channels: 1];
+      [[AVAudioFormat alloc] initStandardFormatWithSampleRate: AUDIO_HW_SAMPLE_RATE
+                                                     channels: 1];
     
-    AVAudioFormat *nodeFormat = (1 == AUDIO_NODE_CHANNELS
-                                 ? monoFormat
-                                 : stereoFormat);
+    // StereoFormat
+    //
+    // It seems this is NOT-INTERLEAVED and must not be interleaved.  If you try
+    // initWithCommonFormat:sampleRate:channels:interleaved of YES, then you can
+    // create the format w/o a problem, but you'll get a InvalidFormat (-10868)
+    // when trying to connect nodes with the interleaved format.
+    //
+    // Okay, so what?  If you are using stereo and it is not interleaved then
+    // the AVAudioPCMBuffer tap will use two non-interleaved buffers to capture
+    // the stereo audio.  But, here is the problem, apparently:
+    //
+    // http://stackoverflow.com/a/9220502/1286639
+    // "One thing to check is that ExtAudioFile expects only one buffer. So your
+    //  fillBufList->mNumberBuffers should always equal 1, and if you need to do
+    //  stereo, you need to interleave the audio data, so that
+    //  mBuffers[0].mNumberChannels is equal to 2 for stereo."
+    //
+    // Thus, apparently, in ExtAudioFileWrite(), the AudioBufferList must have
+    // a mNumberBuffers = 1.  But maybe there is a shot at success, an
+    // ExtAudioFile has a ClientDataFormat; if we set that to stereo, not
+    // interleaved then maybe that input will be recognized.
+    //
+    AVAudioFormat *stereoFormat =
+      [[AVAudioFormat alloc] initStandardFormatWithSampleRate: AUDIO_HW_SAMPLE_RATE
+                                                     channels: 2];
+    
+    // This is going to be stereo; if it can be.
+    self.format = (1 == AUDIO_NODE_CHANNELS ? monoFormat : stereoFormat);
     
     // To mix stereo we need an EnvironmentNode (environment because it models
     // the position of a listener.
@@ -506,24 +655,25 @@ static unsigned int instance = 0;
     // The mainMixer node is tapped to record audio to file.
     [self.engine connect: self.environmentNode
                       to: self.engine.mainMixerNode
-                  format: nodeFormat];
-    
-    AVAudioNode *impedenceNode = [[AVAudioMixerNode alloc] init];
-    [self.engine attachNode: impedenceNode];
-    
-    // The output node is used for monitoring the recorded audio.
-    [self.engine connect: self.engine.mainMixerNode
-                      to: impedenceNode
-                  format: nodeFormat];
+                  format: self.format];
 
-    [self.engine connect: impedenceNode
+    // The mainMixer got to the output
+    [self.engine connect: self.engine.mainMixerNode // impedenceNode
                       to: self.engine.outputNode
-                  format: nodeFormat];
+                  format: self.format];
     
 
     // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
-    
+
+#if 0
+    AVAudioPCMBuffer *interleavedBuffer =
+      [[AVAudioPCMBuffer alloc] initWithPCMFormat: [[AVAudioFormat alloc] initWithCommonFormat: AVAudioPCMFormatFloat32
+                                                                                    sampleRate: AUDIO_HW_SAMPLE_RATE
+                                                                                      channels: AUDIO_FILE_CHANNELS
+                                                                                   interleaved: YES]
+                                    frameCapacity: AUDIO_HW_SAMPLE_RATE];
+#endif
     // Today, we are getting ~16384 frames per block callback. (4 * 4096)
     [self.engine.mainMixerNode
      installTapOnBus: 0
@@ -534,7 +684,9 @@ static unsigned int instance = 0;
      // Use of 'nil' is quasi-required - based on the documentation - because
      // the mainMixerNode is attached to the outputNode and thus the format
      // of the mainMixerNode is already determined.
-     format: [[AVAudioFormat alloc] initWithSettings: self.fileSettings]
+     //
+     // Don't for one minute think of putting 'interleaved: YES' here...
+     format: nil
      
      // This 'handler' needs to allocate and initialze an AVAudioFile and to
      // write buffer data to that file.  If this handler is too slow, we
@@ -544,7 +696,7 @@ static unsigned int instance = 0;
      // initialization of the AVAudioFile that is slow.
      block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
        
-       NSError *error = nil;
+       OSStatus err = noErr;
        
        // The date, right now.  Has 'interval' (10 seconds) elapsed?
        NSDate  *date  = [NSDate date];
@@ -555,28 +707,42 @@ static unsigned int instance = 0;
        //[self configureFileIfNeeded];
        
        // The AVAudioPCMBuffer is 'specially designed' to easily write to a file
-       // and, as part of the write, be converted to the file's format.  The
-       // writeFromBuffer will open if needed and appends by default.
-       ExtAudioFileWrite(self.file, buffer.frameLength, buffer.audioBufferList);
-       AbortOnError(error, @"File ExtAudioFileWrite");
+       // and, as part of the write, be converted to the file's format...
+       //
+       // ... except in virtually every case I've tried.
+
+#if 0
+       // And that means we convert from buffer to interleavedBuffer.
+       interleavedBuffer.frameLength = buffer.frameLength;
+       for (AVAudioFrameCount frame = 0; frame < buffer.frameLength; frame++)
+         for (int channel = 0; channel < AUDIO_FILE_CHANNELS; channel++) {
+           
+         }
+#endif
+       err = ExtAudioFileWrite (self.file, buffer.frameLength, buffer.audioBufferList);
+       AbortOnStatus(err, @"File ExtAudioFileWrite");
        
        // Check if 'now' is beyond the pre-computed fileExpiration.  If so, or
-       // if we don't have a fileExperation, announce the file.
+       // if we don't have a fileExpiration, announce the file.
        if (nil == self.fileExpiration ||
            [date timeIntervalSinceDate: self.fileExpiration] > 0) {
          [self announceFile];
        }
        
+       // Keep the meter up-to-date
        [self updateMeterOfRecordedLevel: buffer
-                                 format: nodeFormat];
+                                 format: self.format];
 
-       // Do last, so as not to upset current handling.
-       buffer.frameLength = 4096;
-
+       // Do last, so as not to upset current handling.  This determines the
+       // frequency at which this tap is called; which we use to help with
+       // computing the levels.
+       //
+       // buffer.frameLength = 4096;
      }];
     
+    // The AVAudioEngine is configued; the tap is installed
+    
     self.isPermitted = granted;
- 
     self.enableOutput = NO;
   }];
 }

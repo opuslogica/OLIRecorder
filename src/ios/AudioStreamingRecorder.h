@@ -7,28 +7,59 @@
 //
 #import <AVFoundation/AVFoundation.h>
 
+// Don't touch this
+#define FOR_AAC 1
+#define FOR_M4A 2
+#define FOR_MP3 3
+
+// Touch this
+#if ! defined (USE_FORMAT)
+#define USE_FORMAT FOR_AAC
+#endif
+
+// AUDIO_FILE_EXTENSION
+//
+// The extension to use when creating audio files
+
+// AUDIO_FILE_TYPE
+//
+// For lower-level file protocols, the file type is NOT derived from the file
+// extension.  So we are forced to set it and hope, desperately, that we got
+// lucky and choose something consistent with the extension.  Or maybe we should
+// just challenge audio file processor by putting a '.scm' or '.sh' or '.o'
+// extension?
+
+// AUDIO_FILE_FORMAT
+//
+// Call it a guess; call it a chimp's random search
+
+#if FOR_AAC == USE_FORMAT
+#define AUDIO_FILE_EXTENSION  @"aac"
+#define AUDIO_FILE_TYPE kAudioFileAAC_ADTSType
+#define AUDIO_FILE_FORMAT kAudioFormatMPEG4AAC
+
+#elif FOR_M4A == USE_FORMAT
+#define AUDIO_FILE_EXTENSION  @"m4a"
+#define AUDIO_FILE_TYPE kAudioFileM4AType
+#define AUDIO_FILE_FORMAT kAudioFormatMPEG4AAC // ??
+
+#elif FOR_MP3 == USE_FORMAT
+#define AUDIO_FILE_EXTENSION  @"mp3"
+#define AUDIO_FILE_TYPE kAudioFileMP3Type
+#define AUDIO_FILE_FORMAT kAudioFormatMPEGLayer3
+
+#else
+#error "Unknown format"
+#endif
+
 // The number of channels written to file
 #define AUDIO_FILE_CHANNELS 2
 
 // The number of channels for audio nodes, in the audio engine.
 #define AUDIO_NODE_CHANNELS 2
 
-// Use m4a, adts or aac
-#if ! defined (AUDIO_FILE_EXTENSION)
-// #define AUDIO_FILE_EXTENSION  @"m4a"
-// #define AUDIO_FILE_EXTENSION  @"adts"
-// #define AUDIO_FILE_EXTENSION  @"aac"
-#define AUDIO_FILE_EXTENSION  @"mp3"
-#endif
-
-// For lower-level file protocols, the file type is NOT derived from the file
-// extension.  So we are forced to set it and hope, desperately, that we got
-// lucky and choose something consistent with the extension.  Or maybe we should
-// just challenge audio file processor by putting a '.scm' or '.sh' or '.o'
-// extesion?
-//
-// See AudioFileTypeID - but the following looks pretty darn good...
-#define AUDIO_FILE_TYPE kAudioFileMP3Type // kAudioFileAAC_ADTSType
+// Do we tell the ExtAudioFile to provide a clientFormat hint?
+#define AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT 1
 
 //
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
