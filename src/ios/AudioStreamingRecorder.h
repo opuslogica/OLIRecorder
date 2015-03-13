@@ -55,12 +55,11 @@
 // The number of channels written to file
 #define AUDIO_FILE_CHANNELS 2
 
-// The number of channels for audio nodes, in the audio engine.
-#define AUDIO_NODE_CHANNELS 2
+// Do we tell the ExtAudioFile to provide a clientFormat hint?  If we do,
+// we fail.  Go figure.
+#define AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT 0
 
-// Do we tell the ExtAudioFile to provide a clientFormat hint?
-#define AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT 1
-
+#define USE_INTERLEAVED_CONVERT 0 // 2 == AUDIO_FILE_CHANNELS
 //
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
 

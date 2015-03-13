@@ -312,6 +312,37 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     delete [] cookie;
   }
 }
+ 
+ #if 0
+ - (void) updateAudioFormat (UInt32 inFormatID) {
+ 
+ 
+ void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
+ {
+ memset(&mRecordFormat, 0, sizeof(mRecordFormat));
+ 
+ UInt32 size = sizeof(mRecordFormat.mSampleRate);
+ XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareSampleRate,
+ &size,
+ &mRecordFormat.mSampleRate), "couldn't get hardware sample rate");
+ 
+ size = sizeof(mRecordFormat.mChannelsPerFrame);
+ XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareInputNumberChannels,
+ &size,
+ &mRecordFormat.mChannelsPerFrame), "couldn't get input channel count");
+ 
+ mRecordFormat.mFormatID = inFormatID;
+ if (inFormatID == kAudioFormatLinearPCM)
+ {
+ // if we want pcm, default to signed 16-bit little-endian
+ mRecordFormat.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
+ mRecordFormat.mBitsPerChannel = 16;
+ mRecordFormat.mBytesPerPacket = mRecordFormat.mBytesPerFrame = (mRecordFormat.mBitsPerChannel / 8) * mRecordFormat.mChannelsPerFrame;
+ mRecordFormat.mFramesPerPacket = 1;
+ }
+ }
+ #endif
+
 */
 
 //
@@ -523,36 +554,6 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
   AbortOnError(error, @"missed SampleRate");
   
-#if 0
-  - (void) updateAudioFormat (UInt32 inFormatID) {
-    
-
-  void AQRecorder::SetupAudioFormat(UInt32 inFormatID)
-  {
-    memset(&mRecordFormat, 0, sizeof(mRecordFormat));
-    
-    UInt32 size = sizeof(mRecordFormat.mSampleRate);
-    XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareSampleRate,
-                                          &size,
-                                          &mRecordFormat.mSampleRate), "couldn't get hardware sample rate");
-    
-    size = sizeof(mRecordFormat.mChannelsPerFrame);
-    XThrowIfError(AudioSessionGetProperty(	kAudioSessionProperty_CurrentHardwareInputNumberChannels,
-                                          &size,
-                                          &mRecordFormat.mChannelsPerFrame), "couldn't get input channel count");
-    
-    mRecordFormat.mFormatID = inFormatID;
-    if (inFormatID == kAudioFormatLinearPCM)
-    {
-      // if we want pcm, default to signed 16-bit little-endian
-      mRecordFormat.mFormatFlags = kLinearPCMFormatFlagIsSignedInteger | kLinearPCMFormatFlagIsPacked;
-      mRecordFormat.mBitsPerChannel = 16;
-      mRecordFormat.mBytesPerPacket = mRecordFormat.mBytesPerFrame = (mRecordFormat.mBitsPerChannel / 8) * mRecordFormat.mChannelsPerFrame;
-      mRecordFormat.mFramesPerPacket = 1;
-    }
-  }
-#endif
-
   // add interruption handler
   [[NSNotificationCenter defaultCenter] addObserver: self
                                            selector: @selector (handleInterruption:)
@@ -625,11 +626,11 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
       [[AVAudioFormat alloc] initStandardFormatWithSampleRate: AUDIO_HW_SAMPLE_RATE
                                                      channels: 2];
     
-    // This is going to be stereo; if it can be.
-    self.format = (1 == AUDIO_NODE_CHANNELS ? monoFormat : stereoFormat);
+    // Save, for file use
+    self.format = stereoFormat;
     
     // To mix stereo we need an EnvironmentNode (environment because it models
-    // the position of a listener.
+    // the position of a listener - thus left or right of the source.
     self.environmentNode = [[AVAudioEnvironmentNode alloc] init];
     
     // Is this the default?
@@ -639,7 +640,6 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     self.environmentNode.pan    = 0.0;
 
     [self.engine attachNode: self.environmentNode];
-    
     // Apparently the mainMixerNode is connected to the outputNode by default
     // but only if the inputNode is connected to the mainMixerNode.
     
@@ -655,25 +655,29 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     // The mainMixer node is tapped to record audio to file.
     [self.engine connect: self.environmentNode
                       to: self.engine.mainMixerNode
-                  format: self.format];
+                  format: stereoFormat];
 
-    // The mainMixer got to the output
-    [self.engine connect: self.engine.mainMixerNode // impedenceNode
+    // The mainMixer goes to the output
+    [self.engine connect: self.engine.mainMixerNode
                       to: self.engine.outputNode
-                  format: self.format];
+                  format: stereoFormat];
     
 
     // Don't overdrive the input; using 1.0 seems to.
     self.engine.inputNode.volume = 0.8;
 
-#if 0
+#if USE_INTERLEAVED_CONVERT
+    AVAudioFormat *interleavedFormat =
+      [[AVAudioFormat alloc] initWithCommonFormat: AVAudioPCMFormatFloat32
+                                       sampleRate: AUDIO_HW_SAMPLE_RATE
+                                         channels: AUDIO_FILE_CHANNELS
+                                      interleaved: YES];
+    
     AVAudioPCMBuffer *interleavedBuffer =
-      [[AVAudioPCMBuffer alloc] initWithPCMFormat: [[AVAudioFormat alloc] initWithCommonFormat: AVAudioPCMFormatFloat32
-                                                                                    sampleRate: AUDIO_HW_SAMPLE_RATE
-                                                                                      channels: AUDIO_FILE_CHANNELS
-                                                                                   interleaved: YES]
+      [[AVAudioPCMBuffer alloc] initWithPCMFormat: interleavedFormat
                                     frameCapacity: AUDIO_HW_SAMPLE_RATE];
 #endif
+    
     // Today, we are getting ~16384 frames per block callback. (4 * 4096)
     [self.engine.mainMixerNode
      installTapOnBus: 0
@@ -710,17 +714,43 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
        // and, as part of the write, be converted to the file's format...
        //
        // ... except in virtually every case I've tried.
-
-#if 0
+       //
        // And that means we convert from buffer to interleavedBuffer.
+
+#if USE_INTERLEAVED_CONVERT
+       // @property(nonatomic, readonly) float *const *floatChannelData
+       // Discussion
+       // The floatChannelData property returns pointers to the buffer’s audio
+       // samples, if the buffer’s format is 32-bit float. It returns nil if it
+       // is another format.
+       //
+       // The returned pointer is to format.channelCount pointers to float. Each
+       // of these pointers is to frameLength valid samples, which are spaced by
+       // stride samples.
+       //
+       // If the format is not interleaved, as with the standard deinterleaved
+       // float format, then the pointers will be to separate chunks of memory
+       // and the stride property value is 1.
+       //
+       // If the format is interleaved, then the pointers will refer to the same
+       // buffer of interleaved samples, each offset by 1 frame, and the stride
+       // property value is the number of interleaved channels.
        interleavedBuffer.frameLength = buffer.frameLength;
-       for (AVAudioFrameCount frame = 0; frame < buffer.frameLength; frame++)
-         for (int channel = 0; channel < AUDIO_FILE_CHANNELS; channel++) {
-           
+       
+       for (int channel = 0; channel < AUDIO_FILE_CHANNELS; channel++) {
+         float *srcSamples = buffer.floatChannelData[channel];
+         float *tgtSamples = interleavedBuffer.floatChannelData[channel];
+         
+         for (AVAudioFrameCount frame = 0; frame < buffer.frameLength; frame++)
+           tgtSamples[interleavedBuffer.stride * frame] = srcSamples[buffer.stride * frame];
          }
-#endif
+       
+       err = ExtAudioFileWrite (self.file, interleavedBuffer.frameLength, interleavedBuffer.audioBufferList);
+       AbortOnStatus(err, @"File ExtAudioFileWrite");
+#else
        err = ExtAudioFileWrite (self.file, buffer.frameLength, buffer.audioBufferList);
        AbortOnStatus(err, @"File ExtAudioFileWrite");
+#endif
        
        // Check if 'now' is beyond the pre-computed fileExpiration.  If so, or
        // if we don't have a fileExpiration, announce the file.
@@ -731,7 +761,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
        
        // Keep the meter up-to-date
        [self updateMeterOfRecordedLevel: buffer
-                                 format: self.format];
+                                 format: stereoFormat];
 
        // Do last, so as not to upset current handling.  This determines the
        // frequency at which this tap is called; which we use to help with
