@@ -354,6 +354,8 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   UInt32 size;
   AudioConverterRef converter;
   
+  char cookie [44100];
+  
   // Get the converter for this file.  The converter is taking the LPCM input
   // and producing AAC (or whatever, as configured) output.  We'll get the
   // magic cookie from the converter.
@@ -365,12 +367,13 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   // Grab the cookie size.  Note: if we had a maximum size for the cookie we
   // could grab the cookie right here.  As it is, we get the size and allocate
   // some memory for the cookie.
-  err = AudioConverterGetProperty (converter, kAudioConverterCompressionMagicCookie, &size, NULL);
-  AbortOnStatus (err, @"AudioConverterGetProperty converter, kAudioConverterCompressionMagicCookie");
+  size = sizeof(cookie);
+  //  err = AudioConverterGetProperty (converter, kAudioConverterCompressionMagicCookie, &size, NULL);
+  //  AbortOnStatus (err, @"AudioConverterGetProperty converter, kAudioConverterCompressionMagicCookie");
   
   // Allocate memory for the cookie, if there is one
-  if (0 != size) {
-    char cookie [size]; //
+  //  if (0 != size) {
+  //    char cookie [size]; //
 
     // Once again, with cookie memory this time
     err = AudioConverterGetProperty (converter, kAudioConverterCompressionMagicCookie, &size, cookie);
@@ -380,7 +383,8 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     // at a lower level interface.
 
     AudioFileID fileID;
-    UInt32 size = sizeof(fileID);
+  
+    size = sizeof(fileID);
 
     err = ExtAudioFileGetProperty(self.file, kExtAudioFileProperty_AudioFile, &size, &fileID);
     AbortOnStatus (err, @"ExtAudioFileGetProperty outFile, kExtAudioFileProperty_AudioFile");
@@ -388,7 +392,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     // Now, write the cookie
     err = AudioFileSetProperty(fileID, kAudioFilePropertyMagicCookieData, size, cookie);
     AbortOnStatus(err, @"AudioFileSetProperty fileID kAudioFilePropertyMagicCookieData");
-  }
+  //  }
 }
 
 ///
@@ -397,7 +401,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
 #pragma mark - Audio File Configuration and Announcement
 
 - (void) configureFile {
-  OSStatus err;
+  OSStatus err = noErr;
   
   NSAssert (nil == self.file, @"Called configureFile w a file?!");
 
@@ -425,28 +429,22 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   description.mSampleRate = AUDIO_HW_SAMPLE_RATE;
   description.mFormatID   = AUDIO_FILE_FORMAT;
   description.mChannelsPerFrame = AUDIO_FILE_CHANNELS;
-  description.mBitsPerChannel   = 16;
-  description.mFormatFlags = (kAudioFormatFlagIsNonInterleaved |
-                              kAudioFormatFlagIsPacked |
-                              kAudioFormatFlagIsFloat);
+  description.mFramesPerPacket  = 1024;
+  //  description.mBitsPerChannel   = 16;
+  //  description.mFormatFlags = (kAudioFormatFlagIsNonInterleaved |
+  //                              kAudioFormatFlagIsPacked |
+  //                              kAudioFormatFlagIsFloat);
   
-  //description.mFramesPerPacket = 1024;
-  
-  // Let everything else 'ride'... could set mFormatFlags at least.
-  
-  // In one, Out another?
-  AVAudioFormat *fileFormat =
-    [[AVAudioFormat alloc] initWithStreamDescription: &description];
-
   // Actually create the ExtAudioFile
   err = ExtAudioFileCreateWithURL ((__bridge CFURLRef)(self.fileURL),
                                    AUDIO_FILE_TYPE,
-                                   fileFormat.streamDescription,
+                                   &description,
                                    NULL,
                                    kAudioFileFlags_EraseFile,
                                    &_file);
   AbortOnStatus(err, @"ExtAudioFileCreateWithURL");
 
+#if 0
   // At this point, if we needed to, we can prove that self.file is valid.
   // We'll aimlessly read back-in the format; during debugging it can be
   // used to confirm the setup.
@@ -456,6 +454,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
     err = ExtAudioFileGetProperty(self.file, kExtAudioFileProperty_FileDataFormat, &size, &format);
     AbortOnStatus (err, @"ExtAudioFileGetProperty outFile, kExtAudioFileProperty_FileDataFormat");
   }
+#endif
   
   // Tell the ExtAudioFile what the client format is.  The audio file writes
   // occur as a tap on the mainMixerNode - so we'll grab that format.  We expect
@@ -470,15 +469,19 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   //   AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT
 #if AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT
   AVAudioFormat *clientFormat = [self.engine.mainMixerNode outputFormatForBus: 0];
+  AudioStreamBasicDescription clientDescription = *clientFormat.streamDescription;
   
   err = ExtAudioFileSetProperty(self.file, kExtAudioFileProperty_ClientDataFormat,
-                                sizeof (clientFormat.streamDescription),
-                                clientFormat.streamDescription);
+                                sizeof (clientDescription),
+                                &clientDescription);
   AbortOnStatus(err, @"ExtAudioFileSetProperty self.file kExtAudioFileProperty_ClientDataFormat");
 #endif
 
   // This new file will expire in self.recordingInterval seconds from now.
   self.fileExpiration = [[NSDate date] dateByAddingTimeInterval: 0.95 * self.recordingInterval];
+  
+  //  [self writeMagicCookie];
+
 }
 
 - (void) configureFileIfNeeded { if (nil == self.file) [self configureFile]; }
@@ -488,13 +491,15 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
 
     OSStatus err = noErr;
     // AudioConverterRef ... writeCookie
+    
+    //    [self writeMagicCookie];
 
     // Close out the AudioFile; presumably closing fileURL
     err = ExtAudioFileDispose(self.file);
     AbortOnStatus(err, @"Missed Dispose"); 
 
     // Announce
-    NSLog (@"Wrote Audio File: (%10ui): %@",
+    NSLog (@"Wrote Audio File: (%10x): %@",
            0xDEADBEEF,
            self.fileURL.lastPathComponent);
 
@@ -690,7 +695,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
      // of the mainMixerNode is already determined.
      //
      // Don't for one minute think of putting 'interleaved: YES' here...
-     format: nil
+     format: [self.engine.mainMixerNode outputFormatForBus: 0]
      
      // This 'handler' needs to allocate and initialze an AVAudioFile and to
      // write buffer data to that file.  If this handler is too slow, we
@@ -748,7 +753,7 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
        err = ExtAudioFileWrite (self.file, interleavedBuffer.frameLength, interleavedBuffer.audioBufferList);
        AbortOnStatus(err, @"File ExtAudioFileWrite");
 #else
-       err = ExtAudioFileWrite (self.file, buffer.frameLength, buffer.audioBufferList);
+       err = ExtAudioFileWriteAsync (self.file, buffer.frameLength, buffer.audioBufferList);
        AbortOnStatus(err, @"File ExtAudioFileWrite");
 #endif
        

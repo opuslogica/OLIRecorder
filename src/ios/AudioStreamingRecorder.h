@@ -57,7 +57,7 @@
 
 // Do we tell the ExtAudioFile to provide a clientFormat hint?  If we do,
 // we fail.  Go figure.
-#define AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT 0
+#define AUDIO_FILE_ANNOUNCE_CLIENT_FORMAT 1
 
 #define USE_INTERLEAVED_CONVERT 0 // 2 == AUDIO_FILE_CHANNELS
 //
