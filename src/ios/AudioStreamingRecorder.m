@@ -469,8 +469,12 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
   [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
   AbortOnError(error, @"missed SampleRate");
   
+  // Must be one... probably the audio input, selected for us, has but one
   [self.session setPreferredInputNumberOfChannels: (NSInteger) 1 error: &error];
   AbortOnError(error, @"setPreferredInputNumberOfChannels");
+  
+  [self.session setPreferredOutputNumberOfChannels: (NSInteger) 1 error: &error];
+  AbortOnError(error, @"setPreferredOutputNumberOfChannels");
   
   // add interruption handler
   [[NSNotificationCenter defaultCenter] addObserver: self
@@ -547,6 +551,14 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     self.filePacketLimit = ((AUDIO_FILE_ANNOUNCE_PERIOD * desc.mSampleRate) /
                             (desc.mFramesPerPacket != 0 ? desc.mFramesPerPacket : 1));
 
+    // Enable metering.
+    {
+      UInt32 enableMetering = AUDIO_METER_LEVELS;
+      status = AudioQueueSetProperty(self.queue, kAudioQueueProperty_EnableLevelMetering,
+                                     &enableMetering, sizeof (enableMetering));
+      AbortOnStatus(status, @"kAudioQueueProperty_EnableLevelMetering");
+    }
+    
     // Compute the buffer size in bytes.  For LPCM formats, think of as frame *
     // bytesPerFrame; for AAC (compressed) formats, think of as packets *
     // (max)bytesPerPacket.
@@ -616,6 +628,7 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
                       desc: (const AudioStreamPacketDescription *) desc {
   
   OSStatus status = noErr;
+  UInt32 size;
   
   if (count > 0) {
 
@@ -629,6 +642,31 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
 
     // count is updated; advance the filePacket
     self.filePacket += count;
+
+#if AUDIO_METER_LEVELS == YES
+    {
+      AudioQueueLevelMeterState meters[2] = { 0 };
+      size = sizeof (meters);
+
+      status = AudioQueueGetProperty (self.queue,
+                                      (AUDIO_METER_LEVELS_AS_DB == YES
+                                       ? kAudioQueueProperty_CurrentLevelMeterDB
+                                       : kAudioQueueProperty_CurrentLevelMeter),
+                                      &meters, &size);
+      AbortOnStatus(status, @"kAudioQueueProperty_CurrentLevelMeterDB");
+      self.recordedLevelLeft  = meters[0];
+      self.recordedLevelRight = meters[1];
+      
+      if (self.meterCallback) {
+        MeterCallback callback = self.meterCallback;
+        dispatch_async (self.callbackQueue, ^{
+          callback (self.recordedLevelLeft, self.recordedLevelRight);
+        });
+      }
+      
+      //NSLog (@".");
+    }
+#endif
   }
   
   if (self.queueIsRunning) {

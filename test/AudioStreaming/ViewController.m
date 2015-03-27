@@ -48,12 +48,11 @@
   self.recorder.meterCallback = ^(AudioQueueLevelMeterState leftMeter,
                                   AudioQueueLevelMeterState rightMeter) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      vc.levelLeft.progress  = 50 * leftMeter.mAveragePower;
-      vc.levelRight.progress = 50 * rightMeter.mAveragePower;
-      vc.levelLeftText.text = [NSString stringWithFormat: @"%f",
-                                 50 * leftMeter.mAveragePower];
-      vc.levelRightText.text = [NSString stringWithFormat: @"%f",
-                                 50 * rightMeter.mAveragePower];
+#define METER_SCALE_FACTOR  1
+      vc.levelLeft.progress  = METER_SCALE_FACTOR * leftMeter.mAveragePower;
+      vc.levelRight.progress = METER_SCALE_FACTOR * rightMeter.mAveragePower;
+      vc.levelLeftText.text  = [NSString stringWithFormat: @"%f", METER_SCALE_FACTOR * leftMeter.mAveragePower];
+      vc.levelRightText.text = [NSString stringWithFormat: @"%f", METER_SCALE_FACTOR * rightMeter.mAveragePower];
       //NSLog (@"Left: %.2g", leftMeter.mAveragePower);
     });
   };

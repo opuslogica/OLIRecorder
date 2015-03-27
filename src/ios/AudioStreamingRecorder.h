@@ -11,11 +11,19 @@
 #define AUDIO_HW_SAMPLE_RATE      44100.0
 
 // The duration of audio buffers.  We expect to be awakened, by the audio queue,
-// at this rate a) to write data to file and b) to update meter levels.
-#define AUDIO_BUFFER_DURATION     0.2
+// at this rate a) to write data to file and b) to update meter levels.  The
+// rate is only approximate as there is buffer/frame/packet rounding going on.
+// And, varies by compression.  0.25 ends up at about 0.20 seconds.
+#define AUDIO_BUFFER_DURATION     0.25
 
 // The (approximate) file announcement period.
 #define AUDIO_FILE_ANNOUNCE_PERIOD  10.0  // seconds
+
+// Perform metering.
+#define AUDIO_METER_LEVELS YES  // 'meter' is a verb
+
+// If metering, us DBs (-50...0) otherwise non-DBs (0...100)
+#define AUDIO_METER_LEVELS_AS_DB  NO
 
 // (IGNORED) The number of channels written to file.
 #define AUDIO_FILE_CHANNELS 2
