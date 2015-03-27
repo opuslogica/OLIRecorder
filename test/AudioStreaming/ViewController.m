@@ -77,7 +77,8 @@
 //
 //
 - (IBAction) toggleRecord: (UIButton *) sender {
-  self.recorder.inputGain = self.recordVolumnSlider.value;
+  NSLog (@"Won't set input gain");
+  //self.recorder.inputGain = self.recordVolumnSlider.value;
 
   if (self.recorder.isRecording)
     [self.recorder pause];

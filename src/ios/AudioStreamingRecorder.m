@@ -62,15 +62,10 @@
 // AAC, 10 seconds ~ 150k bytes
 // 44k * 10 * 2 * 2 = 1.6M == 150k
 
-// The following name is poor.
-//
-// This duration is short; the longest is .93 (translated, somehow, from
-// '4096' somethings/fames/packets/somethings).  Either way it doesn't appear
-// to relate to an 'Audio Queue Buffer Duration'...
-#define AUDIO_BUFFER_DURATION     0.005
 
-// Desired.
-#define AUDIO_HW_SAMPLE_RATE      44100.0
+// The number of audio buffers.  This number sort-a, kind-a depends on our file
+// processing speed.  Minimum is two - one getting filled, one being written.
+#define AUDIO_BUFFER_COUNT        5
 
 
 // AAC, PCM, IMA4, ULAW, ILBC
@@ -92,10 +87,12 @@
 @property (nonatomic, readwrite) Boolean isPermitted;
 @property (nonatomic, readwrite) Boolean isInterrupted;
 
-@property (nonatomic) AudioQueueRef queue;
-@property (nonatomic) AVAudioFormat *queueFormat;
-@property (nonatomic) NSDictionary  *queueSettings;
-@property (nonatomic) Boolean        queueIsRunning;
+@property (nonatomic) AudioQueueRef   queue;
+@property (nonatomic) AVAudioFormat  *queueFormat;
+@property (nonatomic) NSDictionary   *queueSettings;
+@property (nonatomic) Boolean         queueIsRunning;
+@property (nonatomic) AudioQueueBufferRef *queueBuffers;
+@property (nonatomic, readonly) UInt32     queueBufferSize;
 
 // The current file into which audio is being accumulated.
 @property (nonatomic) AudioFileID    file;
@@ -182,6 +179,7 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
 // AudioStreamingRecorder
 //
 @implementation AudioStreamingRecorder
+@synthesize queueBufferSize = _queueBufferSize;
 @dynamic isRecording;
 @dynamic inputGain;
 @dynamic outputGain;
@@ -283,15 +281,21 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
 
     self.session = nil;
     
-    self.enableOutput = NO;
+    // Queue
     
-    self.file    = nil;
+    self.queueBuffers = calloc (sizeof (AudioQueueBufferRef), AUDIO_BUFFER_COUNT);
+    
+    // File
+    self.file = nil;
     
     self.fileIdentifier = [NSDate date];
     self.fileLocation   = [AudioStreamingRecorder documentsDirectory];
 
     [self fileUpdateSessionCount: YES];
     [self fileUpdateBlockCount: YES];
+
+    //
+    self.enableOutput = NO;
     
     self.callbackQueue =
       dispatch_get_global_queue (AUDIO_DISPATCH_QUEUE_PRIORITY_DEFAULT,
@@ -335,11 +339,12 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
 #pragma mark - Audio File Configuration and Announcement
 
 - (void) cookieToFile {
-  UInt32 size;
+  UInt32 size = 0;
   OSStatus status = noErr;
   
   // Determine the size of the cookie
-  status = AudioQueueGetPropertySize (self.queue, kAudioQueueProperty_MagicCookie,
+  status = AudioQueueGetPropertySize (self.queue,
+                                      kAudioQueueProperty_MagicCookie,
                                       &size);
   
   // It may be the case that the AudioQueue wants nothing to do with cookies.
@@ -452,11 +457,20 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
   [self.session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
   AbortOnError(error, @"missed audio category");
   
-  [self.session setPreferredIOBufferDuration: AUDIO_BUFFER_DURATION error: &error];
-  AbortOnError(error, @"missed IOBufferDuration");
+  [self.session setMode: AVAudioSessionModeDefault error: &error];
+  AbortOnError(error, @"missed audio mode");
+  
+  [self.session setActive:YES error: &error];
+  AbortOnError(error, @"missed active");
+  
+  //  [self.session setPreferredIOBufferDuration: AUDIO_BUFFER_DURATION error: &error];
+  //  AbortOnError(error, @"missed IOBufferDuration");
   
   [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
   AbortOnError(error, @"missed SampleRate");
+  
+  [self.session setPreferredInputNumberOfChannels: (NSInteger) 1 error: &error];
+  AbortOnError(error, @"setPreferredInputNumberOfChannels");
   
   // add interruption handler
   [[NSNotificationCenter defaultCenter] addObserver: self
@@ -487,41 +501,39 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     // Configure the Audio Queue
     //
 
-    // The Audio Queue will use MPEG4AAC,
-    self.queueSettings = @{ AVFormatIDKey                 : @(kAudioFormatMPEG4AAC),
-                            AVSampleRateKey               : @(AUDIO_HW_SAMPLE_RATE),
-                            AVNumberOfChannelsKey         : @(AUDIO_FILE_CHANNELS),
-                            AVEncoderBitRatePerChannelKey : @(16),
-                            //AVEncoderAudioQualityKey      : @(AVAudioQualityMedium)
-                            };
+    // The Audio Queue Format, via a Stream Description, will use MPEG4AAC,
+    AudioStreamBasicDescription desc = { 0 };
 
-    // The AVAudioFormat is based on the queueSettings and provides a
-    // StreamBasicDescription for the queue
-    self.queueFormat = [[AVAudioFormat alloc] initWithSettings: self.fileSettings];
+    size = sizeof (desc.mSampleRate);
+    AbortOnStatus(AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareSampleRate, &size, &desc.mSampleRate),
+                  @"kAudioSessionProperty_CurrentHardwareSampleRate");
+
+    size = sizeof (desc.mChannelsPerFrame);
+    AbortOnStatus(AudioSessionGetProperty(kAudioSessionProperty_CurrentHardwareInputNumberChannels, &size, &desc.mChannelsPerFrame),
+                  @"kAudioSessionProperty_CurrentHardwareInputNumberChannels");
+    
+    desc.mFormatID = kAudioFormatMPEG4AAC;
 
     // The AudioQueue is defined from the description and provided with
     // a callback handler.
-    status = AudioQueueNewInput(self.queueFormat.streamDescription,
-                                audio_queue_handler,
-                                (__bridge void *)(self),
-                                NULL, 0,
-                                0, &_queue);
+    status = AudioQueueNewInput (&desc,
+                                 audio_queue_handler,
+                                 (__bridge void *)(self),
+                                 NULL, NULL,
+                                 0, &_queue);
     
     // The AudioQueue, just created, might have augmented the streamDescription
-    // so we'll get the definitive one.
-    {
-      AudioStreamBasicDescription description = { 0 };
-      size = sizeof (description);
-      
-      status = AudioQueueGetProperty(self.queue,
-                                     kAudioQueueProperty_StreamDescription,
-                                     &description,
-                                     &size);
-      
-      self.queueFormat =
-        [[AVAudioFormat alloc] initWithStreamDescription: &description];
-    }
+    // so we'll get the definitive one from the queue itself.
+    size = sizeof (desc);
+    memset(&desc, 0, size);
     
+    status = AudioQueueGetProperty(self.queue,
+                                   kAudioQueueProperty_StreamDescription,
+                                   &desc,
+                                   &size);
+      
+    self.queueFormat = [[AVAudioFormat alloc] initWithStreamDescription: &desc];
+
     // The fileFormat will be identical to the queueFormat.  We are recording
     // compressed MPEG4AAC via the queue; lucky us that the queue does the
     // conversion from whatever native format (LPCM) is used on the microphone.
@@ -530,13 +542,72 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     // Actually create an audio file.
     [self configureFileIfNeeded];
 
-    // Allocate and Enqueue Buffers
+    // We'll announce a file when we have written the number of packets
+    // corresponding to about AUDIO_FILE_ANNOUNCE_PERIOD seconds of audio.
+    self.filePacketLimit = ((AUDIO_FILE_ANNOUNCE_PERIOD * desc.mSampleRate) /
+                            (desc.mFramesPerPacket != 0 ? desc.mFramesPerPacket : 1));
 
+    // Compute the buffer size in bytes.  For LPCM formats, think of as frame *
+    // bytesPerFrame; for AAC (compressed) formats, think of as packets *
+    // (max)bytesPerPacket.
+    size = self.queueBufferSize;
     
+    // Allocate and Enqueue Buffers
+    for (unsigned int dex = 0; dex < AUDIO_BUFFER_COUNT; dex++) {
+      status = AudioQueueAllocateBuffer(self.queue, size, &self.queueBuffers[dex]);
+      AbortOnStatus(status, @"AudioQueueAllocateBuffer failed");
+      
+      status = AudioQueueEnqueueBuffer(self.queue, self.queueBuffers[dex], 0, NULL);
+      AbortOnStatus(status, @"AudioQueueEnqueueBuffer failed");
+    }
+
     self.isPermitted = granted;
- 
     self.enableOutput = NO;
   }];
+}
+
+- (UInt32) queueBufferSize {
+  
+  if (0 == _queueBufferSize) {
+    const AudioStreamBasicDescription *desc = self.queueFormat.streamDescription;
+    
+    // Each sample is a frame.
+    UInt32 frames = (UInt32) ceil(AUDIO_BUFFER_DURATION * desc->mSampleRate);
+    
+    // If the queue has a fixed bytesPerFrame, we are done.
+    _queueBufferSize = frames * desc->mBytesPerFrame;
+    
+    // But, if it doesn't, we need a maximum - from packet+frame munging.
+    if (0 == _queueBufferSize) {
+      
+      // We'll get queueBufferSize as packets * bytesPerPacket.
+      UInt32 bytesPerPacket = desc->mBytesPerPacket;
+      
+      // But, if the bytesPerPacket is not fixed, we'll need a maximum.
+      if (0 == bytesPerPacket) {
+        UInt32   size = sizeof(bytesPerPacket);
+        OSStatus status;
+        
+        bytesPerPacket = 0;
+        status = AudioQueueGetProperty (self.queue,
+                                        kAudioQueueProperty_MaximumOutputPacketSize,
+                                        &bytesPerPacket, &size);
+        AbortOnStatus(status, @"AudioQueueGetProperty kAudioQueueProperty_MaximumOutputPacketSize failed");
+        //if (0 == bytesPerPacket) bytesPerPacket = 128;
+      }
+      
+      // Frames are jumbled into packets - think compressed-ish.
+      
+      // We'll get the number of packets based on the number framesPerPacket
+      UInt32 packets = frames;  // assume 1 framePerPacket.
+      
+      if (desc->mFramesPerPacket > 0)
+        packets /= desc->mFramesPerPacket;
+      
+      _queueBufferSize = MAX(packets, 1) * bytesPerPacket;
+    }
+  }
+  return _queueBufferSize;
 }
 
 - (void) handleQueueBuffer: (AudioQueueBufferRef) buffer
@@ -585,8 +656,12 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     // No longer running; race condition right here.
     self.queueIsRunning = false;
 
+    OSStatus status = noErr;
+
     // Stop the queue immediately.
-    AudioQueueStop(self.queue, true);
+    status = AudioQueuePause(self.queue);
+    if (noErr != status)
+      NSLog (@"AudioQueuePause failed: %d", status);
     
     // Announce the file
     [self announceFile];
@@ -606,8 +681,13 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     // Start running; race condition right here.
     self.queueIsRunning = true;
     
+    OSStatus status = noErr;
+
     [self configureFileIfNeeded];
-    AudioQueueStart(self.queue, NULL);
+
+    status = AudioQueueStart(self.queue, NULL);
+    if (noErr != status)
+      NSLog (@"AudioQueueStart failed: %d", status);
   }
 }
 
@@ -624,7 +704,7 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
   [self pause];
   
   // Stop and Reset the AVAudio Engine
-  void;
+  // void;
   //  [self.engine stop];
   //  [self.engine reset];
 }

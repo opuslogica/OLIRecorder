@@ -7,20 +7,30 @@
 //
 #import <AVFoundation/AVFoundation.h>
 
-// The number of channels written to file
+// Desired.
+#define AUDIO_HW_SAMPLE_RATE      44100.0
+
+// The duration of audio buffers.  We expect to be awakened, by the audio queue,
+// at this rate a) to write data to file and b) to update meter levels.
+#define AUDIO_BUFFER_DURATION     0.2
+
+// The (approximate) file announcement period.
+#define AUDIO_FILE_ANNOUNCE_PERIOD  10.0  // seconds
+
+// (IGNORED) The number of channels written to file.
 #define AUDIO_FILE_CHANNELS 2
 
-// The number of channels for audio nodes, in the audio engine.
+// (IGNORED) The number of channels for audio nodes, in the audio engine.
 #define AUDIO_NODE_CHANNELS 2
 
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)
-#define AUDIO_FILE_EXTENSION  @"m4a"
+#define AUDIO_FILE_EXTENSION  @"aac"
+// #define AUDIO_FILE_EXTENSION  @"m4a"
 // #define AUDIO_FILE_EXTENSION  @"adts"
-// #define AUDIO_FILE_EXTENSION  @"aac"
 #endif
 
-//
+// (IGNORED)
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
 
 #if ! defined (AUDIO_DISPATCH_QUEUE_PRIORITY_DEFAULT)
