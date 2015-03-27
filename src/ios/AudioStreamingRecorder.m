@@ -588,13 +588,11 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
     // Stop the queue immediately.
     AudioQueueStop(self.queue, true);
     
-    // Write an encoder cookie to file.
-    void;
-    
-    // Dispose of the queue?  NO.
-    
     // Announce the file
     [self announceFile];
+    
+    // Dispose of the queue?  NO.
+
   }
 }
 
@@ -702,6 +700,9 @@ block: ^(AVAudioPCMBuffer *buffer, AVAudioTime *when) {
 }
 #endif
 
+- (Boolean) isRecording {
+  return self.queueIsRunning;
+}
 
 ///
 /// Audio Session Notifications

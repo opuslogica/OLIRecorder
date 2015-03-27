@@ -48,7 +48,7 @@
 // YES if interrupted (by a phone call for example); NO otherwise.
 @property (nonatomic, readonly) Boolean isInterrupted;
 
-// Time interval between audio files
+// Time interval between audio files, approximate.
 @property (nonatomic, readonly) NSTimeInterval recordingInterval;
 
 // Gain for the microphone.  Set/Get the gain in {0.0, 1.0}.  If 'self' has not
@@ -79,7 +79,7 @@
 - (void) pause;
 
 // If a 'recording session' is in progress, end it.  Using 'record' will start
-// another session.  NOTE: Our 'recording session' is distinch from an
+// another session.  NOTE: Our 'recording session' is distinct from an
 // AVAudioSession.
 - (void) reset;
 
