@@ -7,20 +7,30 @@
 //
 #import <AVFoundation/AVFoundation.h>
 
-// The number of channels written to file
+// Desired.
+#define AUDIO_HW_SAMPLE_RATE      44100.0
+
+// The duration of audio buffers.  We expect to be awakened, by the audio queue,
+// at this rate a) to write data to file and b) to update meter levels.
+#define AUDIO_BUFFER_DURATION     0.2
+
+// The (approximate) file announcement period.
+#define AUDIO_FILE_ANNOUNCE_PERIOD  10.0  // seconds
+
+// (IGNORED) The number of channels written to file.
 #define AUDIO_FILE_CHANNELS 2
 
-// The number of channels for audio nodes, in the audio engine.
+// (IGNORED) The number of channels for audio nodes, in the audio engine.
 #define AUDIO_NODE_CHANNELS 2
 
 // Use m4a, adts or aac
 #if ! defined (AUDIO_FILE_EXTENSION)
-#define AUDIO_FILE_EXTENSION  @"m4a"
+#define AUDIO_FILE_EXTENSION  @"aac"
+// #define AUDIO_FILE_EXTENSION  @"m4a"
 // #define AUDIO_FILE_EXTENSION  @"adts"
-// #define AUDIO_FILE_EXTENSION  @"aac"
 #endif
 
-//
+// (IGNORED)
 #define AUDIO_MINIMUM_RECORDING_INTERVAL 2.5 // seconds
 
 #if ! defined (AUDIO_DISPATCH_QUEUE_PRIORITY_DEFAULT)
@@ -48,7 +58,7 @@
 // YES if interrupted (by a phone call for example); NO otherwise.
 @property (nonatomic, readonly) Boolean isInterrupted;
 
-// Time interval between audio files
+// Time interval between audio files, approximate.
 @property (nonatomic, readonly) NSTimeInterval recordingInterval;
 
 // Gain for the microphone.  Set/Get the gain in {0.0, 1.0}.  If 'self' has not
@@ -79,7 +89,7 @@
 - (void) pause;
 
 // If a 'recording session' is in progress, end it.  Using 'record' will start
-// another session.  NOTE: Our 'recording session' is distinch from an
+// another session.  NOTE: Our 'recording session' is distinct from an
 // AVAudioSession.
 - (void) reset;
 

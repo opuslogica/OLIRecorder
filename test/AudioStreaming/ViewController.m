@@ -43,15 +43,16 @@
   [self.toggleRecordButton setEnabled: YES];
   // [self toggleMonitor: self.toggleMonitorButton];
   
+  __weak ViewController *vc = self;
+  
   self.recorder.meterCallback = ^(AudioQueueLevelMeterState leftMeter,
                                   AudioQueueLevelMeterState rightMeter) {
     dispatch_async(dispatch_get_main_queue(), ^{
-      self.levelLeft.progress  = 50 * leftMeter.mAveragePower;
-      self.levelRight.progress = 50 * rightMeter.mAveragePower;
-      
-      self.levelLeftText.text = [NSString stringWithFormat: @"%f",
+      vc.levelLeft.progress  = 50 * leftMeter.mAveragePower;
+      vc.levelRight.progress = 50 * rightMeter.mAveragePower;
+      vc.levelLeftText.text = [NSString stringWithFormat: @"%f",
                                  50 * leftMeter.mAveragePower];
-      self.levelRightText.text = [NSString stringWithFormat: @"%f",
+      vc.levelRightText.text = [NSString stringWithFormat: @"%f",
                                  50 * rightMeter.mAveragePower];
       //NSLog (@"Left: %.2g", leftMeter.mAveragePower);
     });
@@ -76,7 +77,8 @@
 //
 //
 - (IBAction) toggleRecord: (UIButton *) sender {
-  self.recorder.inputGain = self.recordVolumnSlider.value;
+  NSLog (@"Won't set input gain");
+  //self.recorder.inputGain = self.recordVolumnSlider.value;
 
   if (self.recorder.isRecording)
     [self.recorder pause];
