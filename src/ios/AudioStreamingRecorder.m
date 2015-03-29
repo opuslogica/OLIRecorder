@@ -553,11 +553,24 @@ void	WriteCookie (AudioConverterRef converter, AudioFileID outfile)
   [self.session setCategory: AVAudioSessionCategoryPlayAndRecord error: &error];
   AbortOnError(error, @"missed audio category");
   
-  [self.session setPreferredIOBufferDuration: AUDIO_BUFFER_DURATION error: &error];
-  AbortOnError(error, @"missed IOBufferDuration");
+  [self.session setMode: AVAudioSessionModeDefault error: &error];
+  AbortOnError(error, @"missed audio mode");
+  
+  [self.session setActive:YES error: &error];
+  AbortOnError(error, @"missed active");
+  
+  //  [self.session setPreferredIOBufferDuration: AUDIO_BUFFER_DURATION error: &error];
+  //  AbortOnError(error, @"missed IOBufferDuration");
   
   [self.session setPreferredSampleRate: AUDIO_HW_SAMPLE_RATE error: &error];
   AbortOnError(error, @"missed SampleRate");
+  
+  // Must be one... probably the audio input, selected for us, has but one
+  [self.session setPreferredInputNumberOfChannels: (NSInteger) 1 error: &error];
+  AbortOnError(error, @"setPreferredInputNumberOfChannels");
+  
+  [self.session setPreferredOutputNumberOfChannels: (NSInteger) 1 error: &error];
+  AbortOnError(error, @"setPreferredOutputNumberOfChannels");
   
   // add interruption handler
   [[NSNotificationCenter defaultCenter] addObserver: self
