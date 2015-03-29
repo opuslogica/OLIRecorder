@@ -22,7 +22,7 @@
 // Perform metering.
 #define AUDIO_METER_LEVELS YES  // 'meter' is a verb
 
-// If metering, us DBs (-50...0) otherwise non-DBs (0...100)
+// If metering, us DBs (-50...0) otherwise non-DBs (0...1)
 #define AUDIO_METER_LEVELS_AS_DB  NO
 
 // (IGNORED) The number of channels written to file.
