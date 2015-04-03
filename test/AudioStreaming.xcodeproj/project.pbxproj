@@ -7,33 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3C0169521A576168000D1543 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169511A576168000D1543 /* main.m */; };
-		3C0169551A576168000D1543 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169541A576168000D1543 /* AppDelegate.m */; };
-		3C0169581A576168000D1543 /* SimplePlayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C0169571A576168000D1543 /* SimplePlayViewController.m */; };
-		3C01695B1A576168000D1543 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C0169591A576168000D1543 /* Main.storyboard */; };
-		3C01695D1A576168000D1543 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695C1A576168000D1543 /* Images.xcassets */; };
-		3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C01695E1A576168000D1543 /* LaunchScreen.xib */; };
-		3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C01696B1A576168000D1543 /* SimplePlayTests.m */; };
-		3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
-		3C1BA8261A9591D3004F42A3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8251A9591D3004F42A3 /* main.m */; };
-		3C1BA8291A9591D3004F42A3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8281A9591D3004F42A3 /* AppDelegate.m */; };
-		3C1BA82C1A9591D3004F42A3 /* ViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA82B1A9591D3004F42A3 /* ViewController.mm */; };
-		3C1BA82F1A9591D3004F42A3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA82D1A9591D3004F42A3 /* Main.storyboard */; };
-		3C1BA8311A9591D3004F42A3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8301A9591D3004F42A3 /* Images.xcassets */; };
-		3C1BA8341A9591D3004F42A3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8321A9591D3004F42A3 /* LaunchScreen.xib */; };
-		3C1BA8401A9591D3004F42A3 /* PhromPhoncertTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA83F1A9591D3004F42A3 /* PhromPhoncertTests.m */; };
-		3C1BA8541A9591EE004F42A3 /* AQPlayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8481A9591EE004F42A3 /* AQPlayer.mm */; };
-		3C1BA8551A9591EE004F42A3 /* AQRecorder.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA84A1A9591EE004F42A3 /* AQRecorder.mm */; };
-		3C1BA8561A9591EE004F42A3 /* CADebugMacros.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA84B1A9591EE004F42A3 /* CADebugMacros.cpp */; };
-		3C1BA8571A9591EE004F42A3 /* CADebugPrintf.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA84D1A9591EE004F42A3 /* CADebugPrintf.cpp */; };
-		3C1BA8581A9591EE004F42A3 /* CAStreamBasicDescription.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8501A9591EE004F42A3 /* CAStreamBasicDescription.cpp */; };
-		3C1BA8591A9591EE004F42A3 /* CAXException.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C1BA8521A9591EE004F42A3 /* CAXException.cpp */; };
-		3C1BA8661A97DE5E004F42A3 /* audio-00.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */; };
-		3C1BA8671A97DE5E004F42A3 /* audio-01.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */; };
-		3C1BA8681A97DE5E004F42A3 /* audio-02.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */; };
-		3C1BA8691A97DE5E004F42A3 /* audio-03.m4a in Resources */ = {isa = PBXBuildFile; fileRef = 3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */; };
-		3C1BA86A1A980FBA004F42A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
-		3C1BA86B1A980FC4004F42A3 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C482C4D1A32447C005B55CE /* AudioToolbox.framework */; };
+		3C1953DE1ACF4BB200A58C02 /* AQLevelMeter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C1953D71ACF4AEB00A58C02 /* AQLevelMeter.mm */; };
+		3C1953DF1ACF4BB200A58C02 /* GLLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1953D91ACF4AEB00A58C02 /* GLLevelMeter.m */; };
+		3C1953E01ACF4BB200A58C02 /* LevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1953DB1ACF4AEB00A58C02 /* LevelMeter.m */; };
+		3C1953E11ACF4BB200A58C02 /* MeterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C1953DD1ACF4AEB00A58C02 /* MeterTable.m */; };
 		3C482C2A1A32365C005B55CE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C291A32365C005B55CE /* main.m */; };
 		3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2C1A32365C005B55CE /* AppDelegate.m */; };
 		3C482C301A32365C005B55CE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C482C2F1A32365C005B55CE /* ViewController.m */; };
@@ -68,20 +45,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3C0169661A576168000D1543 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C482C1C1A32365C005B55CE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C01694C1A576167000D1543;
-			remoteInfo = SimplePlay;
-		};
-		3C1BA83A1A9591D3004F42A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3C482C1C1A32365C005B55CE /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 3C1BA8201A9591D3004F42A3;
-			remoteInfo = PhromPhoncert;
-		};
 		3C482C3E1A32365C005B55CE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 3C482C1C1A32365C005B55CE /* Project object */;
@@ -92,49 +55,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3C01694D1A576167000D1543 /* SimplePlay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SimplePlay.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C0169501A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C0169511A576168000D1543 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3C0169531A576168000D1543 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3C0169541A576168000D1543 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C0169561A576168000D1543 /* SimplePlayViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SimplePlayViewController.h; sourceTree = "<group>"; };
-		3C0169571A576168000D1543 /* SimplePlayViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayViewController.m; sourceTree = "<group>"; };
-		3C01695A1A576168000D1543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3C01695C1A576168000D1543 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3C01695F1A576168000D1543 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3C0169651A576168000D1543 /* SimplePlayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimplePlayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C01696A1A576168000D1543 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C01696B1A576168000D1543 /* SimplePlayTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimplePlayTests.m; sourceTree = "<group>"; };
-		3C1BA8211A9591D3004F42A3 /* PhromPhoncert.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhromPhoncert.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C1BA8241A9591D3004F42A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C1BA8251A9591D3004F42A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		3C1BA8271A9591D3004F42A3 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		3C1BA8281A9591D3004F42A3 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3C1BA82A1A9591D3004F42A3 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3C1BA82B1A9591D3004F42A3 /* ViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ViewController.mm; sourceTree = "<group>"; };
-		3C1BA82E1A9591D3004F42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		3C1BA8301A9591D3004F42A3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		3C1BA8331A9591D3004F42A3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		3C1BA8391A9591D3004F42A3 /* PhromPhoncertTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhromPhoncertTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3C1BA83E1A9591D3004F42A3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3C1BA83F1A9591D3004F42A3 /* PhromPhoncertTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhromPhoncertTests.m; sourceTree = "<group>"; };
-		3C1BA8471A9591EE004F42A3 /* AQPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQPlayer.h; sourceTree = "<group>"; };
-		3C1BA8481A9591EE004F42A3 /* AQPlayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQPlayer.mm; sourceTree = "<group>"; tabWidth = 4; };
-		3C1BA8491A9591EE004F42A3 /* AQRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQRecorder.h; sourceTree = "<group>"; };
-		3C1BA84A1A9591EE004F42A3 /* AQRecorder.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQRecorder.mm; sourceTree = "<group>"; tabWidth = 4; };
-		3C1BA84B1A9591EE004F42A3 /* CADebugMacros.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugMacros.cpp; sourceTree = "<group>"; };
-		3C1BA84C1A9591EE004F42A3 /* CADebugMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugMacros.h; sourceTree = "<group>"; };
-		3C1BA84D1A9591EE004F42A3 /* CADebugPrintf.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CADebugPrintf.cpp; sourceTree = "<group>"; };
-		3C1BA84E1A9591EE004F42A3 /* CADebugPrintf.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CADebugPrintf.h; sourceTree = "<group>"; };
-		3C1BA84F1A9591EE004F42A3 /* CAMath.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAMath.h; sourceTree = "<group>"; };
-		3C1BA8501A9591EE004F42A3 /* CAStreamBasicDescription.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAStreamBasicDescription.cpp; sourceTree = "<group>"; };
-		3C1BA8511A9591EE004F42A3 /* CAStreamBasicDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAStreamBasicDescription.h; sourceTree = "<group>"; };
-		3C1BA8521A9591EE004F42A3 /* CAXException.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CAXException.cpp; sourceTree = "<group>"; };
-		3C1BA8531A9591EE004F42A3 /* CAXException.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAXException.h; sourceTree = "<group>"; };
-		3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-00.m4a"; sourceTree = "<group>"; };
-		3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-01.m4a"; sourceTree = "<group>"; };
-		3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-02.m4a"; sourceTree = "<group>"; };
-		3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "audio-03.m4a"; sourceTree = "<group>"; };
+		3C1953D61ACF4AEB00A58C02 /* AQLevelMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AQLevelMeter.h; path = ../../src/ios/AQLevelMeter.h; sourceTree = "<group>"; };
+		3C1953D71ACF4AEB00A58C02 /* AQLevelMeter.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = AQLevelMeter.mm; path = ../../src/ios/AQLevelMeter.mm; sourceTree = "<group>"; };
+		3C1953D81ACF4AEB00A58C02 /* GLLevelMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = GLLevelMeter.h; path = ../../src/ios/GLLevelMeter.h; sourceTree = "<group>"; };
+		3C1953D91ACF4AEB00A58C02 /* GLLevelMeter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = GLLevelMeter.m; path = ../../src/ios/GLLevelMeter.m; sourceTree = "<group>"; };
+		3C1953DA1ACF4AEB00A58C02 /* LevelMeter.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = LevelMeter.h; path = ../../src/ios/LevelMeter.h; sourceTree = "<group>"; };
+		3C1953DB1ACF4AEB00A58C02 /* LevelMeter.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = LevelMeter.m; path = ../../src/ios/LevelMeter.m; sourceTree = "<group>"; };
+		3C1953DC1ACF4AEB00A58C02 /* MeterTable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MeterTable.h; path = ../../src/ios/MeterTable.h; sourceTree = "<group>"; };
+		3C1953DD1ACF4AEB00A58C02 /* MeterTable.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = MeterTable.m; path = ../../src/ios/MeterTable.m; sourceTree = "<group>"; };
 		3C482C241A32365C005B55CE /* AudioStreaming.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AudioStreaming.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3C482C281A32365C005B55CE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3C482C291A32365C005B55CE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -205,37 +133,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3C01694A1A576167000D1543 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C0169741A5763D0000D1543 /* AVFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C0169621A576168000D1543 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA81E1A9591D3004F42A3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C1BA86B1A980FC4004F42A3 /* AudioToolbox.framework in Frameworks */,
-				3C1BA86A1A980FBA004F42A3 /* AVFoundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA8361A9591D3004F42A3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C482C211A32365C005B55CE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -256,51 +153,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3C01694E1A576168000D1543 /* SimplePlay */ = {
-			isa = PBXGroup;
-			children = (
-				3C0169531A576168000D1543 /* AppDelegate.h */,
-				3C0169541A576168000D1543 /* AppDelegate.m */,
-				3C0169561A576168000D1543 /* SimplePlayViewController.h */,
-				3C0169571A576168000D1543 /* SimplePlayViewController.m */,
-				3C0169591A576168000D1543 /* Main.storyboard */,
-				3C01695C1A576168000D1543 /* Images.xcassets */,
-				3C01695E1A576168000D1543 /* LaunchScreen.xib */,
-				3C01694F1A576168000D1543 /* Supporting Files */,
-			);
-			path = SimplePlay;
-			sourceTree = "<group>";
-		};
-		3C01694F1A576168000D1543 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C1BA8621A97DE5E004F42A3 /* audio-00.m4a */,
-				3C1BA8631A97DE5E004F42A3 /* audio-01.m4a */,
-				3C1BA8641A97DE5E004F42A3 /* audio-02.m4a */,
-				3C1BA8651A97DE5E004F42A3 /* audio-03.m4a */,
-				3C0169501A576168000D1543 /* Info.plist */,
-				3C0169511A576168000D1543 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3C0169681A576168000D1543 /* SimplePlayTests */ = {
-			isa = PBXGroup;
-			children = (
-				3C01696B1A576168000D1543 /* SimplePlayTests.m */,
-				3C0169691A576168000D1543 /* Supporting Files */,
-			);
-			path = SimplePlayTests;
-			sourceTree = "<group>";
-		};
-		3C0169691A576168000D1543 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C01696A1A576168000D1543 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		3C0169771A5E5C89000D1543 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,60 +164,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3C1BA8221A9591D3004F42A3 /* PhromPhoncert */ = {
-			isa = PBXGroup;
-			children = (
-				3C1BA8471A9591EE004F42A3 /* AQPlayer.h */,
-				3C1BA8481A9591EE004F42A3 /* AQPlayer.mm */,
-				3C1BA8491A9591EE004F42A3 /* AQRecorder.h */,
-				3C1BA84A1A9591EE004F42A3 /* AQRecorder.mm */,
-				3C1BA84B1A9591EE004F42A3 /* CADebugMacros.cpp */,
-				3C1BA84C1A9591EE004F42A3 /* CADebugMacros.h */,
-				3C1BA84D1A9591EE004F42A3 /* CADebugPrintf.cpp */,
-				3C1BA84E1A9591EE004F42A3 /* CADebugPrintf.h */,
-				3C1BA84F1A9591EE004F42A3 /* CAMath.h */,
-				3C1BA8501A9591EE004F42A3 /* CAStreamBasicDescription.cpp */,
-				3C1BA8511A9591EE004F42A3 /* CAStreamBasicDescription.h */,
-				3C1BA8521A9591EE004F42A3 /* CAXException.cpp */,
-				3C1BA8531A9591EE004F42A3 /* CAXException.h */,
-				3C1BA8271A9591D3004F42A3 /* AppDelegate.h */,
-				3C1BA8281A9591D3004F42A3 /* AppDelegate.m */,
-				3C1BA82A1A9591D3004F42A3 /* ViewController.h */,
-				3C1BA82B1A9591D3004F42A3 /* ViewController.mm */,
-				3C1BA82D1A9591D3004F42A3 /* Main.storyboard */,
-				3C1BA8301A9591D3004F42A3 /* Images.xcassets */,
-				3C1BA8321A9591D3004F42A3 /* LaunchScreen.xib */,
-				3C1BA8231A9591D3004F42A3 /* Supporting Files */,
-			);
-			path = PhromPhoncert;
-			sourceTree = "<group>";
-		};
-		3C1BA8231A9591D3004F42A3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C1BA8241A9591D3004F42A3 /* Info.plist */,
-				3C1BA8251A9591D3004F42A3 /* main.m */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		3C1BA83C1A9591D3004F42A3 /* PhromPhoncertTests */ = {
-			isa = PBXGroup;
-			children = (
-				3C1BA83F1A9591D3004F42A3 /* PhromPhoncertTests.m */,
-				3C1BA83D1A9591D3004F42A3 /* Supporting Files */,
-			);
-			path = PhromPhoncertTests;
-			sourceTree = "<group>";
-		};
-		3C1BA83D1A9591D3004F42A3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				3C1BA83E1A9591D3004F42A3 /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		3C482C1B1A32365C005B55CE = {
 			isa = PBXGroup;
 			children = (
@@ -373,11 +171,7 @@
 				3CA052011A72FDF20044C363 /* OLIRecorder */,
 				3C482C261A32365C005B55CE /* AudioStreaming */,
 				3C482C401A32365C005B55CE /* AudioStreamingTests */,
-				3C01694E1A576168000D1543 /* SimplePlay */,
-				3C0169681A576168000D1543 /* SimplePlayTests */,
 				3CA051BE1A72FCAE0044C363 /* Cordova */,
-				3C1BA8221A9591D3004F42A3 /* PhromPhoncert */,
-				3C1BA83C1A9591D3004F42A3 /* PhromPhoncertTests */,
 				3C0169771A5E5C89000D1543 /* Frameworks */,
 				3C482C251A32365C005B55CE /* Products */,
 			);
@@ -388,10 +182,6 @@
 			children = (
 				3C482C241A32365C005B55CE /* AudioStreaming.app */,
 				3C482C3D1A32365C005B55CE /* AudioStreamingTests.xctest */,
-				3C01694D1A576167000D1543 /* SimplePlay.app */,
-				3C0169651A576168000D1543 /* SimplePlayTests.xctest */,
-				3C1BA8211A9591D3004F42A3 /* PhromPhoncert.app */,
-				3C1BA8391A9591D3004F42A3 /* PhromPhoncertTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -492,6 +282,14 @@
 		3CA052011A72FDF20044C363 /* OLIRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				3C1953D61ACF4AEB00A58C02 /* AQLevelMeter.h */,
+				3C1953D71ACF4AEB00A58C02 /* AQLevelMeter.mm */,
+				3C1953D81ACF4AEB00A58C02 /* GLLevelMeter.h */,
+				3C1953D91ACF4AEB00A58C02 /* GLLevelMeter.m */,
+				3C1953DA1ACF4AEB00A58C02 /* LevelMeter.h */,
+				3C1953DB1ACF4AEB00A58C02 /* LevelMeter.m */,
+				3C1953DC1ACF4AEB00A58C02 /* MeterTable.h */,
+				3C1953DD1ACF4AEB00A58C02 /* MeterTable.m */,
 				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
 				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
 				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
@@ -504,76 +302,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3C01694C1A576167000D1543 /* SimplePlay */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C0169711A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlay" */;
-			buildPhases = (
-				3C0169491A576167000D1543 /* Sources */,
-				3C01694A1A576167000D1543 /* Frameworks */,
-				3C01694B1A576167000D1543 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SimplePlay;
-			productName = SimplePlay;
-			productReference = 3C01694D1A576167000D1543 /* SimplePlay.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3C0169641A576168000D1543 /* SimplePlayTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C0169721A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlayTests" */;
-			buildPhases = (
-				3C0169611A576168000D1543 /* Sources */,
-				3C0169621A576168000D1543 /* Frameworks */,
-				3C0169631A576168000D1543 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C0169671A576168000D1543 /* PBXTargetDependency */,
-			);
-			name = SimplePlayTests;
-			productName = SimplePlayTests;
-			productReference = 3C0169651A576168000D1543 /* SimplePlayTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		3C1BA8201A9591D3004F42A3 /* PhromPhoncert */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C1BA8451A9591D3004F42A3 /* Build configuration list for PBXNativeTarget "PhromPhoncert" */;
-			buildPhases = (
-				3C1BA81D1A9591D3004F42A3 /* Sources */,
-				3C1BA81E1A9591D3004F42A3 /* Frameworks */,
-				3C1BA81F1A9591D3004F42A3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = PhromPhoncert;
-			productName = PhromPhoncert;
-			productReference = 3C1BA8211A9591D3004F42A3 /* PhromPhoncert.app */;
-			productType = "com.apple.product-type.application";
-		};
-		3C1BA8381A9591D3004F42A3 /* PhromPhoncertTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3C1BA8461A9591D3004F42A3 /* Build configuration list for PBXNativeTarget "PhromPhoncertTests" */;
-			buildPhases = (
-				3C1BA8351A9591D3004F42A3 /* Sources */,
-				3C1BA8361A9591D3004F42A3 /* Frameworks */,
-				3C1BA8371A9591D3004F42A3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3C1BA83B1A9591D3004F42A3 /* PBXTargetDependency */,
-			);
-			name = PhromPhoncertTests;
-			productName = PhromPhoncertTests;
-			productReference = 3C1BA8391A9591D3004F42A3 /* PhromPhoncertTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		3C482C231A32365C005B55CE /* AudioStreaming */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3C482C471A32365C005B55CE /* Build configuration list for PBXNativeTarget "AudioStreaming" */;
@@ -618,20 +346,6 @@
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Opus Logica Inc.";
 				TargetAttributes = {
-					3C01694C1A576167000D1543 = {
-						CreatedOnToolsVersion = 6.1.1;
-					};
-					3C0169641A576168000D1543 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 3C01694C1A576167000D1543;
-					};
-					3C1BA8201A9591D3004F42A3 = {
-						CreatedOnToolsVersion = 6.3;
-					};
-					3C1BA8381A9591D3004F42A3 = {
-						CreatedOnToolsVersion = 6.3;
-						TestTargetID = 3C1BA8201A9591D3004F42A3;
-					};
 					3C482C231A32365C005B55CE = {
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = Q24R6U6QED;
@@ -657,53 +371,11 @@
 			targets = (
 				3C482C231A32365C005B55CE /* AudioStreaming */,
 				3C482C3C1A32365C005B55CE /* AudioStreamingTests */,
-				3C01694C1A576167000D1543 /* SimplePlay */,
-				3C0169641A576168000D1543 /* SimplePlayTests */,
-				3C1BA8201A9591D3004F42A3 /* PhromPhoncert */,
-				3C1BA8381A9591D3004F42A3 /* PhromPhoncertTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3C01694B1A576167000D1543 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C01695B1A576168000D1543 /* Main.storyboard in Resources */,
-				3C1BA8671A97DE5E004F42A3 /* audio-01.m4a in Resources */,
-				3C1BA8691A97DE5E004F42A3 /* audio-03.m4a in Resources */,
-				3C0169601A576168000D1543 /* LaunchScreen.xib in Resources */,
-				3C1BA8681A97DE5E004F42A3 /* audio-02.m4a in Resources */,
-				3C01695D1A576168000D1543 /* Images.xcassets in Resources */,
-				3C1BA8661A97DE5E004F42A3 /* audio-00.m4a in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C0169631A576168000D1543 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA81F1A9591D3004F42A3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C1BA82F1A9591D3004F42A3 /* Main.storyboard in Resources */,
-				3C1BA8341A9591D3004F42A3 /* LaunchScreen.xib in Resources */,
-				3C1BA8311A9591D3004F42A3 /* Images.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA8371A9591D3004F42A3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C482C221A32365C005B55CE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -724,48 +396,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3C0169491A576167000D1543 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C0169581A576168000D1543 /* SimplePlayViewController.m in Sources */,
-				3C0169551A576168000D1543 /* AppDelegate.m in Sources */,
-				3C0169521A576168000D1543 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C0169611A576168000D1543 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C01696C1A576168000D1543 /* SimplePlayTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA81D1A9591D3004F42A3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C1BA8591A9591EE004F42A3 /* CAXException.cpp in Sources */,
-				3C1BA82C1A9591D3004F42A3 /* ViewController.mm in Sources */,
-				3C1BA8291A9591D3004F42A3 /* AppDelegate.m in Sources */,
-				3C1BA8551A9591EE004F42A3 /* AQRecorder.mm in Sources */,
-				3C1BA8581A9591EE004F42A3 /* CAStreamBasicDescription.cpp in Sources */,
-				3C1BA8541A9591EE004F42A3 /* AQPlayer.mm in Sources */,
-				3C1BA8561A9591EE004F42A3 /* CADebugMacros.cpp in Sources */,
-				3C1BA8571A9591EE004F42A3 /* CADebugPrintf.cpp in Sources */,
-				3C1BA8261A9591D3004F42A3 /* main.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		3C1BA8351A9591D3004F42A3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				3C1BA8401A9591D3004F42A3 /* PhromPhoncertTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3C482C201A32365C005B55CE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -781,10 +411,13 @@
 				3CA051FC1A72FCDE0044C363 /* NSDictionary+Extensions.m in Sources */,
 				3CA051FE1A72FCDE0044C363 /* UIDevice+Extensions.m in Sources */,
 				3CA051F61A72FCDE0044C363 /* CDVUserAgentUtil.m in Sources */,
+				3C1953E01ACF4BB200A58C02 /* LevelMeter.m in Sources */,
+				3C1953E11ACF4BB200A58C02 /* MeterTable.m in Sources */,
 				3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */,
 				3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */,
 				3CA051EE1A72FCDE0044C363 /* CDVConfigParser.m in Sources */,
 				3CA051F91A72FCDE0044C363 /* CDVWhitelist.m in Sources */,
+				3C1953DE1ACF4BB200A58C02 /* AQLevelMeter.mm in Sources */,
 				3CA051F31A72FCDE0044C363 /* CDVPluginResult.m in Sources */,
 				3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */,
 				3CA051F51A72FCDE0044C363 /* CDVURLProtocol.m in Sources */,
@@ -794,6 +427,7 @@
 				3CA051F21A72FCDE0044C363 /* CDVPlugin.m in Sources */,
 				3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */,
 				3CA051FD1A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m in Sources */,
+				3C1953DF1ACF4BB200A58C02 /* GLLevelMeter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,16 +442,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3C0169671A576168000D1543 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C01694C1A576167000D1543 /* SimplePlay */;
-			targetProxy = 3C0169661A576168000D1543 /* PBXContainerItemProxy */;
-		};
-		3C1BA83B1A9591D3004F42A3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 3C1BA8201A9591D3004F42A3 /* PhromPhoncert */;
-			targetProxy = 3C1BA83A1A9591D3004F42A3 /* PBXContainerItemProxy */;
-		};
 		3C482C3F1A32365C005B55CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 3C482C231A32365C005B55CE /* AudioStreaming */;
@@ -826,38 +450,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		3C0169591A576168000D1543 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C01695A1A576168000D1543 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3C01695E1A576168000D1543 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C01695F1A576168000D1543 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
-		3C1BA82D1A9591D3004F42A3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C1BA82E1A9591D3004F42A3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		3C1BA8321A9591D3004F42A3 /* LaunchScreen.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				3C1BA8331A9591D3004F42A3 /* Base */,
-			);
-			name = LaunchScreen.xib;
-			sourceTree = "<group>";
-		};
 		3C482C311A32365C005B55CE /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -877,136 +469,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		3C01696D1A576168000D1543 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SimplePlay/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		3C01696E1A576168000D1543 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = SimplePlay/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		3C01696F1A576168000D1543 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SimplePlayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplePlay.app/SimplePlay";
-			};
-			name = Debug;
-		};
-		3C0169701A576168000D1543 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = SimplePlayTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SimplePlay.app/SimplePlay";
-			};
-			name = Release;
-		};
-		3C1BA8411A9591D3004F42A3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ed Gamble (8YS5F6PB43)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PhromPhoncert/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2073ea3-d340-4ccf-9717-0099930397e0";
-			};
-			name = Debug;
-		};
-		3C1BA8421A9591D3004F42A3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Ed Gamble (8YS5F6PB43)";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				INFOPLIST_FILE = PhromPhoncert/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c2073ea3-d340-4ccf-9717-0099930397e0";
-			};
-			name = Release;
-		};
-		3C1BA8431A9591D3004F42A3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PhromPhoncertTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhromPhoncert.app/PhromPhoncert";
-			};
-			name = Debug;
-		};
-		3C1BA8441A9591D3004F42A3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = PhromPhoncertTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PhromPhoncert.app/PhromPhoncert";
-			};
-			name = Release;
-		};
 		3C482C451A32365C005B55CE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1156,42 +618,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3C0169711A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlay" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C01696D1A576168000D1543 /* Debug */,
-				3C01696E1A576168000D1543 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C0169721A576168000D1543 /* Build configuration list for PBXNativeTarget "SimplePlayTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C01696F1A576168000D1543 /* Debug */,
-				3C0169701A576168000D1543 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C1BA8451A9591D3004F42A3 /* Build configuration list for PBXNativeTarget "PhromPhoncert" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C1BA8411A9591D3004F42A3 /* Debug */,
-				3C1BA8421A9591D3004F42A3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		3C1BA8461A9591D3004F42A3 /* Build configuration list for PBXNativeTarget "PhromPhoncertTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				3C1BA8431A9591D3004F42A3 /* Debug */,
-				3C1BA8441A9591D3004F42A3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		3C482C1F1A32365C005B55CE /* Build configuration list for PBXProject "AudioStreaming" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

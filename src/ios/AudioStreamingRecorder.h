@@ -56,6 +56,8 @@
 //
 @interface AudioStreamingRecorder : NSObject
 
+@property (nonatomic) AudioQueueRef   queue;
+
 // YES if granted permission; NO otherwise.  Nothing happens unless permission
 // has been granted.
 @property (nonatomic, readonly) Boolean isPermitted;

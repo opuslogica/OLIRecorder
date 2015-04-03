@@ -1,7 +1,7 @@
 /*
- 
-    File: CAMath.h
-Abstract: Helper class for various math functions
+
+    File: GLLevelMeter.h
+Abstract: dB meter class for displaying audio power levels using OpenGL
  Version: 2.4
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -44,28 +44,22 @@ POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (C) 2009 Apple Inc. All Rights Reserved.
 
-  
+
 */
 
-#ifndef __CAMath_h__
-#define __CAMath_h__
 
-#if !defined(__COREAUDIO_USE_FLAT_INCLUDES__)
-	#include <CoreAudio/CoreAudioTypes.h>
-#else
-	#include <CoreAudioTypes.h>
-#endif
+#import <UIKit/UIKit.h>
+#import <OpenGLES/EAGL.h>
+#import <OpenGLES/ES1/gl.h>
+#import <OpenGLES/ES1/glext.h>
 
-inline bool fiszero(Float64 f) { return (f == 0.); }
-inline bool fiszero(Float32 f) { return (f == 0.f); }
+#import "LevelMeter.h"
 
-inline bool fnonzero(Float64 f) { return !fiszero(f); }
-inline bool fnonzero(Float32 f) { return !fiszero(f); }
+@interface GLLevelMeter : LevelMeter {
+	GLint						_backingWidth;
+	GLint						_backingHeight;
+	EAGLContext					*_context;
+	GLuint						_viewRenderbuffer, _viewFramebuffer;
+}
 
-inline bool fequal(const Float64 &a, const Float64 &b) { return a == b; }
-inline bool fequal(const Float32 &a, const Float32 &b) { return a == b; }
-
-inline bool fnotequal(const Float64 &a, const Float64 &b) { return !fequal(a, b); }
-inline bool fnotequal(const Float32 &a, const Float32 &b) { return !fequal(a, b); }
-
-#endif // __CAMath_h__
+@end

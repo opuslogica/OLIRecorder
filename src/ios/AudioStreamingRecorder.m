@@ -87,7 +87,7 @@
 @property (nonatomic, readwrite) Boolean isPermitted;
 @property (nonatomic, readwrite) Boolean isInterrupted;
 
-@property (nonatomic) AudioQueueRef   queue;
+//@property (nonatomic) AudioQueueRef   queue;
 @property (nonatomic) AVAudioFormat  *queueFormat;
 @property (nonatomic) NSDictionary   *queueSettings;
 @property (nonatomic) Boolean         queueIsRunning;

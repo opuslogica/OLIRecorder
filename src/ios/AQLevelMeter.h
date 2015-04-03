@@ -1,7 +1,7 @@
 /*
  
-    File: CADebugMacros.cpp
-Abstract: Helper class for printing debug messages
+    File: AQLevelMeter.h
+Abstract: Class for handling and displaying AudioQueue meter data
  Version: 2.4
 
 Disclaimer: IMPORTANT:  This Apple software is supplied to you by Apple
@@ -47,45 +47,44 @@ Copyright (C) 2009 Apple Inc. All Rights Reserved.
  
 */
 
-#include "CADebugMacros.h"
-#include <stdio.h>
-#include <stdarg.h>
-#if TARGET_API_MAC_OSX
-	#include <syslog.h>
-#endif
 
-#if DEBUG
-#include <stdio.h>
 
-void	DebugPrint(const char *fmt, ...)
-{
-	va_list args;
-	va_start(args, fmt);
-	vprintf(fmt, args);
-	va_end(args);
-}
-#endif // DEBUG
+#import <UIKit/UIKit.h>
+#import <AudioToolbox/AudioQueue.h>
 
-#if TARGET_API_MAC_OSX
-void	LogError(const char *fmt, ...)
-{
-	va_list args;
-	va_start(args, fmt);
-#if DEBUG
-	vprintf(fmt, args);
-#endif
-	vsyslog(LOG_ERR, fmt, args);
-	va_end(args);
+#include "MeterTable.h"
+//#import "CAXException.h"
+
+#define kPeakFalloffPerSec	.7
+#define kLevelFalloffPerSec .8
+#define kMinDBvalue -80.0
+
+// A LevelMeter subclass which is used specifically for AudioQueue objects
+@interface AQLevelMeter : UIView {
+	AudioQueueLevelMeterState	*_chan_lvls;
+	NSArray						*_channelNumbers;
+	NSArray						*_subLevelMeters;
+	MeterTable					*_meterTable;
+	NSTimer						*_updateTimer;
+	CGFloat						_refreshHz;
+	BOOL						_showsPeaks;
+	BOOL						_vertical;
+	BOOL						_useGL;
+
+	UIColor						*_bgColor, *_borderColor;	
+	CFAbsoluteTime				_peakFalloffLastFire;
 }
 
-void	LogWarning(const char *fmt, ...)
-{
-	va_list args;
-	va_start(args, fmt);
-#if DEBUG
-	vprintf(fmt, args);
-#endif
-	vsyslog(LOG_WARNING, fmt, args);
-	va_end(args);
-}
-#endif
+@property (readwrite) AudioQueueRef aq; // The AudioQueue object
+@property	      CGFloat refreshHz; // How many times per second to redraw
+@property (retain)    NSArray *channelNumbers; // Array of NSNumber objects: The indices of the channels to display in this meter
+@property             BOOL showsPeaks; // Whether or not we show peak levels
+@property             BOOL vertical; // Whether the view is oriented V or H
+@property             BOOL useGL; // Whether or not to use OpenGL for drawing
+
+-(void)setBorderColor: (UIColor *)borderColor;
+-(void)setBackgroundColor: (UIColor *)backgroundColor;
+
+- (void) setAq:(AudioQueueRef)aq;
+
+@end
