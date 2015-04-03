@@ -57,6 +57,10 @@
 		3C71182E1ACF10DD00A6F85B /* GLLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7118281ACF10DD00A6F85B /* GLLevelMeter.m */; };
 		3C71182F1ACF10DD00A6F85B /* LevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182A1ACF10DD00A6F85B /* LevelMeter.m */; };
 		3C7118301ACF10DD00A6F85B /* MeterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182C1ACF10DD00A6F85B /* MeterTable.m */; };
+		3C7118321ACF274200A6F85B /* AQLevelMeter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C7118261ACF10DD00A6F85B /* AQLevelMeter.mm */; };
+		3C7118331ACF274200A6F85B /* GLLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7118281ACF10DD00A6F85B /* GLLevelMeter.m */; };
+		3C7118341ACF274200A6F85B /* LevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182A1ACF10DD00A6F85B /* LevelMeter.m */; };
+		3C7118351ACF274200A6F85B /* MeterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182C1ACF10DD00A6F85B /* MeterTable.m */; };
 		3CA051BD1A72FB140044C363 /* OLIRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051BC1A72FB140044C363 /* OLIRecorder.m */; };
 		3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */; };
 		3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C61A72FCDE0044C363 /* CDVCommandQueue.m */; };
@@ -549,13 +553,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3C7118311ACF267D00A6F85B /* Meter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Meter;
-			sourceTree = "<group>";
-		};
 		3CA051BE1A72FCAE0044C363 /* Cordova */ = {
 			isa = PBXGroup;
 			children = (
@@ -611,7 +608,6 @@
 		3CA052011A72FDF20044C363 /* OLIRecorder */ = {
 			isa = PBXGroup;
 			children = (
-				3C7118311ACF267D00A6F85B /* Meter */,
 				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
 				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
 				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
@@ -962,10 +958,13 @@
 				3CA051FC1A72FCDE0044C363 /* NSDictionary+Extensions.m in Sources */,
 				3CA051FE1A72FCDE0044C363 /* UIDevice+Extensions.m in Sources */,
 				3CA051F61A72FCDE0044C363 /* CDVUserAgentUtil.m in Sources */,
+				3C7118341ACF274200A6F85B /* LevelMeter.m in Sources */,
+				3C7118351ACF274200A6F85B /* MeterTable.m in Sources */,
 				3CFDEA6A1A45EC4F00FC5042 /* AudioStreamingRecorder.m in Sources */,
 				3C482C2D1A32365C005B55CE /* AppDelegate.m in Sources */,
 				3CA051EE1A72FCDE0044C363 /* CDVConfigParser.m in Sources */,
 				3CA051F91A72FCDE0044C363 /* CDVWhitelist.m in Sources */,
+				3C7118321ACF274200A6F85B /* AQLevelMeter.mm in Sources */,
 				3CA051F31A72FCDE0044C363 /* CDVPluginResult.m in Sources */,
 				3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */,
 				3CA051F51A72FCDE0044C363 /* CDVURLProtocol.m in Sources */,
@@ -975,6 +974,7 @@
 				3CA051F21A72FCDE0044C363 /* CDVPlugin.m in Sources */,
 				3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */,
 				3CA051FD1A72FCDE0044C363 /* NSMutableArray+QueueAdditions.m in Sources */,
+				3C7118331ACF274200A6F85B /* GLLevelMeter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

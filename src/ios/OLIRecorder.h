@@ -10,6 +10,8 @@
 #import <Cordova/CDVPlugin.h>
 #endif
 #import "AudioStreamingRecorder.h"
+#import "AQLevelMeter.h"
+
 
 #define OLIRECORDER_DEFAULT_RECORDING_INTERVAL  10.0 /* seconds */
 
@@ -20,6 +22,7 @@
 
 // OLIRecorder Specific
 @property(strong, nonatomic, readonly) AudioStreamingRecorder *audioRecorder;
+@property(strong, nonatomic, readonly) AQLevelMeter *audioMeter;
 
 //
 - (void)create:(CDVInvokedUrlCommand*)command;
@@ -32,4 +35,5 @@
 
 - (void)releaseRecorder:(CDVInvokedUrlCommand*)command;
 
+- (void) createMeter:(CDVInvokedUrlCommand*)command;
 @end

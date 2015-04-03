@@ -7,7 +7,10 @@
 static AudioStreamingRecorder *theAudioRecorder = nil;
 
 @interface OLIRecorder ()
+@property(strong, nonatomic, readwrite) AQLevelMeter *audioMeter;
 @end
+
+
 @implementation OLIRecorder
 @synthesize audioRecorder;
 
@@ -18,6 +21,51 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
 - (CDVPlugin*) initWithWebView: (UIWebView*) theWebView {
   [super initWithWebView: theWebView];
   
+}
+
+//
+//
+//
+- (void) createMeter: (CDVInvokedUrlCommand *) command {
+  NSString* recId  = [command.arguments objectAtIndex:0];
+
+  NSNumber* posX   = [command.arguments objectAtIndex:1];
+  NSNumber* posY   = [command.arguments objectAtIndex:2];
+  NSNumber* width  = [command.arguments objectAtIndex:3];
+  NSNumber* height = [command.arguments objectAtIndex:4];
+  
+  CDVCommandStatus status = CDVCommandStatus_ERROR;
+
+  if (nil != self.audioRecorder && nil != self.audioRecorder.queue) {
+    self.audioMeter = [[AQLevelMeter alloc] initWithFrame:
+                       CGRectMake(posX, posY, width, height)];
+  
+    self.audioMeter.aq = self.audioRecorder.queue;
+  
+    [self.viewController.view addSubview: self.audioMeter];
+    
+    status = CDVCommandStatus_OK;
+  }
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: status]
+   callbackId: command.callbackId];
+}
+
+//
+//
+//
+- (void) dismissMeter: (CDVInvokedUrlCommand *) command {
+  NSString* recId  = [command.arguments objectAtIndex:0];
+  
+  if (nil != self.audioMeter) {
+    [self.audioMeter removeFromSuperview];
+    self.audioMeter = nil;
+  }
+  
+  [self.commandDelegate
+   sendPluginResult: [CDVPluginResult resultWithStatus: CDVCommandStatus_OK]
+   callbackId: command.callbackId];
 }
 
 //
