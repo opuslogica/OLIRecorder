@@ -9,7 +9,7 @@
 #import "AudioOverlayController.h"
 #import "AudioStreamingRecorder.h"
 #import "AQLevelMeter.h"
-
+#import "GLLevelMeter.h"
 
 @interface AudioOverlayController ()
 @property (strong, nonatomic) IBOutlet UIButton *toggleRecordButton;
@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *levelRightText;
 
 @property (strong, nonatomic) IBOutlet AQLevelMeter *leftMeterView;
+@property (strong, nonatomic) IBOutlet GLLevelMeter *rightMeterView;
 
 @property (nonatomic, retain) AudioStreamingRecorder *recorder;
 @end
@@ -50,6 +51,10 @@
   self.recorder.meterCallback = ^(AudioQueueLevelMeterState leftMeter,
                                   AudioQueueLevelMeterState rightMeter) {
     dispatch_async(dispatch_get_main_queue(), ^{
+      self.rightMeterView.level = rightMeter.mAveragePower;
+      self.rightMeterView.peakLevel = rightMeter.mPeakPower;
+      [self.rightMeterView setNeedsDisplay];
+      
       self.levelLeft.progress  = 50 * leftMeter.mAveragePower;
       self.levelRight.progress = 50 * rightMeter.mAveragePower;
       
@@ -93,6 +98,8 @@
   else {
     [self.recorder record];
     self.leftMeterView.aq = self.recorder.queue;
+    [self.leftMeterView setBorderColor: [UIColor lightGrayColor]];
+    [self.leftMeterView setBackgroundColor: [UIColor greenColor]];
   }
   
   [self updateRecordButton: self.recorder.isRecording];

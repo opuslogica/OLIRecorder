@@ -53,6 +53,10 @@
 		3C68AEBD1A44E56B00BF81A3 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */; };
 		3C69AA871ACDFAA600DBF354 /* AudioOverlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C69AA861ACDFAA600DBF354 /* AudioOverlayController.m */; };
 		3C69AA881ACDFAE900DBF354 /* AudioStreamingRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */; };
+		3C71182D1ACF10DD00A6F85B /* AQLevelMeter.mm in Sources */ = {isa = PBXBuildFile; fileRef = 3C7118261ACF10DD00A6F85B /* AQLevelMeter.mm */; };
+		3C71182E1ACF10DD00A6F85B /* GLLevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C7118281ACF10DD00A6F85B /* GLLevelMeter.m */; };
+		3C71182F1ACF10DD00A6F85B /* LevelMeter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182A1ACF10DD00A6F85B /* LevelMeter.m */; };
+		3C7118301ACF10DD00A6F85B /* MeterTable.m in Sources */ = {isa = PBXBuildFile; fileRef = 3C71182C1ACF10DD00A6F85B /* MeterTable.m */; };
 		3CA051BD1A72FB140044C363 /* OLIRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051BC1A72FB140044C363 /* OLIRecorder.m */; };
 		3CA051EC1A72FCDE0044C363 /* CDVCommandDelegateImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C41A72FCDE0044C363 /* CDVCommandDelegateImpl.m */; };
 		3CA051ED1A72FCDE0044C363 /* CDVCommandQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3CA051C61A72FCDE0044C363 /* CDVCommandQueue.m */; };
@@ -182,6 +186,14 @@
 		3C68AEBC1A44E56B00BF81A3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		3C69AA851ACDFAA600DBF354 /* AudioOverlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioOverlayController.h; sourceTree = "<group>"; };
 		3C69AA861ACDFAA600DBF354 /* AudioOverlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioOverlayController.m; sourceTree = "<group>"; };
+		3C7118251ACF10DD00A6F85B /* AQLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AQLevelMeter.h; sourceTree = "<group>"; };
+		3C7118261ACF10DD00A6F85B /* AQLevelMeter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AQLevelMeter.mm; sourceTree = "<group>"; };
+		3C7118271ACF10DD00A6F85B /* GLLevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLLevelMeter.h; sourceTree = "<group>"; };
+		3C7118281ACF10DD00A6F85B /* GLLevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLLevelMeter.m; sourceTree = "<group>"; };
+		3C7118291ACF10DD00A6F85B /* LevelMeter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelMeter.h; sourceTree = "<group>"; };
+		3C71182A1ACF10DD00A6F85B /* LevelMeter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LevelMeter.m; sourceTree = "<group>"; };
+		3C71182B1ACF10DD00A6F85B /* MeterTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeterTable.h; sourceTree = "<group>"; };
+		3C71182C1ACF10DD00A6F85B /* MeterTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeterTable.m; sourceTree = "<group>"; };
 		3CA051BB1A72FB140044C363 /* OLIRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OLIRecorder.h; path = ../../src/ios/OLIRecorder.h; sourceTree = "<group>"; };
 		3CA051BC1A72FB140044C363 /* OLIRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OLIRecorder.m; path = ../../src/ios/OLIRecorder.m; sourceTree = "<group>"; };
 		3CA051BF1A72FCDE0044C363 /* CDV.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CDV.h; path = ../../PhoncertGO/platforms/ios/CordovaLib/Classes/CDV.h; sourceTree = "<group>"; };
@@ -489,6 +501,14 @@
 		3C4AC2941ACDF9C90060E3CB /* AudioOverlay */ = {
 			isa = PBXGroup;
 			children = (
+				3C7118251ACF10DD00A6F85B /* AQLevelMeter.h */,
+				3C7118261ACF10DD00A6F85B /* AQLevelMeter.mm */,
+				3C7118271ACF10DD00A6F85B /* GLLevelMeter.h */,
+				3C7118281ACF10DD00A6F85B /* GLLevelMeter.m */,
+				3C7118291ACF10DD00A6F85B /* LevelMeter.h */,
+				3C71182A1ACF10DD00A6F85B /* LevelMeter.m */,
+				3C71182B1ACF10DD00A6F85B /* MeterTable.h */,
+				3C71182C1ACF10DD00A6F85B /* MeterTable.m */,
 				3C69AA851ACDFAA600DBF354 /* AudioOverlayController.h */,
 				3C69AA861ACDFAA600DBF354 /* AudioOverlayController.m */,
 				3C4AC2991ACDF9C90060E3CB /* AppDelegate.h */,
@@ -527,6 +547,13 @@
 				3C4AC2B01ACDF9C90060E3CB /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3C7118311ACF267D00A6F85B /* Meter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Meter;
 			sourceTree = "<group>";
 		};
 		3CA051BE1A72FCAE0044C363 /* Cordova */ = {
@@ -584,6 +611,7 @@
 		3CA052011A72FDF20044C363 /* OLIRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				3C7118311ACF267D00A6F85B /* Meter */,
 				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
 				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
 				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
@@ -964,9 +992,13 @@
 			files = (
 				3C4AC29E1ACDF9C90060E3CB /* ViewController.m in Sources */,
 				3C4AC29B1ACDF9C90060E3CB /* AppDelegate.m in Sources */,
+				3C71182E1ACF10DD00A6F85B /* GLLevelMeter.m in Sources */,
+				3C71182D1ACF10DD00A6F85B /* AQLevelMeter.mm in Sources */,
+				3C71182F1ACF10DD00A6F85B /* LevelMeter.m in Sources */,
 				3C4AC2981ACDF9C90060E3CB /* main.m in Sources */,
 				3C69AA881ACDFAE900DBF354 /* AudioStreamingRecorder.m in Sources */,
 				3C69AA871ACDFAA600DBF354 /* AudioOverlayController.m in Sources */,
+				3C7118301ACF10DD00A6F85B /* MeterTable.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
