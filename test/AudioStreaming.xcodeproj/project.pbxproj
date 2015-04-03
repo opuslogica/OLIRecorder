@@ -282,6 +282,19 @@
 		3CA052011A72FDF20044C363 /* OLIRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				3CDFC62B1ACF529500CBC253 /* meter */,
+				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
+				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
+				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
+				3CA051BC1A72FB140044C363 /* OLIRecorder.m */,
+			);
+			name = OLIRecorder;
+			path = AudioStreaming;
+			sourceTree = "<group>";
+		};
+		3CDFC62B1ACF529500CBC253 /* meter */ = {
+			isa = PBXGroup;
+			children = (
 				3C1953D61ACF4AEB00A58C02 /* AQLevelMeter.h */,
 				3C1953D71ACF4AEB00A58C02 /* AQLevelMeter.mm */,
 				3C1953D81ACF4AEB00A58C02 /* GLLevelMeter.h */,
@@ -290,13 +303,8 @@
 				3C1953DB1ACF4AEB00A58C02 /* LevelMeter.m */,
 				3C1953DC1ACF4AEB00A58C02 /* MeterTable.h */,
 				3C1953DD1ACF4AEB00A58C02 /* MeterTable.m */,
-				3CFDEA681A45EC4F00FC5042 /* AudioStreamingRecorder.h */,
-				3CFDEA691A45EC4F00FC5042 /* AudioStreamingRecorder.m */,
-				3CA051BB1A72FB140044C363 /* OLIRecorder.h */,
-				3CA051BC1A72FB140044C363 /* OLIRecorder.m */,
 			);
-			name = OLIRecorder;
-			path = AudioStreaming;
+			name = meter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
