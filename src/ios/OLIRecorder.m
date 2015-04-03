@@ -4,14 +4,20 @@
    and others, of Opus Logica, Inc. */
 
 #import "OLIRecorder.h"
-
 static AudioStreamingRecorder *theAudioRecorder = nil;
 
+@interface OLIRecorder ()
+@end
 @implementation OLIRecorder
 @synthesize audioRecorder;
 
 - (AudioStreamingRecorder *) audioRecorder {
   return theAudioRecorder;
+}
+
+- (CDVPlugin*) initWithWebView: (UIWebView*) theWebView {
+  [super initWithWebView: theWebView];
+  
 }
 
 //

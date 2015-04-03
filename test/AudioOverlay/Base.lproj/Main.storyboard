@@ -112,6 +112,11 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="hn9-oJ-h8g"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hn9-oJ-h8g"/>
+                                    </mask>
+                                </variation>
                             </progressView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-9l-ntD">
                                 <rect key="frame" x="16" y="259" width="311" height="2"/>
@@ -141,6 +146,13 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-Gv-GbA" customClass="AQLevelMeter">
+                                <rect key="frame" x="16" y="133" width="311" height="51"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="51" id="2M9-m0-XvY"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -150,9 +162,12 @@
                             <constraint firstItem="TN8-V3-byZ" firstAttribute="top" secondItem="zhc-25-ubI" secondAttribute="bottom" constant="39" id="WD7-gQ-jd0"/>
                             <constraint firstItem="YeP-Vi-530" firstAttribute="leading" secondItem="3NH-fV-OAc" secondAttribute="leadingMargin" id="Ygv-RE-v14"/>
                             <constraint firstItem="8uT-9l-ntD" firstAttribute="leading" secondItem="3NH-fV-OAc" secondAttribute="leadingMargin" id="ZI1-3w-DSS"/>
+                            <constraint firstItem="TWM-Gv-GbA" firstAttribute="top" secondItem="YeP-Vi-530" secondAttribute="bottom" constant="22" id="cVs-Ic-q2W"/>
                             <constraint firstItem="EYL-Pb-Y2O" firstAttribute="leading" secondItem="3NH-fV-OAc" secondAttribute="leadingMargin" id="ebn-6Y-dpX"/>
                             <constraint firstItem="YeP-Vi-530" firstAttribute="top" secondItem="TN8-V3-byZ" secondAttribute="bottom" constant="21" id="ekR-Tw-C5p"/>
                             <constraint firstItem="Yr8-lp-fr5" firstAttribute="trailing" secondItem="3NH-fV-OAc" secondAttribute="trailingMargin" id="fKm-qD-qXp"/>
+                            <constraint firstItem="TWM-Gv-GbA" firstAttribute="trailing" secondItem="3NH-fV-OAc" secondAttribute="trailingMargin" id="jw6-cg-tNY"/>
+                            <constraint firstItem="TWM-Gv-GbA" firstAttribute="leading" secondItem="3NH-fV-OAc" secondAttribute="leadingMargin" id="l0v-s8-vZK"/>
                             <constraint firstItem="EYL-Pb-Y2O" firstAttribute="top" secondItem="Yr8-lp-fr5" secondAttribute="bottom" constant="8" id="on4-8m-lND"/>
                             <constraint firstItem="EYL-Pb-Y2O" firstAttribute="top" secondItem="YeP-Vi-530" secondAttribute="bottom" constant="123" id="pqB-Sd-fGa"/>
                             <constraint firstItem="EYL-Pb-Y2O" firstAttribute="top" secondItem="ZCq-fD-jrl" secondAttribute="bottom" constant="8" id="qwB-Sq-Xg9"/>

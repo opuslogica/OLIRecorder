@@ -8,6 +8,7 @@
 
 #import "AudioOverlayController.h"
 #import "AudioStreamingRecorder.h"
+#import "AQLevelMeter.h"
 
 
 @interface AudioOverlayController ()
@@ -17,6 +18,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *infoLabel;
 @property (strong, nonatomic) IBOutlet UILabel *levelLeftText;
 @property (strong, nonatomic) IBOutlet UILabel *levelRightText;
+
+@property (strong, nonatomic) IBOutlet AQLevelMeter *leftMeterView;
 
 @property (nonatomic, retain) AudioStreamingRecorder *recorder;
 @end
@@ -87,11 +90,12 @@
   NSLog (@"Audio: Want to toggle");
   if (self.recorder.isRecording)
     [self.recorder pause];
-  else
+  else {
     [self.recorder record];
+    self.leftMeterView.aq = self.recorder.queue;
+  }
   
   [self updateRecordButton: self.recorder.isRecording];
-
 }
 
 @end
