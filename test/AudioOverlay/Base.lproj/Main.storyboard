@@ -21,13 +21,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </webView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gaq-ux-WH8" customClass="AQLevelMeter">
-                                <rect key="frame" x="16" y="251" width="343" height="50"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6q5-Uu-nLp"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Flv-38-T2Z">
                                 <rect key="frame" x="146" y="41" width="83" height="30"/>
                                 <constraints>
@@ -46,14 +39,11 @@
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="HNd-L0-LeZ" secondAttribute="trailing" constant="-16" id="0QW-sg-Fhd"/>
                             <constraint firstItem="HNd-L0-LeZ" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" constant="-16" id="8cS-o4-j0t"/>
-                            <constraint firstItem="Gaq-ux-WH8" firstAttribute="trailing" secondItem="kh9-bI-dsS" secondAttribute="trailingMargin" id="Bhm-kJ-EMp"/>
                             <constraint firstItem="Flv-38-T2Z" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="21" id="IuC-HY-IlC"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="HNd-L0-LeZ" secondAttribute="bottom" id="OUF-Uo-EWL"/>
                             <constraint firstItem="HNd-L0-LeZ" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="topMargin" id="ei8-zu-r8b"/>
                             <constraint firstItem="Flv-38-T2Z" firstAttribute="centerX" secondItem="HNd-L0-LeZ" secondAttribute="centerX" constant="-0.5" id="elm-6d-hJP"/>
                             <constraint firstItem="Flv-38-T2Z" firstAttribute="width" secondItem="HNd-L0-LeZ" secondAttribute="width" id="uHz-EW-QTq"/>
-                            <constraint firstItem="Gaq-ux-WH8" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leadingMargin" id="uJK-qP-rs8"/>
-                            <constraint firstItem="Gaq-ux-WH8" firstAttribute="top" secondItem="Flv-38-T2Z" secondAttribute="bottom" constant="180" id="xEb-JN-lo7"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

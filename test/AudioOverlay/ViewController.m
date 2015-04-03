@@ -59,7 +59,7 @@
     // self.audioMeter.hidden = NO;
     self.audioMeter = [[AQLevelMeter alloc] initWithFrame:
                        CGRectMake(20, 200, 320, 50)];
-    [self.audioMeter setBorderColor: [UIColor lightGrayColor]];
+    [self.audioMeter setBorderColor: [UIColor whiteColor]];
     [self.audioMeter setBackgroundColor: [UIColor yellowColor]];
     
     self.audioMeter.aq = self.audioRecorder.queue;

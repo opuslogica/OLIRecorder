@@ -39,6 +39,8 @@ static AudioStreamingRecorder *theAudioRecorder = nil;
   if (nil != self.audioRecorder && nil != self.audioRecorder.queue) {
     self.audioMeter = [[AQLevelMeter alloc] initWithFrame:
                        CGRectMake(posX, posY, width, height)];
+    [self.audioMeter setBorderColor: [UIColor lightGrayColor]];
+    [self.audioMeter setBackgroundColor: [UIColor yellowColor]];
   
     self.audioMeter.aq = self.audioRecorder.queue;
   
