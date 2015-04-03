@@ -101,8 +101,8 @@ abort ();                       \
     _useGL = YES;
     _chan_lvls = (AudioQueueLevelMeterState*)malloc(sizeof(AudioQueueLevelMeterState) * [_channelNumbers count]);
     _meterTable = [[MeterTable alloc] initWithMinDecibels: kMinDBvalue tableSize: 400 root: 2.0];
-    _bgColor = nil;
-    _borderColor = nil;
+    //    _bgColor = nil;
+    //    _borderColor = nil;
     [self layoutSubLevelMeters];
   }
   return self;

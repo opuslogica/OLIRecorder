@@ -49,21 +49,24 @@
   
   if (self.audioRecorder.isRecording) {
     [self.audioRecorder pause];
+    self.audioMeter.aq = nil;
+    //self.audioMeter.hidden = YES;
     [self.audioMeter removeFromSuperview];
     self.audioMeter = nil;
   }
   else {
     [self.audioRecorder record];
+    // self.audioMeter.hidden = NO;
     self.audioMeter = [[AQLevelMeter alloc] initWithFrame:
                        CGRectMake(20, 200, 320, 50)];
     
     self.audioMeter.aq = self.audioRecorder.queue;
     
-    [self.webView addSubview: self.audioMeter];
+    [self.view addSubview: self.audioMeter];
   }
   
-  self.buttonToggleRecord.titleLabel.text =
-  (self.audioRecorder.isRecording ? @"Pause" : @"Record");
+  [self.buttonToggleRecord setTitle: (self.audioRecorder.isRecording ? @"Pause" : @"Record")
+                           forState: UIControlStateNormal];
 }
 
 @end
