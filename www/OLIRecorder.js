@@ -66,7 +66,7 @@ OLIRecorder.get = function(id) {
 /**
  * Create and View an Audio Meter
  */
-OLIRecorder.prototype.createMeter = function(left, top, width, height) {
+OLIRecorder.prototype.create_meter = function(left, top, width, height) {
   exec(null, null, "OLIRecorder", "createMeter",
        [this.id, left, top, width, height]);
 };
@@ -74,8 +74,8 @@ OLIRecorder.prototype.createMeter = function(left, top, width, height) {
 /**
  * Dismiss (and Destroy) an Audio Meter
  */
-OLIRecorder.prototype.createMeter = function() {
-  exec(null, null, "OLIRecorder", "createMeter", [this.id]);
+OLIRecorder.prototype.destroy_meter = function() {
+  exec(null, null, "OLIRecorder", "dismissMeter", [this.id]);
 };
 
 /**

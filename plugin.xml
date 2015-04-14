@@ -28,10 +28,26 @@
 
     <header-file src="src/ios/OLIRecorder.h"/>
     <source-file src="src/ios/OLIRecorder.m"/>
+
+    <header-file src="src/ios/AQLevelMeter.h"/>
+    <source-file src="src/ios/AQLevelMeter.m"/>
+
+    <header-file src="src/ios/GLLevelMeter.h"/>
+    <source-file src="src/ios/GLLevelMeter.m"/>
+
+    <header-file src="src/ios/LevelMeter.h"/>
+    <source-file src="src/ios/LevelMeter.m"/>
+
+    <header-file src="src/ios/MeterTable.h"/>
+    <source-file src="src/ios/MeterTable.m"/>
+    
     <header-file src="src/ios/AudioStreamingRecorder.h"/>
     <source-file src="src/ios/AudioStreamingRecorder.m"/>
+    
     <framework src="UIKit.framework"/>
-    <framework src="AVFoundation.framework"/>
     <framework src="Accelerate.framework"/>
+    <framework src="AVFoundation.framework"/>
+    <framework src="opengles.framework"/>
+    <framework src="QuartzCore.framework"/>
   </platform>
 </plugin>
