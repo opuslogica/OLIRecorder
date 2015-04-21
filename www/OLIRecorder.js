@@ -67,14 +67,19 @@ OLIRecorder.get = function(id) {
  * Create and View an Audio Meter
  */
 OLIRecorder.prototype.create_meter = function(left, top, width, height) {
-  exec(null, null, "OLIRecorder", "createMeter",
-       [this.id, left, top, width, height]);
+  var that = this;
+  var success = function(output_val) { that.meter = true; };
+  var error = function(error_val) { console.log("OLIRecorder instance.create_meter(...): ", error_val); that.meter = false; }
+  exec(success, error, "OLIRecorder", "createMeter", [this.id, left, top, width, height]);
 };
 
 /**
  * Dismiss (and Destroy) an Audio Meter
  */
 OLIRecorder.prototype.destroy_meter = function() {
+  var that = this;
+  var success = function(output_val) { that.meter = false; };
+  var error = function(error_val) { console.log("OLIRecorder instance.create_meter(...): ", error_val); }
   exec(null, null, "OLIRecorder", "dismissMeter", [this.id]);
 };
 
